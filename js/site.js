@@ -303,7 +303,10 @@
     cards.forEach(function (c) {
       c.addEventListener('click', function (e) {
         e.preventDefault();
-        go(c.getAttribute('data-card'), true);
+        // on phones, show the preview instead of starting a 1280x720 sim
+        var big = !window.matchMedia || matchMedia('(min-width: 821px)').matches;
+        go(c.getAttribute('data-card'), big);
+        if (!big) theater.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
         var h = $('.stage__title h2', theater);
         h && h.focus({ preventScroll: true });
       });
