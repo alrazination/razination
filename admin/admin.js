@@ -361,7 +361,7 @@
   function homePanel() {
     var d = S.data;
     return '<h1 class="a-h">Home page</h1>' +
-      '<p class="a-help">Use <code>{n}</code> for the number of simulations shown (8) and <code>{N}</code> for it as a word (Eight). The headline is fitted to one line when you publish.</p>' +
+      '<p class="a-help">Changes appear on the site after you press <b>Publish changes</b>. Use <b>Preview</b> to check first.</p>' +
 
       '<h2 class="a-h">Top of the page</h2><div class="acard">' +
         '<div class="grid2">' + inp('hero.line1', 'Headline, part 1') + inp('hero.line2', 'Headline, part 2', { hint: 'on phones the parts sit on two lines' }) + '</div>' +
@@ -376,11 +376,12 @@
       '</div></div>' +
 
       '<h2 class="a-h">About</h2><div class="acard">' +
+        '<div class="row" style="margin-bottom:14px">' + sw('about.show', 'Show the About section') + '<span class="a-help" style="margin:0">Off: the section and its menu links are removed from the site.</span></div>' +
         '<div class="row" style="align-items:flex-start;margin-bottom:12px">' +
           '<img src="' + esc(preview(d.about.photo)) + '" alt="" style="width:120px;height:120px;object-fit:cover;border:2px solid var(--ink)">' +
           '<label class="af grow">Photo <small>cropped to a square</small><input type="file" accept="image/*" data-act="photo"></label>' +
         '</div>' +
-        '<div class="grid3">' + inp('about.name', 'Name') + inp('about.place', 'City') + inp('about.heading', 'Heading') + '</div>' +
+        '<div class="grid2">' + inp('about.name', 'Name') + inp('about.heading', 'Heading') + '</div>' +
         inp('about.quote', 'Quote', { area: true, rows: 2 }) +
         d.about.facts.map(function (f, i) {
           return '<div class="row" style="align-items:flex-end">' +
@@ -405,7 +406,7 @@
       '</div>' +
 
       '<h2 class="a-h">Simulations page</h2><div class="acard">' +
-        '<div class="grid2">' + inp('simsPage.line1', 'Headline, part 1', { hint: '{N} = number as a word' }) + inp('simsPage.line2', 'Headline, part 2') + '</div>' +
+        '<div class="grid2">' + inp('simsPage.line1', 'Headline, part 1') + inp('simsPage.line2', 'Headline, part 2') + '</div>' +
         '<div class="grid2">' + inp('simsPage.lede', 'Intro', { area: true, rows: 2 }) + inp('simsPage.note', 'Small note', { area: true, rows: 2 }) + '</div>' +
         '<div class="grid2">' + inp('simsPage.workHeading', 'Workplace group heading') + inp('simsPage.classHeading', 'Classroom group heading') + '</div>' +
       '</div>' +
@@ -456,9 +457,23 @@
       '</div>' +
       '<h2 class="a-h">Contact section</h2><div class="acard">' +
         '<div class="grid2">' + inp('contactSection.heading', 'Heading') + inp('contactSection.lede', 'Intro', { area: true, rows: 2 }) + '</div>' +
-        '<div class="grid2">' + inp('contactSection.promises', 'Promises with ticks', { lines: true, hint: 'one per line' }) + inp('contactSection.topics', 'Topic choices in the form', { lines: true, rows: 6, hint: 'one per line' }) + '</div>' +
-        inp('contactSection.placeholder', 'Example text in the message box') +
+        inp('contactSection.promises', 'Promises with ticks', { lines: true, hint: 'one per line' }) +
+        inp('contactSection.placeholder', 'Example text in the "Anything else?" box') +
       '</div>' +
+      '<h2 class="a-h">Questions in the form</h2>' +
+      '<p class="a-help">Visitors answer these one at a time by tapping a choice, then leave their name and email. Answers arrive with the message.</p>' +
+      (S.data.contactSection.questions || []).map(function (q, i) {
+        var b = 'contactSection.questions.' + i + '.';
+        return '<div class="acard">' +
+          '<div class="grid2">' + inp(b + 'q', 'Question ' + (i + 1)) + inp(b + 'key', 'Short label in the email', { hint: 'one word, e.g. problem' }) + '</div>' +
+          inp(b + 'options', 'Choices', { lines: true, rows: 5, hint: 'one per line' }) +
+          '<div class="row">' + sw(b + 'multi', 'Visitors can pick more than one') + '<span class="grow"></span>' +
+          '<button class="ib" data-act="move-row" data-list="contactSection.questions" data-i="' + i + '" data-d="-1"' + (i === 0 ? ' disabled' : '') + '>↑ Up</button>' +
+          '<button class="ib" data-act="move-row" data-list="contactSection.questions" data-i="' + i + '" data-d="1"' + (i === S.data.contactSection.questions.length - 1 ? ' disabled' : '') + '>↓ Down</button>' +
+          '<button class="ib ib--danger" data-act="del-row" data-list="contactSection.questions" data-i="' + i + '">Delete</button></div>' +
+        '</div>';
+      }).join('') +
+      '<button class="ib" data-act="add-row" data-list="contactSection.questions">+ Add a question</button>' +
       '<h2 class="a-h">Impressum & Datenschutz</h2>' +
       '<p class="a-help">German legal pages. Empty fields show up there as yellow placeholders. Have the final text checked before you rely on it.</p>' +
       '<div class="acard">' +
@@ -563,7 +578,7 @@
     }
     else if (act === 'add-row') {
       var name = el.getAttribute('data-list');
-      getPath(d, name).push(name === 'faq' ? { q: '', a: '' } : { label: '', value: '' });
+      getPath(d, name).push(name === 'faq' ? { q: '', a: '' } : name === 'contactSection.questions' ? { key: 'q' + (getPath(d, name).length + 1), q: '', multi: false, options: [] } : { label: '', value: '' });
       markDirty(); render();
     }
     else if (act === 'img-clear') {

@@ -134,38 +134,46 @@
     window.addEventListener('resize', update); update();
   })();
 
-  /* ---------------- process: drawings run while in view ---------------- */
+  /* ---------------- process: the signal walks the weeks, each drawing appears as it arrives ---------------- */
   (function () {
     var flow = $('[data-flow]');
-    if (!flow || reduce) return;
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (en) { flow.classList.toggle('is-live', en[0].isIntersecting); }, { threshold: .2 }).observe(flow);
-    } else flow.classList.add('is-live');
-  })();
-
-  /* ---------------- cards: footage on hover, tilt ---------------- */
-  $$('.card').forEach(function (card) {
-    var v = $('video', card);
-    function on() {
-      if (!v || reduce) return;
-      if (!v.getAttribute('src')) {
-        v.src = v.getAttribute('data-src');
-        v.addEventListener('playing', function () { v.classList.add('is-ready'); }, { once: true });
-      }
-      var p = v.play(); if (p && p.catch) p.catch(function () {});
+    if (!flow) return;
+    var steps = $$('.step', flow), line = $('.flow__line', flow);
+    if (reduce) { steps.forEach(function (st) { st.classList.add('is-on'); }); return; }
+    flow.classList.add('is-js');
+    var k = -1, timer = null, live = false;
+    function pos(i) {
+      var dot = $('.step__dot', steps[i]), lr = line.getBoundingClientRect(), dr = dot.getBoundingClientRect();
+      return { x: dr.left + dr.width / 2 - lr.left, y: dr.top + dr.height / 2 - lr.top };
     }
-    function off() { if (v) v.pause(); card.style.removeProperty('--rx'); card.style.removeProperty('--ry'); }
-    card.addEventListener('mouseenter', on);
-    card.addEventListener('focusin', on);
-    card.addEventListener('mouseleave', off);
-    card.addEventListener('focusout', off);
-    if (fine && !reduce) card.addEventListener('mousemove', function (e) {
-      var r = card.getBoundingClientRect();
-      var x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-      card.style.setProperty('--ry', (x * 6).toFixed(2) + 'deg');
-      card.style.setProperty('--rx', (-y * 5).toFixed(2) + 'deg');
-    });
-  });
+    function go(i) {
+      k = i;
+      var p = pos(i);
+      flow.style.setProperty('--fx', Math.max(0, p.x) + 'px');
+      flow.style.setProperty('--fy', Math.max(0, p.y) + 'px');
+      steps.forEach(function (st, j) { st.classList.toggle('is-on', j <= i); });
+    }
+    function reset() {
+      flow.classList.add('is-reset');
+      steps.forEach(function (st) { st.classList.remove('is-on'); });
+      flow.style.setProperty('--fx', '0px'); flow.style.setProperty('--fy', '0px');
+      void flow.offsetWidth; flow.classList.remove('is-reset'); k = -1;
+    }
+    function tick() {
+      if (!live) return;
+      if (k >= steps.length - 1) { timer = setTimeout(function () { reset(); timer = setTimeout(tick, 700); }, 3200); return; }
+      go(k + 1);
+      timer = setTimeout(tick, 2100);
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) {
+        var was = live; live = en[0].isIntersecting;
+        if (live && !was) { clearTimeout(timer); timer = setTimeout(tick, 400); }
+        if (!live) clearTimeout(timer);
+      }, { threshold: .35 }).observe(flow);
+    } else steps.forEach(function (st) { st.classList.add('is-on'); });
+    window.addEventListener('resize', function () { if (k >= 0) go(k); });
+  })();
 
   /* ---------------- carousel: the centred card faces you and plays ---------------- */
   $$('[data-carousel]').forEach(function (car) {
@@ -184,7 +192,7 @@
       if (best !== center) {
         if (center) { center.classList.remove('is-center'); var ov = $('video', center); if (ov) ov.pause(); }
         center = best; center.classList.add('is-center');
-        count.textContent = pad(cards.indexOf(center) + 1);
+        if (count) count.textContent = pad(cards.indexOf(center) + 1);
         var v = $('video', center);
         if (v && !reduce && inView) {
           if (!v.getAttribute('src')) { v.src = v.getAttribute('data-src'); v.addEventListener('playing', function () { v.classList.add('is-ready'); }, { once: true }); }
@@ -312,6 +320,32 @@
     if (card) { card.classList.add('is-target'); setTimeout(function () { card.scrollIntoView({ block: 'center' }); }, 60); }
   })();
 
+  /* ---------------- questionnaire: one question at a time ---------------- */
+  (function () {
+    var box = $('[data-wizard]');
+    if (!box) return;
+    var qs = $$('.qs', box), label = $('[data-step-label]', box), cur = 0;
+    box.classList.add('is-wizard');
+    function show(i, focus) {
+      cur = clamp(i, 0, qs.length - 1);
+      qs.forEach(function (q, j) { q.classList.toggle('is-on', j === cur); });
+      label.textContent = 'Question ' + (cur + 1) + ' of ' + qs.length;
+      box.style.setProperty('--wp', ((cur + 1) / qs.length).toFixed(3));
+      if (focus) { var f = $('input:not([type=hidden]), textarea', qs[cur]); if (f) f.focus({ preventScroll: true }); }
+    }
+    qs.forEach(function (q, i) {
+      var next = $('[data-next]', q), back = $('[data-back]', q), multi = q.hasAttribute('data-multi');
+      if (next) next.addEventListener('click', function () { show(i + 1, true); });
+      if (back) back.addEventListener('click', function () { show(i - 1, true); });
+      q.addEventListener('change', function (e) {
+        if (!e.target.matches('input[type=radio], input[type=checkbox]')) return;
+        if (!multi) setTimeout(function () { show(i + 1, true); }, 260);
+        else if (next) next.firstChild.textContent = $$('input:checked', q).length ? 'Next' : 'Skip';
+      });
+    });
+    show(0, false);
+  })();
+
   /* ---------------- contact form (Web3Forms; plain POST without JS) ---------------- */
   var form = $('#report');
   if (form && window.fetch && window.FormData && /web3forms/.test(form.action)) {
@@ -321,8 +355,9 @@
       if (!form.reportValidity()) return;
       var btn = $('[type=submit]', form), label = $('.lab', btn), was = label.textContent, err = $('.report__err', box);
       btn.disabled = true; label.textContent = 'Sending…'; err.textContent = '';
-      var data = new FormData(form), topics = data.getAll('topic').join(', ');
-      data.delete('topic'); if (topics) data.append('topic', topics);
+      var data = new FormData(form), keys = {};
+      Array.prototype.forEach.call(form.querySelectorAll('.qs input[type=checkbox]'), function (i) { keys[i.name] = 1; });
+      Object.keys(keys).forEach(function (k) { var v = data.getAll(k).join(', '); data.delete(k); if (v) data.append(k, v); });
       fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: data })
         .then(function (r) { return r.json(); })
         .then(function (j) {
