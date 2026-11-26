@@ -71,7 +71,7 @@
     return '\n        <article class="card' + (big ? ' card--big' : '') + '" id="sim-' + esc(s.slug) + '" data-sim="' + esc(s.slug) + '">' +
       '\n          <button class="card__hit" type="button" data-play="' + esc(s.slug) + '" aria-label="' + esc('Play ' + s.title) + '"></button>' +
       '\n          <div class="card__media"><img src="' + esc(moveImg(s)) + '" alt="' + esc(s.altMove || s.alt) + '" loading="lazy">' + media +
-      '<span class="card__play">' + PLAY + 'Play</span><span class="card__n">' + pad(i + 1) + '</span></div>' +
+      '<span class="card__play">' + PLAY + 'Play</span></div>' +
       '\n          <div class="card__body">' +
       '\n            <p class="card__topic">' + esc(s.topic) + ' <span>· ' + esc(s.audience) + '</span></p>' +
       '\n            <h3' + lang + '>' + esc(s.title) + '</h3>' +
@@ -80,6 +80,13 @@
       '\n        </article>';
   }
 
+  function nav(d, home) {
+    var h = home ? '#' : './#', on = d.about.show !== false;
+    return '\n    <a href="simulations.html"' + (home ? '' : ' aria-current="page"') + '>Simulations</a>' +
+      '\n    <a href="' + h + 'how">How it works</a>' +
+      '\n    <a href="' + h + 'pricing">Pricing</a>' +
+      (on ? '\n    <a href="' + h + 'about">About</a>' : '') + '\n  ';
+  }
   function footer(d, home) {
     var c = d.contact, h = home ? '#' : './#', links = [];
     if (c.email) links.push('<li><a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a></li>');
@@ -87,11 +94,11 @@
     if (c.linkedin) links.push('<li><a href="' + esc(c.linkedin) + '" target="_blank" rel="noopener">LinkedIn</a></li>');
     return '\n    <div class="foot__top">' +
       '\n      <p class="foot__why"><i class="sq" aria-hidden="true"></i>' + esc(d.footer.why) + '</p>' +
-      '\n      <nav class="foot__nav" aria-label="Footer"><a href="simulations.html">Simulations</a><a href="' + h + 'how">How it works</a><a href="' + h + 'pricing">Pricing</a><a href="' + h + 'about">About</a><a href="' + h + 'contact">Contact</a></nav>' +
+      '\n      <nav class="foot__nav" aria-label="Footer"><a href="simulations.html">Simulations</a><a href="' + h + 'how">How it works</a><a href="' + h + 'pricing">Pricing</a>' + (d.about.show !== false ? '<a href="' + h + 'about">About</a>' : '') + '<a href="' + h + 'contact">Contact</a></nav>' +
       '\n      <ul class="foot__contact">' + links.join('') + '</ul>' +
       '\n    </div>' +
       '\n    <p class="foot__mark" aria-hidden="true">raz<span class="i">ı</span>nation</p>' +
-      '\n    <div class="foot__base"><span>© ' + esc(d.footer.year) + ' Razination · ' + esc(d.about.place) + '</span><span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span></div>\n  ';
+      '\n    <div class="foot__base"><span>© ' + esc(d.footer.year) + ' Razination</span><span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span></div>\n  ';
   }
 
   /* ---------------- home page ---------------- */
@@ -130,9 +137,8 @@
       '\n        <div class="carousel__ui">' +
       '\n          <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous simulation"><svg class="ic" aria-hidden="true" style="transform:scaleX(-1)"><use href="#i-arrow"/></svg></button>' +
       '\n          <button class="carousel__btn" type="button" data-dir="1" aria-label="Next simulation">' + ARROW + '</button>' +
-      '\n          <span class="carousel__count"><b data-count>01</b> / ' + pad(all.length) + '</span>' +
       '\n          <span class="carousel__bar"><i></i></span>' +
-      '\n          <a class="more" href="simulations.html">' + esc(fill('All {n} simulations', d)) + ARROW + '</a>' +
+      '\n          <a class="more" href="simulations.html">All simulations' + ARROW + '</a>' +
       '\n        </div>' +
       '\n      </div>\n    ';
 
@@ -191,9 +197,12 @@
       }).join('') + '\n      </div>' +
       '\n      <p class="terms">' + (R.terms || []).filter(Boolean).map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') + '</p>\n    ';
 
-    r.about = '\n      <figure class="who__pic reveal">' +
+    var aboutOn = A.show !== false;
+    r.nav = nav(d, true);
+    r.about = !aboutOn ? '' : '\n  <section class="sec sec--about" id="about" aria-label="About"><div class="wrap who">' +
+      '\n      <figure class="who__pic reveal">' +
       '\n        <img src="' + esc(A.photo) + '" alt="' + esc(A.name) + '" width="480" height="480" loading="lazy">' +
-      '\n        <figcaption>' + esc(A.name) + '<span>' + esc(A.place) + '</span></figcaption>' +
+      '\n        <figcaption>' + esc(A.name) + '</figcaption>' +
       '\n      </figure>' +
       '\n      <div class="who__text">' +
       '\n        <p class="eyebrow"><i class="sq" aria-hidden="true"></i>' + esc(A.heading) + '</p>' +
@@ -202,7 +211,7 @@
         return '<div><dt>' + esc(f.label) + '</dt><dd>' + esc(f.value) + '</dd></div>';
       }).join('') + '</dl>' +
       (C.linkedin ? '\n        <a class="more" href="' + esc(C.linkedin) + '" target="_blank" rel="noopener">' + esc(first(A.name)) + ' on LinkedIn' + OUT + '</a>' : '') +
-      '\n      </div>\n    ';
+      '\n      </div>\n  </div></section>\n  ';
 
     r.faq = '\n      <div class="sec__head sec__head--side">' +
       '\n        <p class="eyebrow"><i class="sq" aria-hidden="true"></i>FAQ</p>' +
@@ -215,11 +224,13 @@
     var alt = [];
     if (C.email) alt.push('email <a href="mailto:' + esc(C.email) + '">' + esc(C.email) + '</a>');
     if (C.phone) alt.push('call <a href="tel:' + esc(C.phone.replace(/[^+\d]/g, '')) + '">' + esc(C.phone) + '</a>');
-    if (C.linkedin) alt.push('message ' + esc(first(A.name)) + ' on <a href="' + esc(C.linkedin) + '" target="_blank" rel="noopener">LinkedIn</a>');
+    if (C.linkedin) alt.push('message us on <a href="' + esc(C.linkedin) + '" target="_blank" rel="noopener">LinkedIn</a>');
     if (C.booking) alt.push('<a href="' + esc(C.booking) + '" target="_blank" rel="noopener">book a call</a>');
     var joined = alt.length > 1 ? alt.slice(0, -1).join(', ') + ' or ' + alt[alt.length - 1] : (alt[0] || '');
     var altText = joined ? 'Prefer not to use the form? ' + joined.charAt(0).toUpperCase() + joined.slice(1) + '.' : '';
     var formOn = !!C.web3formsKey;
+    var Q = (CS.questions || []).filter(function (q) { return q.q && (q.options || []).length; });
+    var total = Q.length + 1;
     r.contact = '\n      <div class="contact__grid">' +
       '\n        <div class="contact__side">' +
       '\n          <p class="eyebrow"><i class="sq" aria-hidden="true"></i>Contact</p>' +
@@ -228,32 +239,39 @@
       '\n          <ul class="promise">' + (CS.promises || []).filter(Boolean).map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>' +
       (altText ? '\n          <p class="contact__alt">' + altText + '</p>' : '') +
       '\n        </div>' +
-      '\n        <div class="report">' +
-      '\n          <p class="report__head"><span>Tell us the mistake</span><span>Reply within 1 working day</span></p>' +
+      '\n        <div class="report" data-wizard>' +
+      '\n          <div class="report__head"><span data-step-label>Question 1 of ' + total + '</span><span class="report__prog"><i></i></span></div>' +
       '\n          <form id="report" action="' + (formOn ? 'https://api.web3forms.com/submit' : 'mailto:' + esc(C.email)) + '" method="POST"' + (formOn ? '' : ' enctype="text/plain"') + '>' +
       (formOn ? '\n            <input type="hidden" name="access_key" value="' + esc(C.web3formsKey) + '">' : '') +
       '\n            <input type="hidden" name="subject" value="New enquiry from razination">' +
       '\n            <input type="hidden" name="from_name" value="Razination website">' +
       '\n            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">' +
-      '\n            <div class="f2">' +
-      '\n              <label class="fld"><span>Your name</span><input name="name" autocomplete="name" required></label>' +
-      '\n              <label class="fld"><span>Work email</span><input name="email" type="email" autocomplete="email" required></label>' +
-      '\n            </div>' +
-      '\n            <label class="fld"><span>Where do people go wrong?</span><textarea name="message" rows="4" required placeholder="' + esc(CS.placeholder) + '"></textarea></label>' +
-      '\n            <fieldset class="chips"><legend>Topic <em>optional</em></legend>' + (CS.topics || []).filter(Boolean).map(function (t) {
-        return '<label><input type="checkbox" name="topic" value="' + esc(t) + '"><span>' + esc(t) + '</span></label>';
-      }).join('') + '</fieldset>' +
-      '\n            <div class="f2">' +
+      Q.map(function (q, i) {
+        var name = esc(q.key || ('q' + (i + 1)));
+        return '\n            <fieldset class="qs" data-q="' + i + '"' + (q.multi ? ' data-multi' : '') + '>' +
+          '<legend><span class="qs__n">' + pad(i + 1) + '</span>' + esc(q.q) + (q.multi ? '<em>Pick all that fit</em>' : '') + '</legend>' +
+          '<div class="qs__opts">' + q.options.filter(Boolean).map(function (o) {
+            return '<label><input type="' + (q.multi ? 'checkbox' : 'radio') + '" name="' + name + '" value="' + esc(o) + '"><span>' + esc(o) + '</span></label>';
+          }).join('') + '</div>' +
+          '<div class="qs__nav">' + (i ? '<button type="button" class="qs__back" data-back>Back</button>' : '<span></span>') +
+          '<button type="button" class="btn btn--sm btn--ink" data-next>' + (q.multi ? 'Next' : 'Skip') + ARROW + '</button></div>' +
+          '</fieldset>';
+      }).join('') +
+      '\n            <fieldset class="qs qs--last" data-q="' + Q.length + '">' +
+      '<legend><span class="qs__n">' + pad(total) + '</span>Where can we reach you?</legend>' +
+      '\n              <div class="f2">' +
+      '\n                <label class="fld"><span>Your name</span><input name="name" autocomplete="name" required></label>' +
+      '\n                <label class="fld"><span>Work email</span><input name="email" type="email" autocomplete="email" required></label>' +
+      '\n              </div>' +
       '\n              <label class="fld"><span>Organisation <em>optional</em></span><input name="organisation" autocomplete="organization"></label>' +
-      '\n              <label class="fld"><span>When do you need it? <em>optional</em></span><input name="deadline"></label>' +
-      '\n            </div>' +
-      '\n            <p class="report__err" aria-live="assertive"></p>' +
-      '\n            <div class="report__foot">' +
-      '\n              <p>We use your details only to reply. More in the <a href="datenschutz.html">Datenschutz</a>.</p>' +
-      '\n              <button class="btn btn--hot" type="submit"><span class="lab">Send it over</span>' + ARROW + '</button>' +
-      '\n            </div>' +
+      '\n              <label class="fld"><span>Anything else? <em>optional</em></span><textarea name="message" rows="3" placeholder="' + esc(CS.placeholder) + '"></textarea></label>' +
+      '\n              <p class="report__err" aria-live="assertive"></p>' +
+      '\n              <div class="qs__nav">' + (Q.length ? '<button type="button" class="qs__back" data-back>Back</button>' : '<span></span>') +
+      '<button class="btn btn--ink" type="submit"><span class="lab">Send it over</span>' + ARROW + '</button></div>' +
+      '\n              <p class="report__note">We use your details only to reply. More in the <a href="datenschutz.html">Datenschutz</a>.</p>' +
+      '\n            </fieldset>' +
       '\n          </form>' +
-      '\n          <div class="report__done" tabindex="-1"><p class="eyebrow"><i class="sq" aria-hidden="true"></i>Received</p><h3>Thanks. ' + esc(first(A.name)) + ' replies within one working day.</h3></div>' +
+      '\n          <div class="report__done" tabindex="-1"><p class="eyebrow"><i class="sq" aria-hidden="true"></i>Received</p><h3>Thanks. We reply within one working day.</h3></div>' +
       '\n        </div>' +
       '\n      </div>\n    ';
 
@@ -279,6 +297,7 @@
         '\n        </div>' +
         '\n      </div>';
     }).join('') + '\n    ';
+    r.nav = nav(d, false);
     r.footer = footer(d, false);
     return r;
   }

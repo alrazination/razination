@@ -5,15 +5,15 @@
   "meta": {
     "home": {
       "title": "Razination · Fail here. Not on the job.",
-      "description": "Training simulations for safety, compliance and IT security. Your people make the mistake, see what happens, and learn why. Live in 3 to 5 weeks, from €500. Made in Munich.",
+      "description": "Training simulations for safety, compliance and IT security. Your people make the mistake, see what happens, and learn why. Live in 3 to 5 weeks, from €500.",
       "ogTitle": "Razination · Fail here. Not on the job.",
       "ogDescription": "Training simulations where your people make the mistake safely, see what happens, and learn why. Play one in your browser."
     },
     "sims": {
       "title": "Simulations · Razination",
-      "description": "{N} playable training simulations: fire safety, phishing, GDPR, procedures and classroom games. Pick one, press start, and make the mistake on purpose.",
-      "ogTitle": "{N} ways to get it wrong · Razination",
-      "ogDescription": "{N} playable training simulations. Pick one, press start, make the mistake on purpose."
+      "description": "Playable training simulations: fire safety, phishing, GDPR, procedures and classroom games. Pick one, press start, and make the mistake on purpose.",
+      "ogTitle": "Get it wrong. On purpose. · Razination",
+      "ogDescription": "Playable training simulations. Pick one, press start, make the mistake on purpose."
     }
   },
   "contact": {
@@ -35,7 +35,7 @@
       "Live in 3–5 weeks",
       "Fixed quote first"
     ],
-    "eyebrow": "Training simulations · Munich",
+    "eyebrow": "Training simulations",
     "reelFirst": "cleanroom-gowning"
   },
   "home": {
@@ -49,7 +49,7 @@
   "plate": [
     {
       "label": "Simulations",
-      "value": "{n} playable demos"
+      "value": "Playable in your browser"
     },
     {
       "label": "Runs in",
@@ -95,7 +95,8 @@
         "label": "Worked on",
         "value": "High-stakes procedures to classrooms, for international teams"
       }
-    ]
+    ],
+    "show": true
   },
   "process": {
     "heading": "Live in 3 to 5 weeks.",
@@ -239,25 +240,79 @@
   ],
   "contactSection": {
     "heading": "Where do your people go wrong?",
-    "lede": "Tell us the mistake. You get a reply within one working day, with a first idea of how to fix it.",
+    "lede": "A few quick taps. You get a reply within one working day, with a first idea of how to fix it.",
     "promises": [
       "A first idea, not a sales sequence",
       "A fixed quote before any work starts",
       "Your message is only used to reply to you"
     ],
     "placeholder": "e.g. New warehouse staff skip the forklift pre-check. We’ve had two near misses this year.",
-    "topics": [
-      "Safety",
-      "IT security",
-      "Data protection",
-      "Procedures",
-      "Onboarding",
-      "School"
+    "questions": [
+      {
+        "key": "problem",
+        "q": "Where do your people go wrong?",
+        "multi": true,
+        "options": [
+          "They skip steps",
+          "They make risky calls",
+          "They click before they think",
+          "They forget the training by Monday",
+          "Nobody finishes the course",
+          "Something else"
+        ]
+      },
+      {
+        "key": "audience",
+        "q": "Who needs to get it right?",
+        "multi": true,
+        "options": [
+          "New starters",
+          "Every employee",
+          "Technicians and operators",
+          "Managers",
+          "Students"
+        ]
+      },
+      {
+        "key": "topic",
+        "q": "What is it about?",
+        "multi": true,
+        "options": [
+          "Safety",
+          "IT security",
+          "Data protection",
+          "Procedures",
+          "Sustainability",
+          "Something else"
+        ]
+      },
+      {
+        "key": "format",
+        "q": "What sounds most useful?",
+        "multi": false,
+        "options": [
+          "A simulation",
+          "An e-learning module",
+          "A workshop activity",
+          "Not sure yet"
+        ]
+      },
+      {
+        "key": "timing",
+        "q": "When do you need it?",
+        "multi": false,
+        "options": [
+          "This month",
+          "In 1 to 3 months",
+          "Later this year",
+          "Just exploring"
+        ]
+      }
     ]
   },
   "simsPage": {
-    "line1": "{N} ways to",
-    "line2": "get it wrong.",
+    "line1": "Get it wrong.",
+    "line2": "On purpose.",
     "fit": 12.15,
     "fitM": 23,
     "lede": "All playable. Pick one, press start, and make the mistake on purpose. That’s where the learning is.",
