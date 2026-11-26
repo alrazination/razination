@@ -20,6 +20,8 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070708'/%3E%3Crect x='12' y='13' width='8' height='14' fill='%23F4F1EA'/%3E%3Crect x='11' y='4' width='10' height='6' fill='%23FF4F00'/%3E%3C/svg%3E">
 <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
+<script>try{var t=localStorage.getItem("raz-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -41,6 +43,7 @@
     <a href="#pricing">Pricing</a>
     <a href="#about">About</a>
   </nav>
+  <button class="theme" type="button" data-theme-toggle aria-label="Switch to light theme"><span class="theme__sun" aria-hidden="true"></span></button>
   <a class="btn btn--sm btn--hot" href="#contact">Get a fixed quote</a>
 </header>
 
@@ -49,7 +52,7 @@
   <section class="hero" aria-labelledby="hero-h">
     <div class="hero__media" aria-hidden="true"><canvas class="hero__amb" width="48" height="27"></canvas><div class="hero__shade"></div></div>
     <div class="hero__screen" aria-hidden="true">
-      <!--@reel--><img class="hero__poster" src="img/thumbs/fire-extinguisher.webp" alt="" fetchpriority="high"><!--/@reel-->
+      <!--@reel--><img class="hero__poster" src="img/thumbs/cleanroom-gowning.webp" alt="" fetchpriority="high"><!--/@reel-->
       <video class="hero__v" muted playsinline preload="auto"></video>
       <video class="hero__v" muted playsinline preload="auto"></video>
       <div class="hero__scan"></div>
@@ -89,7 +92,8 @@
         <p class="story__cap" data-cap="2"><span class="eyebrow eyebrow--hot"><i class="sq"></i>Same rule, as a simulation</span>Skip the brake.</p>
         <p class="story__cap story__cap--big" data-cap="3"><span class="eyebrow eyebrow--hot"><i class="sq"></i>What sticks</span>Nobody forgets this.</p>
       </div>
-      <div class="story__slide" aria-hidden="true">
+      <div class="story__stage">
+        <div class="story__slide" aria-hidden="true">
         <div class="slide">
           <div class="slide__top"><span>Module 2 · Vehicle safety</span><span>Slide 14 of 38</span></div>
           <div class="slide__prog"><i></i></div>
@@ -104,21 +108,23 @@
           <div class="slide__foot"><span>Training department · page 14</span><span class="slide__btns"><b>‹ Back</b><b class="nx">Next ›</b></span></div>
         </div>
       </div>
-      <div class="story__sim" aria-hidden="true">
+        <div class="story__sim" aria-hidden="true">
         <video muted playsinline preload="none" poster="img/thumbs/flat-tire-start.webp" data-src="media/flat-tire.mp4"></video>
+      </div>
       </div>
       <div class="story__bar" aria-hidden="true"><i></i></div>
     </div>
   </section>
 
   <section class="sec" id="play" aria-label="Simulations to play"><div class="wrap"><!--@play-->
-      <div class="sec__head">
-        <p class="eyebrow"><i class="sq" aria-hidden="true"></i>Play one. Get it wrong.</p>
-        <h2 class="big reveal-up"><span>Pick your</span> <span class="hot">disaster.</span></h2>
+      <div class="sec__head sec__head--row">
+        <div><p class="eyebrow"><i class="sq" aria-hidden="true"></i>Play one. Get it wrong.</p>
+        <h2 class="big reveal-up"><span>Pick your</span> <span class="hot">disaster.</span></h2></div>
         <p class="sec__lede">Studio demos, built in-house to show how we work. Made for a laptop or tablet.</p>
       </div>
-      <div class="cards cards--home cards--3">
-        <article class="card card--big" id="sim-fire-extinguisher" data-sim="fire-extinguisher">
+      <div class="carousel" data-carousel>
+        <div class="carousel__track" tabindex="0" aria-label="Simulations, scroll sideways">
+        <article class="card" id="sim-fire-extinguisher" data-sim="fire-extinguisher">
           <button class="card__hit" type="button" data-play="fire-extinguisher" aria-label="Play Fight or get out?"></button>
           <div class="card__media"><img src="img/thumbs/fire-extinguisher-move.webp" alt="Fire 3 of 4: a frying pan on fire in the staff kitchen. The pointer is on the water extinguisher." loading="lazy"><video muted loop playsinline preload="none" poster="img/thumbs/fire-extinguisher-move.webp" data-src="media/fire-extinguisher.mp4"></video><span class="card__play"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Play</span><span class="card__n">01</span></div>
           <div class="card__body">
@@ -145,8 +151,60 @@
             <p class="card__chain"><span>Email customer data to private Gmail</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg><b>1,800 customers fly out the door</b></p>
           </div>
         </article>
+        <article class="card" id="sim-flat-tire" data-sim="flat-tire">
+          <button class="card__hit" type="button" data-play="flat-tire" aria-label="Play Changing a flat tire"></button>
+          <div class="card__media"><img src="img/thumbs/flat-tire-start.webp" alt="A red car with a flat rear tire beside a trunk of tools" loading="lazy"><video muted loop playsinline preload="none" poster="img/thumbs/flat-tire-start.webp" data-src="media/flat-tire.mp4"></video><span class="card__play"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Play</span><span class="card__n">04</span></div>
+          <div class="card__body">
+            <p class="card__topic">Procedure <span>· Anyone who drives</span></p>
+            <h3>Changing a flat tire</h3>
+            <p class="card__chain"><span>Jack it up first</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg><b>The car rolls off the jack</b></p>
+          </div>
+        </article>
+        <article class="card" id="sim-cleanroom-gowning" data-sim="cleanroom-gowning">
+          <button class="card__hit" type="button" data-play="cleanroom-gowning" aria-label="Play Cleanroom gowning"></button>
+          <div class="card__media"><img src="img/thumbs/cleanroom-gowning-start.webp" alt="A technician in street clothes beside a rack of cleanroom garments" loading="lazy"><video muted loop playsinline preload="none" poster="img/thumbs/cleanroom-gowning-start.webp" data-src="media/cleanroom-gowning.mp4"></video><span class="card__play"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Play</span><span class="card__n">05</span></div>
+          <div class="card__body">
+            <p class="card__topic">Procedure <span>· Semiconductor and pharma staff</span></p>
+            <h3>Cleanroom gowning</h3>
+            <p class="card__chain"><span>Hairnet on after the coverall</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg><b>Particles jump: 10 to 10,000</b></p>
+          </div>
+        </article>
+        <article class="card" id="sim-close-the-loop" data-sim="close-the-loop">
+          <button class="card__hit" type="button" data-play="close-the-loop" aria-label="Play Close the loop"></button>
+          <div class="card__media"><img src="img/thumbs/close-the-loop-start.webp" alt="Waste on a conveyor belt heading for an incinerator" loading="lazy"><img class="card__after" src="img/thumbs/close-the-loop.webp" alt="" loading="lazy"><span class="card__play"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Play</span><span class="card__n">06</span></div>
+          <div class="card__body">
+            <p class="card__topic">Sustainability <span>· Schools, ages 10 to 14</span></p>
+            <h3>Close the loop</h3>
+            <p class="card__chain"><span>Too slow, or the wrong machine</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg><b>It burns in the incinerator</b></p>
+          </div>
+        </article>
+        <article class="card" id="sim-eco-party" data-sim="eco-party">
+          <button class="card__hit" type="button" data-play="eco-party" aria-label="Play Eco-Party Planner"></button>
+          <div class="card__media"><img src="img/thumbs/eco-party-start.webp" alt="An empty school gym ready to be decorated, next to a balance scale" loading="lazy"><img class="card__after" src="img/thumbs/eco-party.webp" alt="" loading="lazy"><span class="card__play"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Play</span><span class="card__n">07</span></div>
+          <div class="card__body">
+            <p class="card__topic">Sustainability <span>· Schools</span></p>
+            <h3>Eco-Party Planner</h3>
+            <p class="card__chain"><span>Pick the &quot;compostable&quot; cups</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg><b>Trap. Compostable in factories only.</b></p>
+          </div>
+        </article>
+        <article class="card" id="sim-wo-ist-der-loeffel" data-sim="wo-ist-der-loeffel">
+          <button class="card__hit" type="button" data-play="wo-ist-der-loeffel" aria-label="Play Wo ist der Löffel?"></button>
+          <div class="card__media"><img src="img/thumbs/wo-ist-der-loeffel-start.webp" alt="A 3D kitchen with teal cabinets" loading="lazy"><img class="card__after" src="img/thumbs/wo-ist-der-loeffel.webp" alt="" loading="lazy"><span class="card__play"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Play</span><span class="card__n">08</span></div>
+          <div class="card__body">
+            <p class="card__topic">Language <span>· German A1 learners</span></p>
+            <h3 lang="de">Wo ist der Löffel?</h3>
+            <p class="card__chain"><span>Click the wrong thing</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg><b>You hear its name, with article</b></p>
+          </div>
+        </article>
+        </div>
+        <div class="carousel__ui">
+          <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous simulation"><svg class="ic" aria-hidden="true" style="transform:scaleX(-1)"><use href="#i-arrow"/></svg></button>
+          <button class="carousel__btn" type="button" data-dir="1" aria-label="Next simulation"><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <span class="carousel__count"><b data-count>01</b> / 08</span>
+          <span class="carousel__bar"><i></i></span>
+          <a class="more" href="simulations.html">All 8 simulations<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
       </div>
-      <a class="more" href="simulations.html">All 8 simulations<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     <!--/@play--></div></section>
 
   <section class="sec sec--facts" aria-label="Facts"><div class="wrap"><!--@facts-->
@@ -161,18 +219,21 @@
     <!--/@facts--></div></section>
 
   <section class="sec" id="how" aria-label="How it works"><div class="wrap"><!--@process-->
-      <div class="sec__head">
-        <p class="eyebrow"><i class="sq" aria-hidden="true"></i>How it works</p>
-        <h2 class="big reveal-up"><span>Live in 3 to 5 weeks.</span></h2>
+      <div class="sec__head sec__head--row">
+        <div><p class="eyebrow"><i class="sq" aria-hidden="true"></i>How it works</p>
+        <h2 class="big reveal-up"><span>Live in 3 to 5 weeks.</span></h2></div>
         <p class="sec__lede">Each bar shows who does what. Your part is the thin line. Spoiler: it’s small.</p>
       </div>
-      <ol class="steps">
-        <li class="step"><span class="step__wk">Week 1</span><span class="step__dot" aria-hidden="true"></span><span class="step__n">01</span><h3>Find the moment</h3><p>The one decision where your people go wrong.</p><p class="step__you"><b>You:</b> a one-hour call</p></li>
-        <li class="step"><span class="step__wk">Week 1–2</span><span class="step__dot" aria-hidden="true"></span><span class="step__n">02</span><h3>Sketch it</h3><p>How the mistake will play out, before anything is built.</p><p class="step__you"><b>You:</b> a yes, or what to change</p></li>
-        <li class="step step--hot"><span class="step__wk">Week 2–3</span><span class="step__dot" aria-hidden="true"></span><span class="step__n">03</span><h3>Design the mistakes</h3><p>Every wrong move plays out, with a reason.</p><p class="step__you"><b>You:</b> your expert checks the facts</p></li>
-        <li class="step"><span class="step__wk">Week 3–4</span><span class="step__dot" aria-hidden="true"></span><span class="step__n">04</span><h3>Build</h3><p>Light HTML5, tested on the devices your people use.</p><p class="step__you"><b>You:</b> LMS access, if we upload</p></li>
-        <li class="step"><span class="step__wk">Week 4–5</span><span class="step__dot" aria-hidden="true"></span><span class="step__n">05</span><h3>Play-test</h3><p>Real learners try it. We tune until it feels fair.</p><p class="step__you"><b>You:</b> a few learners, 20 minutes</p></li>
-      </ol>
+      <div class="flow" data-flow>
+        <div class="flow__line" aria-hidden="true"><i class="flow__run"></i></div>
+        <ol class="steps">
+          <li class="step" style="--i:0"><span class="step__wk">Week 1</span><span class="step__dot" aria-hidden="true"></span><div class="step__art" aria-hidden="true"><svg viewBox="0 0 160 90" class="art art--find"><g class="art__row"><rect x="1" y="38" width="18" height="14" rx="2" class="art__ok"/><rect x="27" y="38" width="18" height="14" rx="2" class="art__ok"/><rect x="53" y="38" width="18" height="14" rx="2" class="art__ok"/><rect x="79" y="38" width="18" height="14" rx="2" class="art__bad"/><rect x="105" y="38" width="18" height="14" rx="2" class="art__ok"/><rect x="131" y="38" width="18" height="14" rx="2" class="art__ok"/><path d="M10 45H150" class="art__thin"/></g><g class="art__lens"><circle cx="0" cy="45" r="15" class="art__ring"/><path d="M11 56l12 12" class="art__stroke"/></g></svg></div><span class="step__n">01</span><h3>Find the moment</h3><p>The one decision where your people go wrong.</p><p class="step__you"><b>You:</b> a one-hour call</p></li>
+          <li class="step" style="--i:1"><span class="step__wk">Week 1–2</span><span class="step__dot" aria-hidden="true"></span><div class="step__art" aria-hidden="true"><svg viewBox="0 0 160 90" class="art art--sketch"><rect x="22" y="12" width="116" height="66" rx="3" class="art__draw"/><path d="M34 62h30l10-16 12 10 14-22 18 28" class="art__draw art__draw--2"/><circle cx="120" cy="30" r="7" class="art__pop"/></svg></div><span class="step__n">02</span><h3>Sketch it</h3><p>How the mistake will play out, before anything is built.</p><p class="step__you"><b>You:</b> a yes, or what to change</p></li>
+          <li class="step step--hot" style="--i:2"><span class="step__wk">Week 2–3</span><span class="step__dot" aria-hidden="true"></span><div class="step__art" aria-hidden="true"><svg viewBox="0 0 160 90" class="art art--fork"><path d="M12 45h44c16 0 22-22 40-22h40" class="art__thin"/><path d="M56 45c16 0 22 22 40 22h40" class="art__thin"/><circle r="5" class="art__runner"><animateMotion dur="3.2s" repeatCount="indefinite" path="M12 45h44c16 0 22 22 40 22h40"/></circle><path d="M130 17l12 12M142 17l-12 12" class="art__ok-s"/><g class="art__boom"><path d="M130 61l12 12M142 61l-12 12" class="art__stroke art__stroke--hot"/></g></svg></div><span class="step__n">03</span><h3>Design the mistakes</h3><p>Every wrong move plays out, with a reason.</p><p class="step__you"><b>You:</b> your expert checks the facts</p></li>
+          <li class="step" style="--i:3"><span class="step__wk">Week 3–4</span><span class="step__dot" aria-hidden="true"></span><div class="step__art" aria-hidden="true"><svg viewBox="0 0 160 90" class="art art--build"><path d="M30 80h100" class="art__thin"/><rect x="44" y="60" width="72" height="16" class="art__blk art__blk--1"/><rect x="52" y="42" width="56" height="16" class="art__blk art__blk--2"/><rect x="60" y="24" width="40" height="16" class="art__blk art__blk--3"/><rect x="72" y="8" width="16" height="14" class="art__blk art__blk--4 art__bad"/></svg></div><span class="step__n">04</span><h3>Build</h3><p>Light HTML5, tested on the devices your people use.</p><p class="step__you"><b>You:</b> LMS access, if we upload</p></li>
+          <li class="step" style="--i:4"><span class="step__wk">Week 4–5</span><span class="step__dot" aria-hidden="true"></span><div class="step__art" aria-hidden="true"><svg viewBox="0 0 160 90" class="art art--test"><rect x="20" y="58" width="120" height="8" rx="4" class="art__track"/><rect x="78" y="58" width="34" height="8" rx="4" class="art__zone"/><rect x="20" y="58" width="120" height="8" rx="4" class="art__fill"/><path d="M0 0l0 18 5-5 4 9 4-2-4-9 7 0z" class="art__cursor"/><path d="M70 26l8 8 16-16" class="art__tick"/></svg></div><span class="step__n">05</span><h3>Play-test</h3><p>Real learners try it. We tune until it feels fair.</p><p class="step__you"><b>You:</b> a few learners, 20 minutes</p></li>
+        </ol>
+      </div>
     <!--/@process--></div></section>
 
   <section class="sec" id="pricing" aria-label="Pricing"><div class="wrap"><!--@pricing-->
@@ -239,14 +300,16 @@
     <!--/@faq--></div></section>
 
   <section class="sec sec--contact" id="contact" aria-label="Contact"><div class="wrap"><!--@contact-->
-      <h2 class="huge reveal-up"><span>Where do your people go wrong?</span></h2>
       <div class="contact__grid">
         <div class="contact__side">
+          <p class="eyebrow"><i class="sq" aria-hidden="true"></i>Contact</p>
+          <h2 class="big reveal-up"><span>Where do your people go wrong?</span></h2>
           <p class="sec__lede">Tell us the mistake. You get a reply within one working day, with a first idea of how to fix it.</p>
           <ul class="promise"><li>A first idea, not a sales sequence</li><li>A fixed quote before any work starts</li><li>Your message is only used to reply to you</li></ul>
           <p class="contact__alt">Prefer not to use the form? Message Razin on <a href="https://www.linkedin.com/in/razin-abdullah/" target="_blank" rel="noopener">LinkedIn</a>.</p>
         </div>
         <div class="report">
+          <p class="report__head"><span>Tell us the mistake</span><span>Reply within 1 working day</span></p>
           <form id="report" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="d9b61fef-000e-4c53-9433-96181e14181c">
             <input type="hidden" name="subject" value="New enquiry from razination">
@@ -299,6 +362,7 @@
 </dialog>
 
 <script src="js/sims-data.js"></script>
+<script src="js/theme.js"></script>
 <script src="js/site.js"></script>
 </body>
 </html>

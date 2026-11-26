@@ -367,7 +367,8 @@
         '<div class="grid2">' + inp('hero.line1', 'Headline, part 1') + inp('hero.line2', 'Headline, part 2', { hint: 'on phones the parts sit on two lines' }) + '</div>' +
         inp('hero.lede', 'Intro', { area: true, rows: 2 }) +
         '<div class="grid2">' + inp('hero.button', 'Button') + inp('hero.facts', 'Facts next to the button', { lines: true, hint: 'one per line, up to 3' }) + '</div>' +
-        inp('home.demoNote', 'Line under the player') +
+        inp('home.demoNote', 'Line under the simulation carousel') +
+        inp('hero.reelFirst', 'First clip in the hero reel', { options: d.sims.filter(function (s) { return s.on && s.clip; }).map(function (s) { return [s.slug, s.title]; }), hint: 'only simulations with a footage clip play in the reel' }) +
       '</div>' +
 
       '<h2 class="a-h">Facts strip</h2><div class="acard"><div class="grid2">' +
@@ -783,7 +784,7 @@
       html = html.replace('<script src="js/sims-data.js"></script>', '<script>' + out['js/sims-data.js'].replace(/<\/script/gi, '<\\/script') + '</script>');
       Object.keys(S.files).forEach(function (f) { if (/\.(webp|jpe?g|png)$/.test(f)) html = html.split(f).join(preview(f)); });
       html = html.replace('<body>', '<body><div style="position:sticky;top:0;z-index:99;background:#FF4F00;color:#0E0E0F;font:700 14px sans-serif;padding:8px 16px;text-align:center">Preview of the home page with your unpublished changes. Nothing is live yet.</div>');
-      w.document.open(); w.document.write(html); w.document.close();
+      w.location.replace(URL.createObjectURL(new Blob([html], { type: 'text/html' })));
     }).catch(function (err) {
       w.document.body.innerHTML = '<p style="font:16px sans-serif;padding:24px">Preview failed: ' + esc(err.message) + '</p>';
     });

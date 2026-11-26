@@ -27,6 +27,12 @@
     var list = (d.home && d.home.sims || []).map(function (slug) { return bySlug(d, slug); }).filter(Boolean);
     return list.length ? list : shown(d).slice(0, 3);
   }
+  function reel(d) {
+    var list = shown(d).filter(function (s) { return s.clip; });
+    var f = d.hero && d.hero.reelFirst;
+    list.sort(function (a, b) { return (b.slug === f) - (a.slug === f); });
+    return list;
+  }
   function moveImg(s) { return s.img.move || s.img.start; }
   function abs(d, p) { return (d.settings && d.settings.siteUrl || '').replace(/\/?$/, '/') + p; }
   function pad(n) { return String(n).padStart(2, '0'); }
@@ -104,35 +110,69 @@
       '\n        </div>' +
       '\n      </div>\n    ';
 
-    var reelFirst = shown(d).filter(function (s) { return s.clip; })[0];
+    var reelFirst = reel(d)[0];
     r.reel = reelFirst ? '<img class="hero__poster" src="' + esc(reelFirst.img.mistake) + '" alt="" fetchpriority="high">' : '';
 
     r.facts = '\n      <ul class="facts">' + (d.plate || []).map(function (p) {
       return '\n        <li><span>' + esc(fill(p.label, d)) + '</span><b>' + esc(fill(p.value, d)) + '</b></li>';
     }).join('') + '\n      </ul>\n    ';
 
-    var sims = homeSims(d);
-    r.play = '\n      <div class="sec__head">' +
-      '\n        <p class="eyebrow"><i class="sq" aria-hidden="true"></i>Play one. Get it wrong.</p>' +
-      '\n        <h2 class="big reveal-up"><span>Pick your</span> <span class="hot">disaster.</span></h2>' +
+    var picks = homeSims(d), rest = shown(d).filter(function (s) { return picks.indexOf(s) < 0; }), all = picks.concat(rest);
+    r.play = '\n      <div class="sec__head sec__head--row">' +
+      '\n        <div><p class="eyebrow"><i class="sq" aria-hidden="true"></i>Play one. Get it wrong.</p>' +
+      '\n        <h2 class="big reveal-up"><span>Pick your</span> <span class="hot">disaster.</span></h2></div>' +
       '\n        <p class="sec__lede">' + esc(d.home.demoNote) + '</p>' +
       '\n      </div>' +
-      '\n      <div class="cards cards--home cards--' + sims.length + '">' + sims.map(function (s, i) { return card(s, i, i === 0); }).join('') + '\n      </div>' +
-      '\n      <a class="more" href="simulations.html">' + esc(fill('All {n} simulations', d)) + ARROW + '</a>\n    ';
+      '\n      <div class="carousel" data-carousel>' +
+      '\n        <div class="carousel__track" tabindex="0" aria-label="Simulations, scroll sideways">' +
+      all.map(function (s) { return card(s, shown(d).indexOf(s), false); }).join('') +
+      '\n        </div>' +
+      '\n        <div class="carousel__ui">' +
+      '\n          <button class="carousel__btn" type="button" data-dir="-1" aria-label="Previous simulation"><svg class="ic" aria-hidden="true" style="transform:scaleX(-1)"><use href="#i-arrow"/></svg></button>' +
+      '\n          <button class="carousel__btn" type="button" data-dir="1" aria-label="Next simulation">' + ARROW + '</button>' +
+      '\n          <span class="carousel__count"><b data-count>01</b> / ' + pad(all.length) + '</span>' +
+      '\n          <span class="carousel__bar"><i></i></span>' +
+      '\n          <a class="more" href="simulations.html">' + esc(fill('All {n} simulations', d)) + ARROW + '</a>' +
+      '\n        </div>' +
+      '\n      </div>\n    ';
 
-    r.process = '\n      <div class="sec__head">' +
-      '\n        <p class="eyebrow"><i class="sq" aria-hidden="true"></i>How it works</p>' +
-      '\n        <h2 class="big reveal-up"><span>' + esc(P.heading) + '</span></h2>' +
+    var ART = [
+      /* find the moment: a lens scans the steps and stops on the one that goes wrong */
+      '<svg viewBox="0 0 160 90" class="art art--find"><g class="art__row">' +
+        [10, 36, 62, 88, 114, 140].map(function (x, k) { return '<rect x="' + (x - 9) + '" y="38" width="18" height="14" rx="2" class="' + (k === 3 ? 'art__bad' : 'art__ok') + '"/>'; }).join('') +
+        '<path d="M10 45H150" class="art__thin"/></g><g class="art__lens"><circle cx="0" cy="45" r="15" class="art__ring"/><path d="M11 56l12 12" class="art__stroke"/></g></svg>',
+      /* sketch it: a storyboard frame draws itself, then the consequence appears */
+      '<svg viewBox="0 0 160 90" class="art art--sketch"><rect x="22" y="12" width="116" height="66" rx="3" class="art__draw"/>' +
+        '<path d="M34 62h30l10-16 12 10 14-22 18 28" class="art__draw art__draw--2"/><circle cx="120" cy="30" r="7" class="art__pop"/></svg>',
+      /* design the mistakes: one path splits, the wrong branch ends in a consequence */
+      '<svg viewBox="0 0 160 90" class="art art--fork"><path d="M12 45h44c16 0 22-22 40-22h40" class="art__thin"/><path d="M56 45c16 0 22 22 40 22h40" class="art__thin"/>' +
+        '<circle r="5" class="art__runner"><animateMotion dur="3.2s" repeatCount="indefinite" path="M12 45h44c16 0 22 22 40 22h40"/></circle>' +
+        '<path d="M130 17l12 12M142 17l-12 12" class="art__ok-s"/><g class="art__boom"><path d="M130 61l12 12M142 61l-12 12" class="art__stroke art__stroke--hot"/></g></svg>',
+      /* build: blocks stack up into the finished piece */
+      '<svg viewBox="0 0 160 90" class="art art--build"><path d="M30 80h100" class="art__thin"/>' +
+        '<rect x="44" y="60" width="72" height="16" class="art__blk art__blk--1"/><rect x="52" y="42" width="56" height="16" class="art__blk art__blk--2"/><rect x="60" y="24" width="40" height="16" class="art__blk art__blk--3"/><rect x="72" y="8" width="16" height="14" class="art__blk art__blk--4 art__bad"/></svg>',
+      /* play-test: a cursor plays, the meter settles into the fair zone */
+      '<svg viewBox="0 0 160 90" class="art art--test"><rect x="20" y="58" width="120" height="8" rx="4" class="art__track"/><rect x="78" y="58" width="34" height="8" rx="4" class="art__zone"/>' +
+        '<rect x="20" y="58" width="120" height="8" rx="4" class="art__fill"/><path d="M0 0l0 18 5-5 4 9 4-2-4-9 7 0z" class="art__cursor"/>' +
+        '<path d="M70 26l8 8 16-16" class="art__tick"/></svg>'
+    ];
+    r.process = '\n      <div class="sec__head sec__head--row">' +
+      '\n        <div><p class="eyebrow"><i class="sq" aria-hidden="true"></i>How it works</p>' +
+      '\n        <h2 class="big reveal-up"><span>' + esc(P.heading) + '</span></h2></div>' +
       '\n        <p class="sec__lede">' + esc(P.intro) + '</p>' +
       '\n      </div>' +
-      '\n      <ol class="steps">' + P.steps.map(function (s, i) {
-        return '\n        <li class="step' + (s.mistakes ? ' step--hot' : '') + '">' +
+      '\n      <div class="flow" data-flow>' +
+      '\n        <div class="flow__line" aria-hidden="true"><i class="flow__run"></i></div>' +
+      '\n        <ol class="steps">' + P.steps.map(function (s, i) {
+        return '\n          <li class="step' + (s.mistakes ? ' step--hot' : '') + '" style="--i:' + i + '">' +
           '<span class="step__wk">' + weeks(s) + '</span>' +
           '<span class="step__dot" aria-hidden="true"></span>' +
+          '<div class="step__art" aria-hidden="true">' + (ART[i] || ART[ART.length - 1]) + '</div>' +
           '<span class="step__n">' + pad(i + 1) + '</span>' +
           '<h3>' + esc(s.title) + '</h3><p>' + esc(s.desc) + '</p>' +
           (s.you ? '<p class="step__you"><b>You:</b> ' + esc(s.you) + '</p>' : '') + '</li>';
-      }).join('') + '\n      </ol>\n    ';
+      }).join('') + '\n        </ol>' +
+      '\n      </div>\n    ';
 
     r.pricing = '\n      <div class="sec__head">' +
       '\n        <p class="eyebrow"><i class="sq" aria-hidden="true"></i>Pricing</p>' +
@@ -180,14 +220,16 @@
     var joined = alt.length > 1 ? alt.slice(0, -1).join(', ') + ' or ' + alt[alt.length - 1] : (alt[0] || '');
     var altText = joined ? 'Prefer not to use the form? ' + joined.charAt(0).toUpperCase() + joined.slice(1) + '.' : '';
     var formOn = !!C.web3formsKey;
-    r.contact = '\n      <h2 class="huge reveal-up"><span>' + esc(CS.heading) + '</span></h2>' +
-      '\n      <div class="contact__grid">' +
+    r.contact = '\n      <div class="contact__grid">' +
       '\n        <div class="contact__side">' +
+      '\n          <p class="eyebrow"><i class="sq" aria-hidden="true"></i>Contact</p>' +
+      '\n          <h2 class="big reveal-up"><span>' + esc(CS.heading) + '</span></h2>' +
       '\n          <p class="sec__lede">' + esc(CS.lede) + '</p>' +
       '\n          <ul class="promise">' + (CS.promises || []).filter(Boolean).map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>' +
       (altText ? '\n          <p class="contact__alt">' + altText + '</p>' : '') +
       '\n        </div>' +
       '\n        <div class="report">' +
+      '\n          <p class="report__head"><span>Tell us the mistake</span><span>Reply within 1 working day</span></p>' +
       '\n          <form id="report" action="' + (formOn ? 'https://api.web3forms.com/submit' : 'mailto:' + esc(C.email)) + '" method="POST"' + (formOn ? '' : ' enctype="text/plain"') + '>' +
       (formOn ? '\n            <input type="hidden" name="access_key" value="' + esc(C.web3formsKey) + '">' : '') +
       '\n            <input type="hidden" name="subject" value="New enquiry from razination">' +
@@ -306,7 +348,8 @@
     });
     return '/* Generated from data/site.json by the admin panel (or tools/build.js).\n' +
       '   Edit simulations in /admin/, not here: this file is overwritten on Publish. */\n' +
-      'window.RAZ_SIMS = ' + JSON.stringify(list, null, 2) + ';\n';
+      'window.RAZ_SIMS = ' + JSON.stringify(list, null, 2) + ';\n' +
+      'window.RAZ_REEL = ' + JSON.stringify(reel(d).map(function (s) { return s.slug; })) + ';\n';
   }
 
   function apply(html, regions, file) {
