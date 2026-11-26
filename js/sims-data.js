@@ -24,6 +24,7 @@ window.RAZ_SIMS = [
       "move": "img/thumbs/fire-extinguisher-move.webp",
       "mistake": "img/thumbs/fire-extinguisher.webp"
     },
+    "clip": "media/fire-extinguisher.mp4",
     "altMove": "Fire 3 of 4: a frying pan on fire in the staff kitchen. The pointer is on the water extinguisher."
   },
   {
@@ -48,7 +49,8 @@ window.RAZ_SIMS = [
       "start": "img/thumbs/phishing-inbox-start.webp",
       "move": "",
       "mistake": "img/thumbs/phishing-inbox.webp"
-    }
+    },
+    "clip": "media/phishing-inbox.mp4"
   },
   {
     "slug": "gdpr-every-dot",
@@ -73,6 +75,7 @@ window.RAZ_SIMS = [
       "move": "img/thumbs/gdpr-every-dot-move.webp",
       "mistake": "img/thumbs/gdpr-every-dot.webp"
     },
+    "clip": "media/gdpr-every-dot.mp4",
     "altMove": "Situation 2 of 6: a customer export of 1,800 records. The pointer is on Email it to my personal Gmail."
   },
   {
@@ -97,7 +100,8 @@ window.RAZ_SIMS = [
       "start": "img/thumbs/flat-tire-start.webp",
       "move": "",
       "mistake": "img/thumbs/flat-tire.webp"
-    }
+    },
+    "clip": "media/flat-tire.mp4"
   },
   {
     "slug": "cleanroom-gowning",
@@ -121,7 +125,8 @@ window.RAZ_SIMS = [
       "start": "img/thumbs/cleanroom-gowning-start.webp",
       "move": "",
       "mistake": "img/thumbs/cleanroom-gowning.webp"
-    }
+    },
+    "clip": "media/cleanroom-gowning.mp4"
   },
   {
     "slug": "close-the-loop",
@@ -145,7 +150,8 @@ window.RAZ_SIMS = [
       "start": "img/thumbs/close-the-loop-start.webp",
       "move": "",
       "mistake": "img/thumbs/close-the-loop.webp"
-    }
+    },
+    "clip": ""
   },
   {
     "slug": "eco-party",
@@ -169,7 +175,8 @@ window.RAZ_SIMS = [
       "start": "img/thumbs/eco-party-start.webp",
       "move": "",
       "mistake": "img/thumbs/eco-party.webp"
-    }
+    },
+    "clip": ""
   },
   {
     "slug": "wo-ist-der-loeffel",
@@ -194,6 +201,7 @@ window.RAZ_SIMS = [
       "move": "",
       "mistake": "img/thumbs/wo-ist-der-loeffel.webp"
     },
+    "clip": "",
     "lang": "de"
   }
 ];

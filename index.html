@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,409 +15,288 @@
 <link rel="canonical" href="https://alrazination.github.io/razination/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="img/thumbs/fire-extinguisher.webp" as="image" fetchpriority="high">
 <!--/@meta-->
-<meta name="theme-color" content="#0E0E0F">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230E0E0F'/%3E%3Crect x='12' y='13' width='8' height='14' fill='%23F2EFE8'/%3E%3Crect x='11' y='4' width='10' height='6' fill='%23FF4F00'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#070708">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070708'/%3E%3Crect x='12' y='13' width='8' height='14' fill='%23F4F1EA'/%3E%3Crect x='11' y='4' width='10' height='6' fill='%23FF4F00'/%3E%3C/svg%3E">
 <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M1 8h12M8.5 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
-  <symbol id="i-out" viewBox="0 0 16 16"><path d="M5 3h8v8M13 3 3 13" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
-  <symbol id="i-full" viewBox="0 0 16 16"><path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
-  <symbol id="i-redo" viewBox="0 0 16 16"><path d="M13.5 8A5.5 5.5 0 1 1 11 3.4M11 0.8V4h3.2" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
-  <symbol id="i-tick" viewBox="0 0 18 18"><rect width="18" height="18" fill="currentColor"/><path d="M4.2 9.4l3.1 3.1 6.4-7.2" fill="none" stroke="#0E0E0F" stroke-width="2.6"/></symbol>
-  <symbol id="i-send" viewBox="0 0 16 16"><path d="M2 3h12v8H6l-4 3z" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M1 8h12M8.5 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-out" viewBox="0 0 16 16"><path d="M5 3h8v8M13 3 3 13" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></symbol>
+  <symbol id="i-full" viewBox="0 0 16 16"><path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-redo" viewBox="0 0 16 16"><path d="M13.5 8A5.5 5.5 0 1 1 11 3.4M11 0.8V4h3.2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-x" viewBox="0 0 16 16"><path d="M3 3l10 10M13 3 3 13" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
 </svg>
 <a class="skip" href="#main">Skip to content</a>
-<a class="skip" href="#after-stage">Skip the simulation</a>
+<div class="glow" aria-hidden="true"></div>
 
 <header class="top">
-  <div class="frame">
-    <a class="logo" href="./" aria-label="Razination, home">raz<span class="i">ı</span>nation</a>
-    <nav class="nav" aria-label="Main">
-      <a href="simulations.html">Simulations</a>
-      <a href="#how">How it works</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#about">About</a>
-      <a class="btn btn--ink btn--sm" href="#contact">Get a fixed quote</a>
-    </nav>
-  </div>
+  <a class="logo" href="./" aria-label="Razination, home">raz<span class="i">ı</span>nation</a>
+  <nav class="nav" aria-label="Main">
+    <a href="simulations.html">Simulations</a>
+    <a href="#how">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#about">About</a>
+  </nav>
+  <a class="btn btn--sm btn--hot" href="#contact">Get a fixed quote</a>
 </header>
 
 <main id="main">
-
-  <!-- ===================== HERO ===================== -->
-  <section class="hero" aria-labelledby="h1">
-    <div class="frame"><!--@hero-->
-      <h1 class="placard" id="h1" style="--fit:13.25;--fit-m:22"><span>Fail here.</span> <span>Not on the job.</span></h1>
-      <div class="hero__row">
-        <div>
-          <p class="lede">Training simulations for safety, compliance and IT security. Your people make the mistake, see what happens, and learn why.</p>
-          <a class="byline" href="#about"><img src="img/razin-portrait.webp" alt="" width="34" height="34"><span>Built by <b>Razin Abdullah</b> in Munich</span></a>
-        </div>
-        <div class="hero__side">
-          <div class="hero__cta">
-            <a class="btn" href="#play" data-play-hero><i class="tri" aria-hidden="true"></i>Play a simulation <small>no sign-up</small></a>
-          </div>
-          <p class="hero__facts data"><span><i class="sq" aria-hidden="true"></i>SCORM &amp; xAPI</span><span><i class="sq" aria-hidden="true"></i>Live in 3–5 weeks</span><span><i class="sq" aria-hidden="true"></i>Fixed quote first</span></p>
+  <!-- HERO: the real mistakes, recorded from the simulations -->
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hero__media" aria-hidden="true"><canvas class="hero__amb" width="48" height="27"></canvas><div class="hero__shade"></div></div>
+    <div class="hero__screen" aria-hidden="true">
+      <!--@reel--><img class="hero__poster" src="img/thumbs/fire-extinguisher.webp" alt="" fetchpriority="high"><!--/@reel-->
+      <video class="hero__v" muted playsinline preload="auto"></video>
+      <video class="hero__v" muted playsinline preload="auto"></video>
+      <div class="hero__scan"></div>
+      <div class="hud hud--tl"><i class="rec"></i>REC <span data-tc>00:00:00</span></div>
+      <div class="hud hud--tr">Case <span data-case>01</span> · <span data-topic>Safety</span></div>
+    </div>
+    <div class="hero__inner" id="hero-h"><!--@hero-->
+      <p class="eyebrow reveal"><i class="sq" aria-hidden="true"></i>Training simulations · Munich</p>
+      <h1 class="hero__h"><span class="ln"><span>Fail here.</span></span><span class="ln ln--hot"><span>Not on the job.</span></span></h1>
+      <div class="hero__foot">
+        <p class="hero__lede reveal">Training simulations for safety, compliance and IT security. Your people make the mistake, see what happens, and learn why.</p>
+        <div class="hero__cta reveal">
+          <button class="btn btn--hot" type="button" data-play="fire-extinguisher"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Play one now</button>
+          <a class="btn btn--line" href="#contact">Get a fixed quote</a>
         </div>
       </div>
     <!--/@hero--></div>
-  </section>
-
-  <!-- ===================== THE THREE SIMULATIONS ===================== -->
-  <section class="band band--top on-ink" id="play" aria-label="Three simulations you can play">
-    <div class="frame"><!--@stage-->
-      <div class="stage" id="stage" data-sim="fire-extinguisher">
-        <div class="stage__bar">
-          <div class="tabs" role="tablist" aria-label="Pick a simulation" data-tabs="stage">
-            <span class="tabs__lab data" aria-hidden="true">Pick a mistake</span>
-            <button class="tab" role="tab" aria-selected="true" aria-controls="stage-screen" data-sim="fire-extinguisher"><img src="img/thumbs/fire-extinguisher-move.webp" alt="" width="58" height="33"><b>Fire safety</b><span>Fight or get out?</span></button>
-            <button class="tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="stage-screen" data-sim="phishing-inbox"><img src="img/thumbs/phishing-inbox-start.webp" alt="" width="58" height="33" loading="lazy"><b>Phishing</b><span>Report or click?</span></button>
-            <button class="tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="stage-screen" data-sim="gdpr-every-dot"><img src="img/thumbs/gdpr-every-dot-move.webp" alt="" width="58" height="33" loading="lazy"><b>GDPR</b><span>Every dot is a person</span></button>
-          </div>
-          <div class="deck__act data">
-            <button type="button" data-reset><svg aria-hidden="true"><use href="#i-redo"/></svg>Restart</button>
-            <button type="button" data-fullscreen><svg aria-hidden="true"><use href="#i-full"/></svg>Full screen</button>
-            <a href="sims/fire-extinguisher/index.html" target="_blank" rel="noopener" data-newtab><svg aria-hidden="true"><use href="#i-out"/></svg>New tab</a>
-          </div>
-        </div>
-
-        <div class="screen" id="stage-screen" role="tabpanel" aria-label="Simulation">
-          <div class="cover">
-            <img class="before" src="img/thumbs/fire-extinguisher-move.webp" alt="Your move: Fire 3 of 4: a frying pan on fire in the staff kitchen. The pointer is on the water extinguisher." width="1280" height="720">
-            <img class="after" src="img/thumbs/fire-extinguisher.webp" alt="What happens: A kitchen engulfed by a fireball after water hit burning fat" width="1280" height="720" fetchpriority="high">
-            <button class="btn start" type="button"><i class="tri" aria-hidden="true"></i><span class="lab">Play: Fire safety</span> <small>no sign-up</small></button>
-          </div>
-          <div class="screen__loading data" aria-hidden="true">Loading simulation</div>
-        </div>
-
-        <div class="replay">
-          <button class="replay__btn" type="button" aria-label="Pause the replay"></button>
-          <span class="replay__lab data" aria-hidden="true">Your move</span>
-          <div class="track">
-            <input type="range" min="0" max="1000" value="1000" aria-label="Replay of the mistake. Drag to go from your move to what happens.">
-            <span class="track__head"></span>
-            <span class="track__fill"></span>
-            <span class="track__cut"></span>
-          </div>
-          <span class="replay__lab replay__lab--hap data" aria-hidden="true">What happens</span>
-        </div>
-
-        <div class="deck">
-          <div class="deck__cell deck__cell--do"><span class="data">01 · You do</span><b data-triad="0">Water on burning fat</b></div>
-          <div class="deck__cell deck__cell--hap"><span class="data"><i class="sq sq--ink" aria-hidden="true"></i>02 · What happens</span><b data-triad="1">Instant fireball</b><small data-field="readout">Fire 3 of 4 · frying pan, staff kitchen</small></div>
-          <div class="deck__cell deck__cell--stick"><span class="data"><svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg>03 · What sticks</span><b data-triad="2">Fat fire? Use the fire blanket.</b></div>
-        </div>
-        <p class="sr-only" aria-live="polite" data-live></p>
-
-        <div class="stage__foot">
-          <p>Studio demos, built in-house to show how we work. Made for a laptop or tablet.</p>
-          <button class="arrow share" type="button" data-share><span class="lab">Send it to my laptop</span><svg aria-hidden="true"><use href="#i-send"/></svg></button>
-          <span style="display:flex;gap:28px;flex-wrap:wrap">
-            <a class="arrow" href="#contact">Want one like this? Get a fixed quote<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-            <a class="arrow" href="simulations.html">All 8 simulations<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </span>
-        </div>
-      </div>
-<!--/@stage-->
-<!--@plate-->
-      <dl class="plate" id="after-stage">
-        <div><dt class="data">Simulations</dt><dd>8 playable demos</dd></div>
-        <div><dt class="data">Runs in</dt><dd>SCORM &amp; xAPI</dd></div>
-        <div><dt class="data">Timeline</dt><dd>3 to 5 weeks</dd></div>
-        <div><dt class="data">Price, excl. VAT</dt><dd>Pilot €500 · sim €1,800</dd></div>
-        <div><dt class="data">Learner data</dt><dd>None by default</dd></div>
-        <div><dt class="data">Quote</dt><dd>Fixed, before we start</dd></div>
-      </dl>
-    <!--/@plate-->
+    <div class="cue" aria-hidden="true">
+      <span class="cue__lab">Your move</span><span class="cue__do" data-do>—</span>
+      <span class="cue__arr">→</span>
+      <span class="cue__lab cue__lab--hot">What happens</span><span class="cue__hap" data-hap>—</span>
+      <span class="cue__bar"><i data-bar></i></span>
     </div>
   </section>
 
-  <!-- ===================== SLIDE 14 ===================== -->
-  <section class="sec" id="why" aria-labelledby="why-h">
-    <div class="frame">
-      <div class="sec-head">
-        <h2 class="placard" id="why-h">Nobody remembers slide&nbsp;14.</h2>
-        <div>
-          <p>Same rule, two versions. Only one makes you decide. Go on, click <b>Next</b> like everyone does.</p>
-          <div class="flip"><span class="data mute">Flip it</span><div class="vs__switch" role="group" aria-label="Show the rule as">
-          <button type="button" data-show="slide" aria-pressed="true">Slide 14</button>
-          <button type="button" data-show="sim" aria-pressed="false">Simulation</button>
-        </div></div>
-        </div>
-      </div>
+  <div class="marquee" aria-hidden="true"><div class="marquee__track">
+    <span>Fail here</span><span class="o">Not on the job</span><span>Fail here</span><span class="o">Not on the job</span><span>Fail here</span><span class="o">Not on the job</span>
+    <span>Fail here</span><span class="o">Not on the job</span><span>Fail here</span><span class="o">Not on the job</span><span>Fail here</span><span class="o">Not on the job</span>
+  </div></div>
 
-      <div class="vs" data-vs>
-        <div class="vs__screen">
-          <div class="slide" role="group" aria-label="A typical e-learning slide, 14 of 38">
-            <div class="slide__top"><span>Module 2 · Vehicle safety</span><span>Slide 14 of 38</span></div>
+  <!-- STORY: slide 14 gets torn away by the real consequence -->
+  <section class="story" aria-label="Slide versus simulation">
+    <div class="story__pin">
+      <div class="story__caps">
+        <p class="story__cap is-on" data-cap="0"><span class="eyebrow"><i class="sq"></i>Most training</span>This is slide 14 of 38.</p>
+        <p class="story__cap" data-cap="1"><span class="eyebrow"><i class="sq"></i>It’s correct</span>Nobody remembers it.</p>
+        <p class="story__cap" data-cap="2"><span class="eyebrow eyebrow--hot"><i class="sq"></i>Same rule, as a simulation</span>Skip the brake.</p>
+        <p class="story__cap story__cap--big" data-cap="3"><span class="eyebrow eyebrow--hot"><i class="sq"></i>What sticks</span>Nobody forgets this.</p>
+      </div>
+      <div class="story__slide" aria-hidden="true">
+        <div class="slide">
+          <div class="slide__top"><span>Module 2 · Vehicle safety</span><span>Slide 14 of 38</span></div>
+          <div class="slide__prog"><i></i></div>
+          <div class="slide__body">
             <div>
-              <div class="slide__prog"><i></i></div>
-              <div class="slide__body">
-                <div>
-                  <h3>Changing a flat tire</h3>
-                  <ol>
-                    <li>Apply the parking brake.</li>
-                    <li>Loosen the wheel nuts.</li>
-                    <li>Raise the vehicle with the jack.</li>
-                    <li>Replace the wheel.</li>
-                  </ol>
-                  <p class="slide__note">Please read carefully before continuing.</p>
-                </div>
-                <div class="slide__clip">
-                  <svg viewBox="0 0 320 170" aria-hidden="true"><rect width="320" height="170" fill="#eef1f4"/><rect y="138" width="320" height="32" fill="#d5dae0"/><path d="M50 128V104q0-10 12-11l42-3 26-30q6-7 16-7h66q10 0 17 8l22 29 34 4q14 2 14 14v24z" fill="#b9c2cc"/><path d="M138 90l14-24h30v24zM190 66h30l18 24h-48z" fill="#e4e9ee"/><circle cx="92" cy="132" r="19" fill="#8b96a3"/><circle cx="92" cy="132" r="8" fill="#d5dae0"/><circle cx="244" cy="132" r="19" fill="#8b96a3"/><circle cx="244" cy="132" r="8" fill="#d5dae0"/></svg>
-                  <p>Figure 2.14: Vehicle</p>
-                </div>
-              </div>
+              <h3>Changing a flat tire</h3>
+              <ol><li>Apply the parking brake.</li><li>Loosen the wheel nuts.</li><li>Raise the vehicle with the jack.</li><li>Replace the wheel.</li></ol>
+              <p class="slide__note">Please read carefully before continuing.</p>
             </div>
-            <div class="slide__foot">
-              <span>Training department · page 14</span>
-              <span style="display:flex;gap:1cqw"><button class="slide__btn" type="button" tabindex="-1" aria-hidden="true">‹ Back</button><button class="slide__btn slide__btn--next" type="button" data-next>Next ›</button></span>
-            </div>
+            <div class="slide__clip"><svg viewBox="0 0 320 170"><rect width="320" height="170" fill="#eef1f4"/><rect y="138" width="320" height="32" fill="#d5dae0"/><path d="M50 128V104q0-10 12-11l42-3 26-30q6-7 16-7h66q10 0 17 8l22 29 34 4q14 2 14 14v24z" fill="#b9c2cc"/><path d="M138 90l14-24h30v24zM190 66h30l18 24h-48z" fill="#e4e9ee"/><circle cx="92" cy="132" r="19" fill="#8b96a3"/><circle cx="92" cy="132" r="8" fill="#d5dae0"/><circle cx="244" cy="132" r="19" fill="#8b96a3"/><circle cx="244" cy="132" r="8" fill="#d5dae0"/></svg><p>Figure 2.14: Vehicle</p></div>
           </div>
-          <img class="vs__sim" src="img/thumbs/flat-tire.webp" alt="The same rule as a simulation: the parking brake was skipped, the car rolled off the jack, and a critical danger alert explains why." width="1280" height="720" loading="lazy">
+          <div class="slide__foot"><span>Training department · page 14</span><span class="slide__btns"><b>‹ Back</b><b class="nx">Next ›</b></span></div>
         </div>
-        <div class="vs__cap">
-          <div>
-            <b class="d">Correct, complete, and easy to click past.</b>
-            <b class="s">Everybody remembers the car rolling off the jack.</b>
-          </div>
-          <div class="vs__act">
-            <button class="arrow s" type="button" data-back>Back to slide 14</button>
-            <a class="arrow" href="simulations.html#flat-tire">Play the flat tire<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </div>
-        <p class="sr-only" aria-live="polite" data-live></p>
       </div>
+      <div class="story__sim" aria-hidden="true">
+        <video muted playsinline preload="none" poster="img/thumbs/flat-tire-start.webp" data-src="media/flat-tire.mp4"></video>
+      </div>
+      <div class="story__bar" aria-hidden="true"><i></i></div>
     </div>
   </section>
 
-  <!-- ===================== WHO ===================== -->
-  <section class="sec sec--alt" id="about" aria-labelledby="who-h">
-    <div class="frame who"><!--@about-->
-      <figure class="who__pic">
-        <img src="img/razin-portrait.webp" alt="Razin Abdullah" width="480" height="480" loading="lazy">
-        <figcaption class="data">Razin Abdullah · Munich</figcaption>
-      </figure>
-      <div>
-        <h2 class="placard" id="who-h">Razin designs the mistakes.</h2>
-        <blockquote>People learn most at the moment they get something wrong, as long as it’s safe and they can see why.</blockquote>
-        <dl class="facts">
-          <div><dt class="data">Trained</dt><dd>M.Ed., Technical University of Munich</dd></div>
-          <div><dt class="data">Experience</dt><dd>4+ years designing and evaluating training</dd></div>
-          <div><dt class="data">Builds in</dt><dd>HTML5, Storyline, 3D</dd></div>
-          <div><dt class="data">Worked on</dt><dd>High-stakes procedures to classrooms, for international teams</dd></div>
-        </dl>
-        <a class="arrow" href="https://www.linkedin.com/in/razin-abdullah/" target="_blank" rel="noopener">Razin on LinkedIn<svg aria-hidden="true"><use href="#i-out"/></svg></a>
+  <section class="sec" id="play" aria-label="Simulations to play"><div class="wrap"><!--@play-->
+      <div class="sec__head">
+        <p class="eyebrow"><i class="sq" aria-hidden="true"></i>Play one. Get it wrong.</p>
+        <h2 class="big reveal-up"><span>Pick your</span> <span class="hot">disaster.</span></h2>
+        <p class="sec__lede">Studio demos, built in-house to show how we work. Made for a laptop or tablet.</p>
       </div>
-    <!--/@about--></div>
-  </section>
-
-  <!-- ===================== PROCESS ===================== -->
-  <section class="sec sec--ink" id="how" aria-labelledby="how-h">
-    <div class="frame"><!--@process-->
-      <div class="sec-head">
-        <h2 class="placard" id="how-h">Live in 3 to 5 weeks.</h2>
-        <p>Each bar shows who does what. Your part is the thin line. Spoiler: it’s small.</p>
+      <div class="cards cards--home cards--3">
+        <article class="card card--big" id="sim-fire-extinguisher" data-sim="fire-extinguisher">
+          <button class="card__hit" type="button" data-play="fire-extinguisher" aria-label="Play Fight or get out?"></button>
+          <div class="card__media"><img src="img/thumbs/fire-extinguisher-move.webp" alt="Fire 3 of 4: a frying pan on fire in the staff kitchen. The pointer is on the water extinguisher." loading="lazy"><video muted loop playsinline preload="none" poster="img/thumbs/fire-extinguisher-move.webp" data-src="media/fire-extinguisher.mp4"></video><span class="card__play"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Play</span><span class="card__n">01</span></div>
+          <div class="card__body">
+            <p class="card__topic">Safety <span>· Every workplace</span></p>
+            <h3>Fight or get out?</h3>
+            <p class="card__chain"><span>Water on burning fat</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg><b>Instant fireball</b></p>
+          </div>
+        </article>
+        <article class="card" id="sim-phishing-inbox" data-sim="phishing-inbox">
+          <button class="card__hit" type="button" data-play="phishing-inbox" aria-label="Play Report or click?"></button>
+          <div class="card__media"><img src="img/thumbs/phishing-inbox-start.webp" alt="An email inbox next to a map of the office network" loading="lazy"><video muted loop playsinline preload="none" poster="img/thumbs/phishing-inbox-start.webp" data-src="media/phishing-inbox.mp4"></video><span class="card__play"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Play</span><span class="card__n">02</span></div>
+          <div class="card__body">
+            <p class="card__topic">IT security <span>· Everyone with an inbox</span></p>
+            <h3>Report or click?</h3>
+            <p class="card__chain"><span>Click the fake link</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg><b>Infection spreads, device by device</b></p>
+          </div>
+        </article>
+        <article class="card" id="sim-gdpr-every-dot" data-sim="gdpr-every-dot">
+          <button class="card__hit" type="button" data-play="gdpr-every-dot" aria-label="Play Every dot is a person"></button>
+          <div class="card__media"><img src="img/thumbs/gdpr-every-dot-move.webp" alt="Situation 2 of 6: a customer export of 1,800 records. The pointer is on Email it to my personal Gmail." loading="lazy"><video muted loop playsinline preload="none" poster="img/thumbs/gdpr-every-dot-move.webp" data-src="media/gdpr-every-dot.mp4"></video><span class="card__play"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Play</span><span class="card__n">03</span></div>
+          <div class="card__body">
+            <p class="card__topic">Data protection <span>· Anyone who handles personal data</span></p>
+            <h3>Every dot is a person</h3>
+            <p class="card__chain"><span>Email customer data to private Gmail</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg><b>1,800 customers fly out the door</b></p>
+          </div>
+        </article>
       </div>
+      <a class="more" href="simulations.html">All 8 simulations<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <!--/@play--></div></section>
 
-      <div class="gantt" role="list" aria-label="Project plan, week by week">
-        <div class="gantt__weeks data" aria-hidden="true"><span></span><span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span><span>Week 5</span></div>
-        <span class="g-live" aria-hidden="true"><svg class="tick" style="color:var(--paper)"><use href="#i-tick"/></svg>Live</span>
+  <section class="sec sec--facts" aria-label="Facts"><div class="wrap"><!--@facts-->
+      <ul class="facts">
+        <li><span>Simulations</span><b>8 playable demos</b></li>
+        <li><span>Runs in</span><b>SCORM &amp; xAPI</b></li>
+        <li><span>Timeline</span><b>3 to 5 weeks</b></li>
+        <li><span>Price, excl. VAT</span><b>Pilot €500 · sim €1,800</b></li>
+        <li><span>Learner data</span><b>None by default</b></li>
+        <li><span>Quote</span><b>Fixed, before we start</b></li>
+      </ul>
+    <!--/@facts--></div></section>
 
-        <div class="g-row" role="listitem">
-          <div class="g-row__lab"><h3><span class="n">01</span>Find the moment</h3><p>The one decision where your people go wrong.</p></div>
-          <div class="g-row__lane">
-            <span class="g-bar" style="--s:0;--e:1;--i:0">Kick-off and research</span>
-            <span class="g-you" style="--s:0;--i:0"><i style="--w:36"></i><b>You:</b> a one-hour call</span>
-          </div>
-        </div>
-
-        <div class="g-row" role="listitem">
-          <div class="g-row__lab"><h3><span class="n">02</span>Sketch it</h3><p>How the mistake will play out, before anything is built.</p></div>
-          <div class="g-row__lane">
-            <span class="g-bar" style="--s:0.5;--e:2;--i:1">Sketch of the consequence</span>
-            <span class="g-you" style="--s:1.65;--i:1"><i style="--w:28"></i><b>You:</b> a yes, or what to change</span>
-          </div>
-        </div>
-
-        <div class="g-row" role="listitem">
-          <div class="g-row__lab"><h3><span class="n">03</span>Design the mistakes</h3><p>Every wrong move plays out, with a reason.</p></div>
-          <div class="g-row__lane">
-            <span class="g-bar g-bar--mistake" style="--s:1.5;--e:3;--i:2">Mistakes and feedback</span>
-            <span class="g-you" style="--s:2.5;--i:2"><i style="--w:36"></i><b>You:</b> your expert checks the facts</span>
-          </div>
-        </div>
-
-        <div class="g-row" role="listitem">
-          <div class="g-row__lab"><h3><span class="n">04</span>Build</h3><p>Light HTML5, tested on the devices your people use.</p></div>
-          <div class="g-row__lane">
-            <span class="g-bar" style="--s:2.5;--e:4;--i:3">Build and LMS package</span>
-            <span class="g-you" style="--s:3.5;--i:3"><i style="--w:20"></i><b>You:</b> LMS access, if we upload</span>
-          </div>
-        </div>
-
-        <div class="g-row" role="listitem">
-          <div class="g-row__lab"><h3><span class="n">05</span>Play-test</h3><p>Real learners try it. We tune until it feels fair.</p></div>
-          <div class="g-row__lane">
-            <span class="g-bar" style="--s:3.5;--e:5;--i:4">Test, tune, hand over</span>
-            <span class="g-you" style="--s:3.6;--i:4"><i style="--w:28"></i><b>You:</b> a few learners, 20 minutes</span>
-          </div>
-        </div>
-        <div class="gantt__legend" aria-hidden="true">
-          <span><i></i>Razination</span><span><i class="y"></i>You</span><span><i class="m"></i>Where the mistakes get designed</span>
-        </div>
+  <section class="sec" id="how" aria-label="How it works"><div class="wrap"><!--@process-->
+      <div class="sec__head">
+        <p class="eyebrow"><i class="sq" aria-hidden="true"></i>How it works</p>
+        <h2 class="big reveal-up"><span>Live in 3 to 5 weeks.</span></h2>
+        <p class="sec__lede">Each bar shows who does what. Your part is the thin line. Spoiler: it’s small.</p>
       </div>
-    <!--/@process--></div>
-  </section>
+      <ol class="steps">
+        <li class="step"><span class="step__wk">Week 1</span><span class="step__dot" aria-hidden="true"></span><span class="step__n">01</span><h3>Find the moment</h3><p>The one decision where your people go wrong.</p><p class="step__you"><b>You:</b> a one-hour call</p></li>
+        <li class="step"><span class="step__wk">Week 1–2</span><span class="step__dot" aria-hidden="true"></span><span class="step__n">02</span><h3>Sketch it</h3><p>How the mistake will play out, before anything is built.</p><p class="step__you"><b>You:</b> a yes, or what to change</p></li>
+        <li class="step step--hot"><span class="step__wk">Week 2–3</span><span class="step__dot" aria-hidden="true"></span><span class="step__n">03</span><h3>Design the mistakes</h3><p>Every wrong move plays out, with a reason.</p><p class="step__you"><b>You:</b> your expert checks the facts</p></li>
+        <li class="step"><span class="step__wk">Week 3–4</span><span class="step__dot" aria-hidden="true"></span><span class="step__n">04</span><h3>Build</h3><p>Light HTML5, tested on the devices your people use.</p><p class="step__you"><b>You:</b> LMS access, if we upload</p></li>
+        <li class="step"><span class="step__wk">Week 4–5</span><span class="step__dot" aria-hidden="true"></span><span class="step__n">05</span><h3>Play-test</h3><p>Real learners try it. We tune until it feels fair.</p><p class="step__you"><b>You:</b> a few learners, 20 minutes</p></li>
+      </ol>
+    <!--/@process--></div></section>
 
-  <!-- ===================== PRICING ===================== -->
-  <section class="sec" id="pricing" aria-labelledby="price-h">
-    <div class="frame"><!--@pricing-->
-      <div class="sec-head">
-        <h2 class="placard" id="price-h">Three sizes. No “price on request”.</h2>
-        <p>You get a fixed quote before anything starts. Prices exclude VAT.</p>
+  <section class="sec" id="pricing" aria-label="Pricing"><div class="wrap"><!--@pricing-->
+      <div class="sec__head">
+        <p class="eyebrow"><i class="sq" aria-hidden="true"></i>Pricing</p>
+        <h2 class="big reveal-up"><span>Three sizes. No “price on request”.</span></h2>
+        <p class="sec__lede">You get a fixed quote before anything starts. Prices exclude VAT.</p>
       </div>
       <div class="prices">
         <article class="price">
-          <div class="price__weeks" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
-          <span class="price__wk data">About 3 weeks</span>
+          <p class="price__wk">About 3 weeks</p>
           <h3>Spark</h3>
-          <div class="price__amt"><span class="data">from</span><b>€500</b></div>
+          <p class="price__amt"><span>from</span>€500</p>
           <p class="price__for">One focused piece. Test the water or fix one weak spot.</p>
-          <ul>
-            <li>A video explainer (up to 90 s), an interactive activity, or a workshop activity</li>
-            <li>SCORM, MP4 or a web link</li>
-            <li>One round of revisions</li>
-          </ul>
-          <a class="btn btn--ghost btn--sm" href="#contact">Start with Spark</a>
+          <ul><li>A video explainer (up to 90 s), an interactive activity, or a workshop activity</li><li>SCORM, MP4 or a web link</li><li>One round of revisions</li></ul>
+          <a class="btn btn--line" href="#contact">Start with Spark</a>
         </article>
         <article class="price price--core">
-          <div class="price__weeks" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
-          <span class="price__wk data">About 4 weeks</span>
+          <p class="price__wk">About 4 weeks</p>
           <h3>Build</h3>
-          <div class="price__amt"><span class="data">from</span><b>€1,800</b></div>
+          <p class="price__amt"><span>from</span>€1,800</p>
           <p class="price__for">A full simulation, built around your real mistakes.</p>
-          <ul>
-            <li>One simulation or e-learning module, 15 to 20 minutes of practice</li>
-            <li>Play-tested with real learners, then tuned</li>
-            <li>SCORM or xAPI, set up in your LMS</li>
-            <li>Two rounds of revisions, source files included</li>
-          </ul>
-          <a class="btn btn--sm" href="#contact">Choose Build</a>
+          <ul><li>One simulation or e-learning module, 15 to 20 minutes of practice</li><li>Play-tested with real learners, then tuned</li><li>SCORM or xAPI, set up in your LMS</li><li>Two rounds of revisions, source files included</li></ul>
+          <a class="btn btn--hot" href="#contact">Choose Build</a>
         </article>
         <article class="price">
-          <div class="price__weeks" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
-          <span class="price__wk data">About 5 weeks</span>
+          <p class="price__wk">About 5 weeks</p>
           <h3>Programme</h3>
-          <div class="price__amt"><span class="data">from</span><b>€3,900</b></div>
+          <p class="price__amt"><span>from</span>€3,900</p>
           <p class="price__for">When the training has to change behaviour.</p>
-          <ul>
-            <li>Everything in Build</li>
-            <li>Live discussion activities and a train-the-trainer session</li>
-            <li>Evaluation plan and a dashboard that shows learning gaps</li>
-            <li>Optional hosting, so you don’t need your own LMS</li>
-          </ul>
-          <a class="btn btn--ghost btn--sm" href="#contact">Plan a programme</a>
+          <ul><li>Everything in Build</li><li>Live discussion activities and a train-the-trainer session</li><li>Evaluation plan and a dashboard that shows learning gaps</li><li>Optional hosting, so you don’t need your own LMS</li></ul>
+          <a class="btn btn--line" href="#contact">Plan a programme</a>
         </article>
       </div>
-      <div class="terms">
-        <span><i class="sq" aria-hidden="true"></i>Fixed quote first</span>
-        <span><i class="sq" aria-hidden="true"></i>50% to start, 50% on delivery</span>
-        <span><i class="sq" aria-hidden="true"></i>Extra languages or a retainer? Just ask</span>
-      </div>
-    <!--/@pricing--></div>
-  </section>
+      <p class="terms"><span>Fixed quote first</span><span>50% to start, 50% on delivery</span><span>Extra languages or a retainer? Just ask</span></p>
+    <!--/@pricing--></div></section>
 
-  <!-- ===================== FAQ ===================== -->
-  <section class="sec" id="faq" aria-labelledby="faq-h" style="padding-top:0">
-    <div class="frame"><!--@faq-->
-      <div class="sec-head">
-        <h2 class="placard" id="faq-h">Before you ask.</h2>
+  <section class="sec sec--about" id="about" aria-label="About"><div class="wrap who"><!--@about-->
+      <figure class="who__pic reveal">
+        <img src="img/razin-portrait.webp" alt="Razin Abdullah" width="480" height="480" loading="lazy">
+        <figcaption>Razin Abdullah<span>Munich</span></figcaption>
+      </figure>
+      <div class="who__text">
+        <p class="eyebrow"><i class="sq" aria-hidden="true"></i>Razin designs the mistakes.</p>
+        <blockquote class="reveal-up"><span>“People learn most at the moment they get something wrong, as long as it’s safe and they can see why.”</span></blockquote>
+        <dl class="who__facts"><div><dt>Trained</dt><dd>M.Ed., Technical University of Munich</dd></div><div><dt>Experience</dt><dd>4+ years designing and evaluating training</dd></div><div><dt>Builds in</dt><dd>HTML5, Storyline, 3D</dd></div><div><dt>Worked on</dt><dd>High-stakes procedures to classrooms, for international teams</dd></div></dl>
+        <a class="more" href="https://www.linkedin.com/in/razin-abdullah/" target="_blank" rel="noopener">Razin on LinkedIn<svg class="ic" aria-hidden="true"><use href="#i-out"/></svg></a>
+      </div>
+    <!--/@about--></div></section>
+
+  <section class="sec" id="faq" aria-label="Questions"><div class="wrap faq"><!--@faq-->
+      <div class="sec__head sec__head--side">
+        <p class="eyebrow"><i class="sq" aria-hidden="true"></i>FAQ</p>
+        <h2 class="big reveal-up"><span>Before you ask.</span></h2>
       </div>
       <div class="qa">
-        <div><h3>Will it run in our LMS?</h3><p>Almost certainly. SCORM 1.2, SCORM 2004 or xAPI, tested in your LMS before handover. No LMS? We can host it.</p></div>
-        <div><h3>What do you need from us?</h3><p>One expert for a kick-off call and two short reviews, the material you already have, and ideally a few learners for a play-test.</p></div>
-        <div><h3>Do you collect learner data?</h3><p>No. The simulations collect nothing unless you ask for tracking. With tracking, your LMS records completion and score.</p></div>
-        <div><h3>Who owns it?</h3><p>You do. You get the source files and short notes on how to change text and images. It runs without us.</p></div>
-        <div><h3>Does it work on phones?</h3><p>Videos, activities and most modules do. Detailed drag-and-drop simulations are built for laptops and tablets first. We tell you up front what fits.</p></div>
-        <div><h3>Can it be in German?</h3><p>Ask for it in your quote. Extra languages are priced in up front. The German kitchen game on the simulations page is one we built.</p></div>
+        <details><summary>Will it run in our LMS?<i aria-hidden="true"></i></summary><p>Almost certainly. SCORM 1.2, SCORM 2004 or xAPI, tested in your LMS before handover. No LMS? We can host it.</p></details>
+        <details><summary>What do you need from us?<i aria-hidden="true"></i></summary><p>One expert for a kick-off call and two short reviews, the material you already have, and ideally a few learners for a play-test.</p></details>
+        <details><summary>Do you collect learner data?<i aria-hidden="true"></i></summary><p>No. The simulations collect nothing unless you ask for tracking. With tracking, your LMS records completion and score.</p></details>
+        <details><summary>Who owns it?<i aria-hidden="true"></i></summary><p>You do. You get the source files and short notes on how to change text and images. It runs without us.</p></details>
+        <details><summary>Does it work on phones?<i aria-hidden="true"></i></summary><p>Videos, activities and most modules do. Detailed drag-and-drop simulations are built for laptops and tablets first. We tell you up front what fits.</p></details>
+        <details><summary>Can it be in German?<i aria-hidden="true"></i></summary><p>Ask for it in your quote. Extra languages are priced in up front. The German kitchen game on the simulations page is one we built.</p></details>
       </div>
-    <!--/@faq--></div>
-  </section>
+    <!--/@faq--></div></section>
 
-  <!-- ===================== CONTACT ===================== -->
-  <section class="sec sec--ink" id="contact" aria-labelledby="contact-h">
-    <div class="frame contact"><!--@contact-->
-      <div>
-        <h2 class="placard" id="contact-h">Where do your people go wrong?</h2>
-        <p class="lede">Tell us the mistake. You get a reply within one working day, with a first idea of how to fix it.</p>
-        <ul class="promise">
-          <li><svg class="tick" aria-hidden="true" style="color:var(--paper)"><use href="#i-tick"/></svg>A first idea, not a sales sequence</li>
-          <li><svg class="tick" aria-hidden="true" style="color:var(--paper)"><use href="#i-tick"/></svg>A fixed quote before any work starts</li>
-          <li><svg class="tick" aria-hidden="true" style="color:var(--paper)"><use href="#i-tick"/></svg>Your message is only used to reply to you</li>
-        </ul>
-        <p class="contact__alt">Prefer not to use the form? Message Razin on <a href="https://www.linkedin.com/in/razin-abdullah/" target="_blank" rel="noopener">LinkedIn</a>.</p>
-      </div>
-
-      <div class="report">
-        <div class="report__head data"><span>Incident report</span><span>Reply within 1 working day</span></div>
-        <form id="report" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="d9b61fef-000e-4c53-9433-96181e14181c">
-          <input type="hidden" name="subject" value="New incident report from razination">
-          <input type="hidden" name="from_name" value="Razination website">
-          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <div class="report__body">
-            <div class="field"><label for="f-name"><span class="data">01</span>Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
-            <div class="field"><label for="f-email"><span class="data">02</span>Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
-            <div class="field field--wide"><label for="f-msg"><span class="data">03</span>What goes wrong?</label><textarea id="f-msg" name="message" required placeholder="e.g. New warehouse staff skip the forklift pre-check. We’ve had two near misses this year."></textarea></div>
-            <fieldset class="field field--wide"><legend><span class="data">04</span>Topic <em>optional</em></legend>
-              <div class="chips">
-                <label><input type="checkbox" name="topic" value="Safety"><span>Safety</span></label>
-                <label><input type="checkbox" name="topic" value="IT security"><span>IT security</span></label>
-                <label><input type="checkbox" name="topic" value="Data protection"><span>Data protection</span></label>
-                <label><input type="checkbox" name="topic" value="Procedures"><span>Procedures</span></label>
-                <label><input type="checkbox" name="topic" value="Onboarding"><span>Onboarding</span></label>
-                <label><input type="checkbox" name="topic" value="School"><span>School</span></label>
-              </div>
-            </fieldset>
-            <div class="field"><label for="f-org"><span class="data">05</span>Organisation <em>optional</em></label><input id="f-org" name="organisation" autocomplete="organization"></div>
-            <div class="field"><label for="f-when"><span class="data">06</span>When do you need it? <em>optional</em></label><input id="f-when" name="deadline" placeholder="e.g. before March onboarding"></div>
-          </div>
-          <p class="report__err" aria-live="assertive"></p>
-          <div class="report__foot">
-            <p>We use your details only to reply. More in the <a href="datenschutz.html">Datenschutz</a>.</p>
-            <button class="btn" type="submit"><span class="lab">Send it over</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></button>
-          </div>
-        </form>
-        <div class="report__done" tabindex="-1">
-          <span class="data" style="display:flex;gap:10px;align-items:center"><i class="sq" aria-hidden="true"></i>Report received</span>
-          <h3>Thanks. Razin replies within one working day.</h3>
-          <p class="mute">With a first idea of how to fix it.</p>
+  <section class="sec sec--contact" id="contact" aria-label="Contact"><div class="wrap"><!--@contact-->
+      <h2 class="huge reveal-up"><span>Where do your people go wrong?</span></h2>
+      <div class="contact__grid">
+        <div class="contact__side">
+          <p class="sec__lede">Tell us the mistake. You get a reply within one working day, with a first idea of how to fix it.</p>
+          <ul class="promise"><li>A first idea, not a sales sequence</li><li>A fixed quote before any work starts</li><li>Your message is only used to reply to you</li></ul>
+          <p class="contact__alt">Prefer not to use the form? Message Razin on <a href="https://www.linkedin.com/in/razin-abdullah/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+        </div>
+        <div class="report">
+          <form id="report" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="d9b61fef-000e-4c53-9433-96181e14181c">
+            <input type="hidden" name="subject" value="New enquiry from razination">
+            <input type="hidden" name="from_name" value="Razination website">
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="f2">
+              <label class="fld"><span>Your name</span><input name="name" autocomplete="name" required></label>
+              <label class="fld"><span>Work email</span><input name="email" type="email" autocomplete="email" required></label>
+            </div>
+            <label class="fld"><span>Where do people go wrong?</span><textarea name="message" rows="4" required placeholder="e.g. New warehouse staff skip the forklift pre-check. We’ve had two near misses this year."></textarea></label>
+            <fieldset class="chips"><legend>Topic <em>optional</em></legend><label><input type="checkbox" name="topic" value="Safety"><span>Safety</span></label><label><input type="checkbox" name="topic" value="IT security"><span>IT security</span></label><label><input type="checkbox" name="topic" value="Data protection"><span>Data protection</span></label><label><input type="checkbox" name="topic" value="Procedures"><span>Procedures</span></label><label><input type="checkbox" name="topic" value="Onboarding"><span>Onboarding</span></label><label><input type="checkbox" name="topic" value="School"><span>School</span></label></fieldset>
+            <div class="f2">
+              <label class="fld"><span>Organisation <em>optional</em></span><input name="organisation" autocomplete="organization"></label>
+              <label class="fld"><span>When do you need it? <em>optional</em></span><input name="deadline"></label>
+            </div>
+            <p class="report__err" aria-live="assertive"></p>
+            <div class="report__foot">
+              <p>We use your details only to reply. More in the <a href="datenschutz.html">Datenschutz</a>.</p>
+              <button class="btn btn--hot" type="submit"><span class="lab">Send it over</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            </div>
+          </form>
+          <div class="report__done" tabindex="-1"><p class="eyebrow"><i class="sq" aria-hidden="true"></i>Received</p><h3>Thanks. Razin replies within one working day.</h3></div>
         </div>
       </div>
-    <!--/@contact--></div>
-  </section>
+    <!--/@contact--></div></section>
 </main>
 
-<footer class="foot">
-  <div class="frame"><!--@footer-->
-    <div class="foot__grid">
-      <div>
-        <a class="logo" href="./" aria-label="Razination, home">raz<span class="i">ı</span>nation</a>
-        <p class="foot__why"><i class="sq" aria-hidden="true"></i><span>Flight recorders are orange so they can be found after something goes wrong. Ours is for before.</span></p>
-      </div>
-      <div><h4 class="data">Site</h4><ul><li><a href="simulations.html">Simulations</a></li><li><a href="#how">How it works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul></div>
-      <div><h4 class="data">Contact</h4><ul><li><a href="https://www.linkedin.com/in/razin-abdullah/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
-      <div><h4 class="data">Legal</h4><ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li></ul></div>
+<footer class="foot"><div class="wrap"><!--@footer-->
+    <div class="foot__top">
+      <p class="foot__why"><i class="sq" aria-hidden="true"></i>Flight recorders are orange so they can be found after something goes wrong. Ours is for before.</p>
+      <nav class="foot__nav" aria-label="Footer"><a href="simulations.html">Simulations</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+      <ul class="foot__contact"><li><a href="https://www.linkedin.com/in/razin-abdullah/" target="_blank" rel="noopener">LinkedIn</a></li></ul>
     </div>
-    <div class="foot__base"><span>© 2026 Razination · Munich</span><span>Every simulation here is hand-built and runs in your browser.</span></div>
-  <!--/@footer--></div>
-</footer>
+    <p class="foot__mark" aria-hidden="true">raz<span class="i">ı</span>nation</p>
+    <div class="foot__base"><span>© 2026 Razination · Munich</span><span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span></div>
+  <!--/@footer--></div></footer>
+
+<dialog class="player" aria-label="Simulation player">
+  <div class="player__bar">
+    <p class="player__title"><span class="eyebrow"><i class="sq"></i><span data-p-topic></span></span><b data-p-title></b></p>
+    <p class="player__chain"><span data-p-do></span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg><b data-p-hap></b></p>
+    <div class="player__act">
+      <button type="button" data-p-restart><svg class="ic" aria-hidden="true"><use href="#i-redo"/></svg>Restart</button>
+      <button type="button" data-p-full><svg class="ic" aria-hidden="true"><use href="#i-full"/></svg>Full screen</button>
+      <button type="button" class="player__x" data-p-close aria-label="Close"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+    </div>
+  </div>
+  <div class="player__stage"><div class="player__screen"></div></div>
+  <p class="player__lesson"><span class="eyebrow"><i class="sq"></i>What sticks</span><b data-p-stick></b></p>
+</dialog>
 
 <script src="js/sims-data.js"></script>
 <script src="js/site.js"></script>

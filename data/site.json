@@ -29,12 +29,13 @@
     "fit": 13.25,
     "fitM": 22,
     "lede": "Training simulations for safety, compliance and IT security. Your people make the mistake, see what happens, and learn why.",
-    "button": "Play a simulation",
+    "button": "Play one now",
     "facts": [
       "SCORM & xAPI",
       "Live in 3–5 weeks",
       "Fixed quote first"
-    ]
+    ],
+    "eyebrow": "Training simulations · Munich"
   },
   "home": {
     "sims": [
@@ -308,7 +309,8 @@
         "mistake": "img/thumbs/fire-extinguisher.webp"
       },
       "path": "sims/fire-extinguisher/index.html",
-      "uploaded": false
+      "uploaded": false,
+      "clip": "media/fire-extinguisher.mp4"
     },
     {
       "slug": "phishing-inbox",
@@ -336,7 +338,8 @@
         "mistake": "img/thumbs/phishing-inbox.webp"
       },
       "path": "sims/phishing-inbox/index.html",
-      "uploaded": false
+      "uploaded": false,
+      "clip": "media/phishing-inbox.mp4"
     },
     {
       "slug": "gdpr-every-dot",
@@ -364,7 +367,8 @@
         "mistake": "img/thumbs/gdpr-every-dot.webp"
       },
       "path": "sims/gdpr-every-dot/index.html",
-      "uploaded": false
+      "uploaded": false,
+      "clip": "media/gdpr-every-dot.mp4"
     },
     {
       "slug": "flat-tire",
@@ -392,7 +396,8 @@
         "mistake": "img/thumbs/flat-tire.webp"
       },
       "path": "sims/flat-tire/index.html",
-      "uploaded": false
+      "uploaded": false,
+      "clip": "media/flat-tire.mp4"
     },
     {
       "slug": "cleanroom-gowning",
@@ -420,7 +425,8 @@
         "mistake": "img/thumbs/cleanroom-gowning.webp"
       },
       "path": "sims/cleanroom-gowning/index.html",
-      "uploaded": false
+      "uploaded": false,
+      "clip": "media/cleanroom-gowning.mp4"
     },
     {
       "slug": "close-the-loop",
@@ -448,7 +454,8 @@
         "mistake": "img/thumbs/close-the-loop.webp"
       },
       "path": "sims/close-the-loop/index.html",
-      "uploaded": false
+      "uploaded": false,
+      "clip": ""
     },
     {
       "slug": "eco-party",
@@ -476,7 +483,8 @@
         "mistake": "img/thumbs/eco-party.webp"
       },
       "path": "sims/eco-party/index.html",
-      "uploaded": false
+      "uploaded": false,
+      "clip": ""
     },
     {
       "slug": "wo-ist-der-loeffel",
@@ -504,7 +512,8 @@
         "mistake": "img/thumbs/wo-ist-der-loeffel.webp"
       },
       "path": "sims/wo-ist-der-loeffel/index.html",
-      "uploaded": false
+      "uploaded": false,
+      "clip": ""
     }
   ]
 }
