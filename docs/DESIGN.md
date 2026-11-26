@@ -122,5 +122,51 @@ CSS transform only when the frame is narrower. The gutter is sized so the frame 
 
 ## Round 2: review of the built site
 
-Two reviewers (brand/visual, buyer/UX) critiqued screenshots of the finished pages at 1440, 1366 × 768 and
-390 px. Their fixes were applied before release. See the commit history for details.
+Two reviewers (brand/visual and buyer/UX) critiqued screenshots of the finished pages at 1440, 1366 × 768 and
+390 px. What changed as a result:
+
+**Accuracy (buyer/UX, the most important catch)**
+- The fire replay paired fire 1 (a paper bin, where water is *right*) with the fire 3 fireball. A safety
+  officer would read that as "water on a bin causes a fireball".
+- The GDPR replay paired the newsletter with the export.
+- Both "your move" frames were re-captured at the same decision point as their consequence, in one
+  playthrough each. Fire: fire 3 with the pointer on Water. GDPR: situation 2 with the pointer on
+  "Email it to my personal Gmail".
+- The spec plate no longer implies a €500 simulation. It now reads *Pilot €500 · sim €1,800*.
+
+**First screen (both)**
+- The hero opens on the consequence (a cold open), then replays how it happened.
+- The duplicate quote button is gone, replaced by three facts: SCORM & xAPI, live in 3–5 weeks, fixed quote first.
+- The stage starts about 90 px higher.
+
+**Differentiation (brand)**
+- All hard drop-shadows are removed. They were a neo-brutalist cliché, and the same device the portfolio uses.
+- Buttons are flat with 2 px borders and invert on hover.
+- The start button is paper with an orange triangle, because orange on an orange fireball disappeared.
+
+**Clarity**
+- The "what sticks" cell never dims below 55%, so it doesn't look disabled.
+- Restart, Full screen and New tab moved to the stage bar, so the deck reads as three equal steps.
+- The Slide 14 switch is a 60 px control in the section head.
+- Build is inverted (ink) as the core offer, and the "Start here" tag is gone.
+- Sections use less padding, and the alternating section has ink rules at its edges.
+
+**Behaviour (buyer/UX)**
+- "Play a simulation" and clicking the preview start the sim.
+- The replay holds 3 s on the lesson, then loops through the three tabs once and stops.
+- Pause and play no longer restart endless cycling.
+- With reduced motion, the pause button is hidden.
+- Slide 14 moves focus between Next and Back.
+- The form shows "Sending…" and reports errors in a live region that is always present.
+
+**Phones**
+- The Simulations link stays in the header.
+- Start opens the sim full screen and asks for landscape.
+- Buttons are full width, the portrait is smaller, and the preview is cropped to 4:3 so the scene stays readable.
+
+**Added**
+- An FAQ answer on German-language delivery, worded only as far as the facts allow.
+
+**Left to the owner**
+- The Impressum and Datenschutz placeholders: address, email, phone, VAT ID, the Web3Forms provider and the supervisory authority.
+- A public email address. The buyer reviewer insists on one; it isn't on the site because no Razination email was given.

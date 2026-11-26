@@ -63,6 +63,11 @@
             <h2 tabindex="-1" data-field="title">Fight or get out?</h2>
             <span class="data"><span data-field="topic">Safety</span> · <span data-field="audience">Every workplace</span></span>
           </div>
+          <div class="deck__act data">
+            <button type="button" data-reset><svg aria-hidden="true"><use href="#i-redo"/></svg>Restart</button>
+            <button type="button" data-fullscreen><svg aria-hidden="true"><use href="#i-full"/></svg>Full screen</button>
+            <a href="sims/fire-extinguisher/index.html" target="_blank" rel="noopener" data-newtab><svg aria-hidden="true"><use href="#i-out"/></svg>New tab</a>
+          </div>
           <div class="stage__nav">
             <button type="button" data-step="-1" aria-label="Previous simulation"><svg aria-hidden="true"><use href="#i-back"/></svg></button>
             <button type="button" data-step="1" aria-label="Next simulation"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
@@ -71,8 +76,8 @@
 
         <div class="screen">
           <div class="cover">
-            <img class="before" src="img/thumbs/fire-extinguisher-start.webp" alt="Your move: an office with a burning waste bin and extinguishers on the wall" width="1280" height="720" fetchpriority="high">
-            <img class="after" src="img/thumbs/fire-extinguisher.webp" alt="What happens: a kitchen engulfed by a fireball after water hit burning fat" width="1280" height="720">
+            <img class="before" src="img/thumbs/fire-extinguisher-move.webp" alt="Your move: Fire 3 of 4: a frying pan on fire in the staff kitchen. The pointer is on the water extinguisher." width="1280" height="720">
+            <img class="after" src="img/thumbs/fire-extinguisher.webp" alt="What happens: a kitchen engulfed by a fireball after water hit burning fat" width="1280" height="720" fetchpriority="high">
             <button class="btn start" type="button"><i class="tri" aria-hidden="true"></i><span class="lab">Play: Fire safety</span> <small>no sign-up</small></button>
           </div>
           <div class="screen__loading data" aria-hidden="true">Loading simulation</div>
@@ -94,11 +99,6 @@
           <div class="deck__cell deck__cell--do"><span class="data">01 · You do</span><b data-triad="0">Water on burning fat</b><small data-field="play">Four fires. Grab something from the wall, or get out.</small></div>
           <div class="deck__cell deck__cell--hap"><span class="data"><i class="sq sq--ink" aria-hidden="true"></i>02 · What happens</span><b data-triad="1">Instant fireball</b><small data-field="readout">Fire 3 of 4 · frying pan, staff kitchen</small></div>
           <div class="deck__cell deck__cell--stick"><span class="data"><svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg>03 · What sticks</span><b data-triad="2">Fat fire? Use the fire blanket.</b></div>
-          <div class="deck__act data">
-            <button type="button" data-reset><svg aria-hidden="true"><use href="#i-redo"/></svg>Restart</button>
-            <button type="button" data-fullscreen><svg aria-hidden="true"><use href="#i-full"/></svg>Full screen</button>
-            <a href="sims/fire-extinguisher/index.html" target="_blank" rel="noopener" data-newtab><svg aria-hidden="true"><use href="#i-out"/></svg>New tab</a>
-          </div>
         </div>
         <p class="sr-only" aria-live="polite" data-live></p>
 

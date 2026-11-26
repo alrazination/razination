@@ -21,6 +21,8 @@
   var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
   function thumb(s, mistake) { return 'img/thumbs/' + s.slug + (mistake ? '' : '-start') + '.webp'; }
   function simSrc(s) { return 'sims/' + s.slug + '/index.html'; }
+  function moveImg(s) { return s.move ? 'img/thumbs/' + s.slug + '-move.webp' : thumb(s, false); }
+  function phone() { return !!(window.matchMedia && !matchMedia('(min-width: 821px)').matches); }
 
   /* ---------------------------------------------------------------
      1 + 2. STAGE with REPLAY
@@ -49,7 +51,7 @@
     this.visible = false;
     this.onEnd = null;
 
-    $('.start', el).addEventListener('click', function () { self.start(true); });
+    $('.start', el).addEventListener('click', function () { self.go(); });
     $$('[data-fullscreen]', el).forEach(function (b) { b.addEventListener('click', function () { self.fullscreen(); }); });
     $$('[data-reset]', el).forEach(function (b) { b.addEventListener('click', function () { self.unload(); self.start(true); }); });
 
@@ -59,12 +61,12 @@
     }
     if (this.pauseBtn) this.pauseBtn.addEventListener('click', function () {
       if (self.playing) { self.takeOver(); }
-      else { self.userTook = false; if (self.v >= 1) self.set(0); self.play(); }
+      else { if (self.v >= 1) self.set(0); self.play(); }
     });
-    // clicking the picture jumps between "your move" and "what happens"
+    // the screenshot looks like the sim, so clicking it starts the sim
     this.cover.addEventListener('click', function (e) {
       if (e.target.closest('.start')) return;
-      self.takeOver(); self.set(self.v < self.cutAt ? 1 : 0, true);
+      self.go();
     });
     el.addEventListener('mouseenter', function () { self.hover = true; });
     el.addEventListener('mouseleave', function () { self.hover = false; });
@@ -83,13 +85,21 @@
     document.addEventListener('webkitfullscreenchange', function () { self.fit(); });
 
     this.paint();
-    this.set(reduce ? 1 : 0);
+    this.v = 1;
+    this.set(1);
+    this.pauseIcon(false);
+    if (reduce && this.pauseBtn) this.pauseBtn.hidden = true;
   }
+
+  /* phones get the sim full screen and sideways; everyone else plays in place */
+  Stage.prototype.go = function () {
+    if (phone()) this.fullscreen(true); else this.start(true);
+  };
 
   Stage.prototype.paint = function () {
     var s = this.sim;
     this.el.setAttribute('data-sim', s.slug);
-    this.before.src = thumb(s, false); this.before.alt = 'Your move: ' + s.alt;
+    this.before.src = moveImg(s); this.before.alt = 'Your move: ' + (s.altMove || s.alt);
     this.after.src = thumb(s, true); this.after.alt = 'What happens: ' + s.altMistake;
     if (this.markTxt) this.markTxt.textContent = s.readout;
     var t = s.triad;
@@ -152,7 +162,13 @@
         self.playing = false;
         self.pauseIcon(false);
         self.deck && self.deck.classList.remove('is-replaying');
-        if (self.onEnd && !self.userTook) setTimeout(function () { if (!self.userTook && !self.frame) self.onEnd(); }, 700);
+        // hold on the lesson for 3 s (longer while hovered) before moving on
+        var next = function () {
+          if (self.userTook || self.frame || !self.onEnd) return;
+          if (self.hover || document.hidden) return setTimeout(next, 600);
+          self.onEnd();
+        };
+        if (self.onEnd && !self.userTook) setTimeout(next, 3000);
         return;
       }
       self.raf = requestAnimationFrame(step);
@@ -236,13 +252,19 @@
     else if (opts.play) this.play();
   };
 
-  Stage.prototype.fullscreen = function () {
+  Stage.prototype.fullscreen = function (sideways) {
     var box = this.screen, self = this;
     if (!this.frame) this.start(false);
     var req = box.requestFullscreen || box.webkitRequestFullscreen;
     function tab() { window.open(simSrc(self.sim), '_blank', 'noopener'); }
+    function turn() {
+      if (sideways && screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(function () {});
+    }
     if (!req) return tab();
-    try { var p = req.call(box); if (p && p.catch) p.catch(tab); } catch (e) { tab(); }
+    try {
+      var p = req.call(box);
+      if (p && p.then) p.then(turn, tab); else turn();
+    } catch (e) { tab(); }
   };
 
   $$('.stage').forEach(function (el) { var s = new Stage(el); el._stage = s; stages.push(s); });
@@ -277,10 +299,23 @@
     stage.tab = tabs[0];
     // keep cycling through the three until the visitor takes over
     stage.onEnd = function () {
-      var next = (tabs.indexOf(stage.tab) + 1) % tabs.length;
-      select(next, { play: true });
+      var i = tabs.indexOf(stage.tab);
+      if (i === tabs.length - 1) { select(0, { showAfter: true }); stage.onEnd = null; return; }
+      select(i + 1, { play: true });
     };
-    if (!reduce) stage.play();
+    // the hero button plays the first simulation right away on laptops
+    $$('[data-play-hero]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        if (phone()) return;
+        e.preventDefault();
+        stage.start(true);
+      });
+    });
+    // cold open: show the consequence first, then replay how it happened
+    if (!reduce) setTimeout(function () {
+      if (stage.userTook || stage.frame) return;
+      stage.set(0); stage.play();
+    }, 1800);
   });
 
   /* ---------------------------------------------------------------
@@ -320,7 +355,13 @@
     var initial = (location.hash || '').slice(1);
     st.userTook = true;
     if (BY[initial]) { st.load(BY[initial], { showAfter: true }); mark(initial); }
-    else { mark(st.sim.slug); if (!reduce) { st.userTook = false; st.play(); st.onEnd = null; } }
+    else {
+      mark(st.sim.slug);
+      if (!reduce) setTimeout(function () {
+        if (st.frame || st.sim.slug !== SIMS[0].slug) return;
+        st.userTook = false; st.onEnd = null; st.set(0); st.play();
+      }, 1800);
+    }
     window.addEventListener('hashchange', function () {
       var h = location.hash.slice(1);
       if (BY[h] && h !== st.sim.slug) go(h, false);
@@ -331,16 +372,21 @@
      5. SLIDE 14
      --------------------------------------------------------------- */
   $$('[data-vs]').forEach(function (vs) {
-    var btns = $$('.vs__switch button', vs);
+    var scope = vs.closest('section') || vs;
+    var btns = $$('.vs__switch button', scope);
     var live = $('[data-live]', vs);
-    function show(sim) {
+    function show(sim, moveFocus) {
       vs.classList.toggle('is-sim', sim);
+      if (moveFocus) {
+        var to = sim ? $('[data-back]', vs) : $('[data-next]', vs);
+        setTimeout(function () { to && to.focus(); }, 0);
+      }
       btns.forEach(function (b) { b.setAttribute('aria-pressed', String((b.getAttribute('data-show') === 'sim') === sim)); });
       if (live) live.textContent = sim ? 'Now showing the simulation: the car rolls off the jack.' : 'Now showing slide 14 of 38.';
     }
     btns.forEach(function (b) { b.addEventListener('click', function () { show(b.getAttribute('data-show') === 'sim'); }); });
-    $$('[data-next]', vs).forEach(function (b) { b.addEventListener('click', function () { show(true); }); });
-    $$('[data-back]', vs).forEach(function (b) { b.addEventListener('click', function () { show(false); }); });
+    $$('[data-next]', vs).forEach(function (b) { b.addEventListener('click', function () { show(true, true); }); });
+    $$('[data-back]', vs).forEach(function (b) { b.addEventListener('click', function () { show(false, true); }); });
   });
 
   /* ---------------------------------------------------------------
@@ -365,7 +411,11 @@
       e.preventDefault();
       if (!form.reportValidity()) return;
       var btn = $('[type=submit]', form);
+      var label = $('.lab', btn), was = label ? label.textContent : '';
+      var err = $('.report__err', box);
       btn.disabled = true;
+      if (label) label.textContent = 'Sending…';
+      if (err) err.textContent = '';
       var data = new FormData(form);
       var topics = data.getAll('topic').join(', ');
       data.delete('topic');
@@ -378,7 +428,11 @@
           box.classList.add('is-sent');
           var d = $('.report__done', box); d && d.focus();
         })
-        .catch(function () { box.classList.add('is-error'); btn.disabled = false; });
+        .catch(function () {
+          btn.disabled = false;
+          if (label) label.textContent = was;
+          if (err) err.textContent = 'That didn’t go through. Please try again, or message Razin on LinkedIn.';
+        });
     });
   }
 

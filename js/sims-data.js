@@ -7,6 +7,8 @@ window.RAZ_SIMS = [
     slug: 'fire-extinguisher',
     tab: 'Fire safety',
     readout: 'Fire 3 of 4 · frying pan, staff kitchen',
+    move: true,
+    altMove: 'Fire 3 of 4: a frying pan on fire in the staff kitchen. The pointer is on the water extinguisher.',
     title: 'Fight or get out?',
     topic: 'Safety',
     group: 'work',
@@ -34,7 +36,9 @@ window.RAZ_SIMS = [
   {
     slug: 'gdpr-every-dot',
     tab: 'GDPR',
-    readout: '1,800 customer records · 240 people affected',
+    readout: 'Situation 2 of 6 · 1,800 customer records',
+    move: true,
+    altMove: 'Situation 2 of 6: a customer export of 1,800 records. The pointer is on Email it to my personal Gmail.',
     title: 'Every dot is a person',
     topic: 'Data protection',
     group: 'work',
@@ -43,7 +47,7 @@ window.RAZ_SIMS = [
     play: 'Six everyday calls. Watch where the people end up.',
     triad: ['Email customer data to private Gmail', '1,800 customers fly out the door', 'Company data stays in company tools'],
     alt: 'A newsletter email beside a wall of 240 dots, one per person',
-    altMistake: '1,800 dots flying out of the company boundary'
+    altMistake: '1,800 dots, each a customer, flying out of the company towards a personal Gmail account'
   },
   {
     slug: 'flat-tire',

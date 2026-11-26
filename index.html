@@ -15,7 +15,7 @@
 <meta name="theme-color" content="#0E0E0F">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230E0E0F'/%3E%3Crect x='12' y='13' width='8' height='14' fill='%23F2EFE8'/%3E%3Crect x='11' y='4' width='10' height='6' fill='%23FF4F00'/%3E%3C/svg%3E">
 <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/thumbs/fire-extinguisher-start.webp" as="image" fetchpriority="high">
+<link rel="preload" href="img/thumbs/fire-extinguisher.webp" as="image" fetchpriority="high">
 <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
@@ -54,9 +54,11 @@
           <p class="lede">Training simulations for safety, compliance and IT&nbsp;security. Your people make the mistake, see what happens, and learn why.</p>
           <a class="byline" href="#about"><img src="img/razin-portrait.webp" alt="" width="34" height="34"><span>Built by <b>Razin Abdullah</b> in Munich</span></a>
         </div>
-        <div class="hero__cta">
-          <a class="btn" href="#play"><i class="tri" aria-hidden="true"></i>Play a simulation <small>2 min</small></a>
-          <a class="btn btn--ghost" href="#contact">Get a fixed quote</a>
+        <div class="hero__side">
+          <div class="hero__cta">
+            <a class="btn" href="#play" data-play-hero><i class="tri" aria-hidden="true"></i>Play a simulation <small>2 min · no sign-up</small></a>
+          </div>
+          <p class="hero__facts data"><span><i class="sq" aria-hidden="true"></i>SCORM &amp; xAPI</span><span><i class="sq" aria-hidden="true"></i>Live in 3–5 weeks</span><span><i class="sq" aria-hidden="true"></i>Fixed quote first</span></p>
         </div>
       </div>
     </div>
@@ -69,16 +71,21 @@
         <div class="stage__bar">
           <div class="tabs" role="tablist" aria-label="Pick a simulation" data-tabs="stage">
             <span class="tabs__lab data" aria-hidden="true">Pick a mistake</span>
-            <button class="tab" role="tab" aria-selected="true" aria-controls="stage-screen" data-sim="fire-extinguisher"><img src="img/thumbs/fire-extinguisher-start.webp" alt="" width="58" height="33"><b>Fire safety</b><span>Fight or get out?</span></button>
+            <button class="tab" role="tab" aria-selected="true" aria-controls="stage-screen" data-sim="fire-extinguisher"><img src="img/thumbs/fire-extinguisher-move.webp" alt="" width="58" height="33"><b>Fire safety</b><span>Fight or get out?</span></button>
             <button class="tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="stage-screen" data-sim="phishing-inbox"><img src="img/thumbs/phishing-inbox-start.webp" alt="" width="58" height="33" loading="lazy"><b>Phishing</b><span>Report or click?</span></button>
-            <button class="tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="stage-screen" data-sim="gdpr-every-dot"><img src="img/thumbs/gdpr-every-dot-start.webp" alt="" width="58" height="33" loading="lazy"><b>GDPR</b><span>Every dot is a person</span></button>
+            <button class="tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="stage-screen" data-sim="gdpr-every-dot"><img src="img/thumbs/gdpr-every-dot-move.webp" alt="" width="58" height="33" loading="lazy"><b>GDPR</b><span>Every dot is a person</span></button>
+          </div>
+          <div class="deck__act data">
+            <button type="button" data-reset><svg aria-hidden="true"><use href="#i-redo"/></svg>Restart</button>
+            <button type="button" data-fullscreen><svg aria-hidden="true"><use href="#i-full"/></svg>Full screen</button>
+            <a href="sims/fire-extinguisher/index.html" target="_blank" rel="noopener" data-newtab><svg aria-hidden="true"><use href="#i-out"/></svg>New tab</a>
           </div>
         </div>
 
         <div class="screen" id="stage-screen" role="tabpanel" aria-label="Simulation">
           <div class="cover">
-            <img class="before" src="img/thumbs/fire-extinguisher-start.webp" alt="Your move: an office with a burning waste bin and extinguishers on the wall" width="1280" height="720" fetchpriority="high">
-            <img class="after" src="img/thumbs/fire-extinguisher.webp" alt="What happens: a kitchen engulfed by a fireball after water hit burning fat" width="1280" height="720">
+            <img class="before" src="img/thumbs/fire-extinguisher-move.webp" alt="Your move: Fire 3 of 4: a frying pan on fire in the staff kitchen. The pointer is on the water extinguisher." width="1280" height="720">
+            <img class="after" src="img/thumbs/fire-extinguisher.webp" alt="What happens: a kitchen engulfed by a fireball after water hit burning fat" width="1280" height="720" fetchpriority="high">
             <button class="btn start" type="button"><i class="tri" aria-hidden="true"></i><span class="lab">Play: Fire safety</span> <small>2 min · no sign-up</small></button>
           </div>
           <div class="screen__loading data" aria-hidden="true">Loading simulation</div>
@@ -100,18 +107,16 @@
           <div class="deck__cell deck__cell--do"><span class="data">01 · You do</span><b data-triad="0">Water on burning fat</b></div>
           <div class="deck__cell deck__cell--hap"><span class="data"><i class="sq sq--ink" aria-hidden="true"></i>02 · What happens</span><b data-triad="1">Instant fireball</b><small data-field="readout">Fire 3 of 4 · frying pan, staff kitchen</small></div>
           <div class="deck__cell deck__cell--stick"><span class="data"><svg class="tick" aria-hidden="true"><use href="#i-tick"/></svg>03 · What sticks</span><b data-triad="2">Fat fire? Use the fire blanket.</b></div>
-          <div class="deck__act data">
-            <button type="button" data-reset><svg aria-hidden="true"><use href="#i-redo"/></svg>Restart</button>
-            <button type="button" data-fullscreen><svg aria-hidden="true"><use href="#i-full"/></svg>Full screen</button>
-            <a href="sims/fire-extinguisher/index.html" target="_blank" rel="noopener" data-newtab><svg aria-hidden="true"><use href="#i-out"/></svg>New tab</a>
-          </div>
         </div>
         <p class="sr-only" aria-live="polite" data-live></p>
 
         <div class="stage__foot">
           <p>Studio demos, built in-house to show how we work. Made for a laptop or tablet.</p>
           <button class="arrow share" type="button" data-share><span class="lab">Send it to my laptop</span><svg aria-hidden="true"><use href="#i-send"/></svg></button>
-          <a class="arrow" href="simulations.html">All 8 simulations<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <span style="display:flex;gap:28px;flex-wrap:wrap">
+            <a class="arrow" href="#contact">Want one like this? Get a fixed quote<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="arrow" href="simulations.html">All 8 simulations<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </span>
         </div>
       </div>
 
@@ -119,9 +124,9 @@
         <div><dt class="data">Simulations</dt><dd>8 playable demos</dd></div>
         <div><dt class="data">Runs in</dt><dd>SCORM &amp; xAPI</dd></div>
         <div><dt class="data">Timeline</dt><dd>3 to 5 weeks</dd></div>
-        <div><dt class="data">Price</dt><dd>From €500</dd></div>
+        <div><dt class="data">Price, excl. VAT</dt><dd>Pilot €500 · sim €1,800</dd></div>
         <div><dt class="data">Learner data</dt><dd>None by default</dd></div>
-        <div><dt class="data">Source files</dt><dd>Yours to keep</dd></div>
+        <div><dt class="data">Quote</dt><dd>Fixed, before we start</dd></div>
       </dl>
     </div>
   </section>
@@ -131,14 +136,16 @@
     <div class="frame">
       <div class="sec-head">
         <h2 class="placard" id="why-h">Nobody remembers slide&nbsp;14.</h2>
-        <p>Same rule, two versions. Only one makes you decide. Go on, click <b>Next</b> like everyone does.</p>
+        <div>
+          <p>Same rule, two versions. Only one makes you decide. Go on, click <b>Next</b> like everyone does.</p>
+          <div class="flip"><span class="data mute">Flip it</span><div class="vs__switch" role="group" aria-label="Show the rule as">
+          <button type="button" data-show="slide" aria-pressed="true">Slide 14</button>
+          <button type="button" data-show="sim" aria-pressed="false">Simulation</button>
+        </div></div>
+        </div>
       </div>
 
       <div class="vs" data-vs>
-        <div class="vs__switch" role="group" aria-label="Show the rule as">
-          <button type="button" data-show="slide" aria-pressed="true">As a slide</button>
-          <button type="button" data-show="sim" aria-pressed="false">As a simulation</button>
-        </div>
         <div class="vs__screen">
           <div class="slide" role="group" aria-label="A typical e-learning slide, 14 of 38">
             <div class="slide__top"><span>Module 2 · Vehicle safety</span><span>Slide 14 of 38</span></div>
@@ -214,7 +221,7 @@
 
       <div class="gantt" role="list" aria-label="Project plan, week by week">
         <div class="gantt__weeks data" aria-hidden="true"><span></span><span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span><span>Week 5</span></div>
-        <span class="g-live" aria-hidden="true"><i class="sq"></i>Live</span>
+        <span class="g-live" aria-hidden="true"><svg class="tick" style="color:var(--paper)"><use href="#i-tick"/></svg>Live</span>
 
         <div class="g-row" role="listitem">
           <div class="g-row__lab"><h3><span class="n">01</span>Find the moment</h3><p>The one decision where your people go wrong.</p></div>
@@ -267,7 +274,6 @@
       </div>
       <div class="prices">
         <article class="price">
-          <span class="price__tag data"><i class="sq" aria-hidden="true"></i>Start here</span>
           <div class="price__weeks" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
           <span class="price__wk data">About 3 weeks</span>
           <h3>Spark</h3>
@@ -280,7 +286,7 @@
           </ul>
           <a class="btn btn--ghost btn--sm" href="#contact">Start with Spark</a>
         </article>
-        <article class="price">
+        <article class="price price--core">
           <div class="price__weeks" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
           <span class="price__wk data">About 4 weeks</span>
           <h3>Build</h3>
@@ -329,7 +335,7 @@
         <div><h3>Do you collect learner data?</h3><p>No. The simulations collect nothing unless you ask for tracking. With tracking, your LMS records completion and score.</p></div>
         <div><h3>Who owns it?</h3><p>You do. You get the source files and short notes on how to change text and images. It runs without us.</p></div>
         <div><h3>Does it work on phones?</h3><p>Videos, activities and most modules do. Detailed drag-and-drop simulations are built for laptops and tablets first. We tell you up front what fits.</p></div>
-        <div><h3>How do payments work?</h3><p>A fixed quote first. Then 50% to start and 50% on delivery. Larger programmes can be split by milestone.</p></div>
+        <div><h3>Can it be in German?</h3><p>Ask for it in your quote. Extra languages are priced in up front. The German kitchen game on the simulations page is one we built.</p></div>
       </div>
     </div>
   </section>
@@ -367,16 +373,15 @@
                 <label><input type="checkbox" name="topic" value="Procedures"><span>Procedures</span></label>
                 <label><input type="checkbox" name="topic" value="Onboarding"><span>Onboarding</span></label>
                 <label><input type="checkbox" name="topic" value="School"><span>School</span></label>
-                <label><input type="checkbox" name="topic" value="Something else"><span>Something else</span></label>
               </div>
             </fieldset>
             <div class="field"><label for="f-org"><span class="data">05</span>Organisation <em>optional</em></label><input id="f-org" name="organisation" autocomplete="organization"></div>
             <div class="field"><label for="f-when"><span class="data">06</span>When do you need it? <em>optional</em></label><input id="f-when" name="deadline" placeholder="e.g. before March onboarding"></div>
           </div>
-          <p class="report__err" role="alert">That didn’t go through. Please try again, or message Razin on LinkedIn.</p>
+          <p class="report__err" aria-live="assertive"></p>
           <div class="report__foot">
             <p>We use your details only to reply. More in the <a href="datenschutz.html">Datenschutz</a>.</p>
-            <button class="btn" type="submit">Send it over<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <button class="btn" type="submit"><span class="lab">Send it over</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></button>
           </div>
         </form>
         <div class="report__done" tabindex="-1">
