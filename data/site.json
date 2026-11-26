@@ -1,0 +1,510 @@
+{
+  "settings": {
+    "siteUrl": "https://alrazination.github.io/razination/"
+  },
+  "meta": {
+    "home": {
+      "title": "Razination · Fail here. Not on the job.",
+      "description": "Training simulations for safety, compliance and IT security. Your people make the mistake, see what happens, and learn why. Live in 3 to 5 weeks, from €500. Made in Munich.",
+      "ogTitle": "Razination · Fail here. Not on the job.",
+      "ogDescription": "Training simulations where your people make the mistake safely, see what happens, and learn why. Play one in your browser."
+    },
+    "sims": {
+      "title": "Simulations · Razination",
+      "description": "{N} playable training simulations: fire safety, phishing, GDPR, procedures and classroom games. Pick one, press start, and make the mistake on purpose.",
+      "ogTitle": "{N} ways to get it wrong · Razination",
+      "ogDescription": "{N} playable training simulations. Pick one, press start, make the mistake on purpose."
+    }
+  },
+  "contact": {
+    "email": "",
+    "phone": "",
+    "linkedin": "https://www.linkedin.com/in/razin-abdullah/",
+    "booking": "",
+    "web3formsKey": "d9b61fef-000e-4c53-9433-96181e14181c"
+  },
+  "hero": {
+    "line1": "Fail here.",
+    "line2": "Not on the job.",
+    "fit": 13.25,
+    "fitM": 22,
+    "lede": "Training simulations for safety, compliance and IT security. Your people make the mistake, see what happens, and learn why.",
+    "button": "Play a simulation",
+    "facts": [
+      "SCORM & xAPI",
+      "Live in 3–5 weeks",
+      "Fixed quote first"
+    ]
+  },
+  "home": {
+    "sims": [
+      "fire-extinguisher",
+      "phishing-inbox",
+      "gdpr-every-dot"
+    ],
+    "demoNote": "Studio demos, built in-house to show how we work. Made for a laptop or tablet."
+  },
+  "plate": [
+    {
+      "label": "Simulations",
+      "value": "{n} playable demos"
+    },
+    {
+      "label": "Runs in",
+      "value": "SCORM & xAPI"
+    },
+    {
+      "label": "Timeline",
+      "value": "3 to 5 weeks"
+    },
+    {
+      "label": "Price, excl. VAT",
+      "value": "Pilot €500 · sim €1,800"
+    },
+    {
+      "label": "Learner data",
+      "value": "None by default"
+    },
+    {
+      "label": "Quote",
+      "value": "Fixed, before we start"
+    }
+  ],
+  "about": {
+    "name": "Razin Abdullah",
+    "place": "Munich",
+    "photo": "img/razin-portrait.webp",
+    "heading": "Razin designs the mistakes.",
+    "quote": "People learn most at the moment they get something wrong, as long as it’s safe and they can see why.",
+    "facts": [
+      {
+        "label": "Trained",
+        "value": "M.Ed., Technical University of Munich"
+      },
+      {
+        "label": "Experience",
+        "value": "4+ years designing and evaluating training"
+      },
+      {
+        "label": "Builds in",
+        "value": "HTML5, Storyline, 3D"
+      },
+      {
+        "label": "Worked on",
+        "value": "High-stakes procedures to classrooms, for international teams"
+      }
+    ]
+  },
+  "process": {
+    "heading": "Live in 3 to 5 weeks.",
+    "intro": "Each bar shows who does what. Your part is the thin line. Spoiler: it’s small.",
+    "steps": [
+      {
+        "title": "Find the moment",
+        "desc": "The one decision where your people go wrong.",
+        "bar": "Kick-off and research",
+        "start": 0,
+        "end": 1,
+        "you": "a one-hour call",
+        "youAt": 0,
+        "youWidth": 36,
+        "mistakes": false
+      },
+      {
+        "title": "Sketch it",
+        "desc": "How the mistake will play out, before anything is built.",
+        "bar": "Sketch of the consequence",
+        "start": 0.5,
+        "end": 2,
+        "you": "a yes, or what to change",
+        "youAt": 1.65,
+        "youWidth": 28,
+        "mistakes": false
+      },
+      {
+        "title": "Design the mistakes",
+        "desc": "Every wrong move plays out, with a reason.",
+        "bar": "Mistakes and feedback",
+        "start": 1.5,
+        "end": 3,
+        "you": "your expert checks the facts",
+        "youAt": 2.5,
+        "youWidth": 36,
+        "mistakes": true
+      },
+      {
+        "title": "Build",
+        "desc": "Light HTML5, tested on the devices your people use.",
+        "bar": "Build and LMS package",
+        "start": 2.5,
+        "end": 4,
+        "you": "LMS access, if we upload",
+        "youAt": 3.5,
+        "youWidth": 20,
+        "mistakes": false
+      },
+      {
+        "title": "Play-test",
+        "desc": "Real learners try it. We tune until it feels fair.",
+        "bar": "Test, tune, hand over",
+        "start": 3.5,
+        "end": 5,
+        "you": "a few learners, 20 minutes",
+        "youAt": 3.6,
+        "youWidth": 28,
+        "mistakes": false
+      }
+    ]
+  },
+  "pricing": {
+    "heading": "Three sizes. No “price on request”.",
+    "intro": "You get a fixed quote before anything starts. Prices exclude VAT.",
+    "packages": [
+      {
+        "name": "Spark",
+        "weeks": 3,
+        "price": "€500",
+        "for": "One focused piece. Test the water or fix one weak spot.",
+        "items": [
+          "A video explainer (up to 90 s), an interactive activity, or a workshop activity",
+          "SCORM, MP4 or a web link",
+          "One round of revisions"
+        ],
+        "button": "Start with Spark",
+        "core": false
+      },
+      {
+        "name": "Build",
+        "weeks": 4,
+        "price": "€1,800",
+        "for": "A full simulation, built around your real mistakes.",
+        "items": [
+          "One simulation or e-learning module, 15 to 20 minutes of practice",
+          "Play-tested with real learners, then tuned",
+          "SCORM or xAPI, set up in your LMS",
+          "Two rounds of revisions, source files included"
+        ],
+        "button": "Choose Build",
+        "core": true
+      },
+      {
+        "name": "Programme",
+        "weeks": 5,
+        "price": "€3,900",
+        "for": "When the training has to change behaviour.",
+        "items": [
+          "Everything in Build",
+          "Live discussion activities and a train-the-trainer session",
+          "Evaluation plan and a dashboard that shows learning gaps",
+          "Optional hosting, so you don’t need your own LMS"
+        ],
+        "button": "Plan a programme",
+        "core": false
+      }
+    ],
+    "terms": [
+      "Fixed quote first",
+      "50% to start, 50% on delivery",
+      "Extra languages or a retainer? Just ask"
+    ]
+  },
+  "faqHeading": "Before you ask.",
+  "faq": [
+    {
+      "q": "Will it run in our LMS?",
+      "a": "Almost certainly. SCORM 1.2, SCORM 2004 or xAPI, tested in your LMS before handover. No LMS? We can host it."
+    },
+    {
+      "q": "What do you need from us?",
+      "a": "One expert for a kick-off call and two short reviews, the material you already have, and ideally a few learners for a play-test."
+    },
+    {
+      "q": "Do you collect learner data?",
+      "a": "No. The simulations collect nothing unless you ask for tracking. With tracking, your LMS records completion and score."
+    },
+    {
+      "q": "Who owns it?",
+      "a": "You do. You get the source files and short notes on how to change text and images. It runs without us."
+    },
+    {
+      "q": "Does it work on phones?",
+      "a": "Videos, activities and most modules do. Detailed drag-and-drop simulations are built for laptops and tablets first. We tell you up front what fits."
+    },
+    {
+      "q": "Can it be in German?",
+      "a": "Ask for it in your quote. Extra languages are priced in up front. The German kitchen game on the simulations page is one we built."
+    }
+  ],
+  "contactSection": {
+    "heading": "Where do your people go wrong?",
+    "lede": "Tell us the mistake. You get a reply within one working day, with a first idea of how to fix it.",
+    "promises": [
+      "A first idea, not a sales sequence",
+      "A fixed quote before any work starts",
+      "Your message is only used to reply to you"
+    ],
+    "placeholder": "e.g. New warehouse staff skip the forklift pre-check. We’ve had two near misses this year.",
+    "topics": [
+      "Safety",
+      "IT security",
+      "Data protection",
+      "Procedures",
+      "Onboarding",
+      "School"
+    ]
+  },
+  "simsPage": {
+    "line1": "{N} ways to",
+    "line2": "get it wrong.",
+    "fit": 12.15,
+    "fitM": 23,
+    "lede": "All playable. Pick one, press start, and make the mistake on purpose. That’s where the learning is.",
+    "note": "Studio demos, built in-house to show how we work. Not client work.",
+    "workHeading": "For the workplace",
+    "classHeading": "For the classroom"
+  },
+  "footer": {
+    "why": "Flight recorders are orange so they can be found after something goes wrong. Ours is for before.",
+    "year": "2026"
+  },
+  "legal": {
+    "owner": "Razin Abdullah",
+    "street": "",
+    "city": "",
+    "country": "Deutschland",
+    "vatId": "",
+    "noVatId": false,
+    "hostingProvider": "",
+    "hostingTransfer": "",
+    "formProvider": "",
+    "formTransfer": "",
+    "authority": "",
+    "updated": ""
+  },
+  "sims": [
+    {
+      "slug": "fire-extinguisher",
+      "on": true,
+      "title": "Fight or get out?",
+      "tab": "Fire safety",
+      "topic": "Safety",
+      "group": "work",
+      "audience": "Every workplace",
+      "hook": "Water on burning fat: fireball.",
+      "play": "Four fires. Grab something from the wall, or get out.",
+      "triad": [
+        "Water on burning fat",
+        "Instant fireball",
+        "Fat fire? Use the fire blanket."
+      ],
+      "readout": "Fire 3 of 4 · frying pan, staff kitchen",
+      "alt": "An office with a burning waste bin and extinguishers on the wall",
+      "altMove": "Fire 3 of 4: a frying pan on fire in the staff kitchen. The pointer is on the water extinguisher.",
+      "altMistake": "A kitchen engulfed by a fireball after water hit burning fat",
+      "lang": "",
+      "img": {
+        "start": "img/thumbs/fire-extinguisher-start.webp",
+        "move": "img/thumbs/fire-extinguisher-move.webp",
+        "mistake": "img/thumbs/fire-extinguisher.webp"
+      },
+      "path": "sims/fire-extinguisher/index.html",
+      "uploaded": false
+    },
+    {
+      "slug": "phishing-inbox",
+      "on": true,
+      "title": "Report or click?",
+      "tab": "Phishing",
+      "topic": "IT security",
+      "group": "work",
+      "audience": "Everyone with an inbox",
+      "hook": "One bad click and the network turns red.",
+      "play": "Eight emails, five fake. Point at a link before you click.",
+      "triad": [
+        "Click the fake link",
+        "Infection spreads, device by device",
+        "Point at links before clicking"
+      ],
+      "readout": "5/10 devices infected · 3,700 records exposed",
+      "alt": "An email inbox next to a map of the office network",
+      "altMove": "",
+      "altMistake": "The office network map turning red, device by device",
+      "lang": "",
+      "img": {
+        "start": "img/thumbs/phishing-inbox-start.webp",
+        "move": "",
+        "mistake": "img/thumbs/phishing-inbox.webp"
+      },
+      "path": "sims/phishing-inbox/index.html",
+      "uploaded": false
+    },
+    {
+      "slug": "gdpr-every-dot",
+      "on": true,
+      "title": "Every dot is a person",
+      "tab": "GDPR",
+      "topic": "Data protection",
+      "group": "work",
+      "audience": "Anyone who handles personal data",
+      "hook": "Email the export home and 1,800 people leave the building.",
+      "play": "Six everyday calls. Watch where the people end up.",
+      "triad": [
+        "Email customer data to private Gmail",
+        "1,800 customers fly out the door",
+        "Company data stays in company tools"
+      ],
+      "readout": "Situation 2 of 6 · 1,800 customer records",
+      "alt": "A newsletter email beside a wall of 240 dots, one per person",
+      "altMove": "Situation 2 of 6: a customer export of 1,800 records. The pointer is on Email it to my personal Gmail.",
+      "altMistake": "1,800 dots, each a customer, flying out of the company towards a personal Gmail account",
+      "lang": "",
+      "img": {
+        "start": "img/thumbs/gdpr-every-dot-start.webp",
+        "move": "img/thumbs/gdpr-every-dot-move.webp",
+        "mistake": "img/thumbs/gdpr-every-dot.webp"
+      },
+      "path": "sims/gdpr-every-dot/index.html",
+      "uploaded": false
+    },
+    {
+      "slug": "flat-tire",
+      "on": true,
+      "title": "Changing a flat tire",
+      "tab": "Flat tire",
+      "topic": "Procedure",
+      "group": "work",
+      "audience": "Anyone who drives",
+      "hook": "Skip the brake and the car rolls off the jack.",
+      "play": "Four tools, one car. Try the wrong order first.",
+      "triad": [
+        "Jack it up first",
+        "The car rolls off the jack",
+        "Parking brake first. Always."
+      ],
+      "readout": "Critical danger · car rolled off the jack",
+      "alt": "A red car with a flat rear tire beside a trunk of tools",
+      "altMove": "",
+      "altMistake": "The car rolling off the jack with a critical danger alert",
+      "lang": "",
+      "img": {
+        "start": "img/thumbs/flat-tire-start.webp",
+        "move": "",
+        "mistake": "img/thumbs/flat-tire.webp"
+      },
+      "path": "sims/flat-tire/index.html",
+      "uploaded": false
+    },
+    {
+      "slug": "cleanroom-gowning",
+      "on": true,
+      "title": "Cleanroom gowning",
+      "tab": "Cleanroom",
+      "topic": "Procedure",
+      "group": "work",
+      "audience": "Semiconductor and pharma staff",
+      "hook": "Hairnet last: 10,000 particles.",
+      "play": "Dress the technician, then walk into the clean zone.",
+      "triad": [
+        "Hairnet on after the coverall",
+        "Particles jump: 10 to 10,000",
+        "Gown up top to bottom"
+      ],
+      "readout": "Particle counter: 10,000 per ft³",
+      "alt": "A technician in street clothes beside a rack of cleanroom garments",
+      "altMove": "",
+      "altMistake": "Dust on the clean suit and the particle counter at 10,000",
+      "lang": "",
+      "img": {
+        "start": "img/thumbs/cleanroom-gowning-start.webp",
+        "move": "",
+        "mistake": "img/thumbs/cleanroom-gowning.webp"
+      },
+      "path": "sims/cleanroom-gowning/index.html",
+      "uploaded": false
+    },
+    {
+      "slug": "close-the-loop",
+      "on": true,
+      "title": "Close the loop",
+      "tab": "Upcycling",
+      "topic": "Sustainability",
+      "group": "class",
+      "audience": "Schools, ages 10 to 14",
+      "hook": "Too slow and the material burns.",
+      "play": "Rescue waste from the belt before it reaches the fire.",
+      "triad": [
+        "Too slow, or the wrong machine",
+        "It burns in the incinerator",
+        "Right machine: jeans become a tote bag"
+      ],
+      "readout": "Circularity score 33%",
+      "alt": "Waste on a conveyor belt heading for an incinerator",
+      "altMove": "",
+      "altMistake": "Torn jeans rescued and turned into a tote bag",
+      "lang": "",
+      "img": {
+        "start": "img/thumbs/close-the-loop-start.webp",
+        "move": "",
+        "mistake": "img/thumbs/close-the-loop.webp"
+      },
+      "path": "sims/close-the-loop/index.html",
+      "uploaded": false
+    },
+    {
+      "slug": "eco-party",
+      "on": true,
+      "title": "Eco-Party Planner",
+      "tab": "Eco-party",
+      "topic": "Sustainability",
+      "group": "class",
+      "audience": "Schools",
+      "hook": "The \"compostable\" cups are a trap.",
+      "play": "Plan the school party. Keep the scale balanced.",
+      "triad": [
+        "Pick the \"compostable\" cups",
+        "Trap. Compostable in factories only.",
+        "Check the claim before you buy"
+      ],
+      "readout": "Trap! The scale tips",
+      "alt": "An empty school gym ready to be decorated, next to a balance scale",
+      "altMove": "",
+      "altMistake": "A trap warning: the compostable cups only compost in industrial facilities",
+      "lang": "",
+      "img": {
+        "start": "img/thumbs/eco-party-start.webp",
+        "move": "",
+        "mistake": "img/thumbs/eco-party.webp"
+      },
+      "path": "sims/eco-party/index.html",
+      "uploaded": false
+    },
+    {
+      "slug": "wo-ist-der-loeffel",
+      "on": true,
+      "title": "Wo ist der Löffel?",
+      "tab": "German A1",
+      "topic": "Language",
+      "group": "class",
+      "audience": "German A1 learners",
+      "hook": "58 words, found in a 3D kitchen.",
+      "play": "Look around, open things, find the word.",
+      "triad": [
+        "Click the wrong thing",
+        "You hear its name, with article",
+        "Der blue. Die red. Das green."
+      ],
+      "readout": "Finde: die Blume",
+      "alt": "A 3D kitchen with teal cabinets",
+      "altMove": "",
+      "altMistake": "The learner is asked to find die Blume in the kitchen",
+      "lang": "de",
+      "img": {
+        "start": "img/thumbs/wo-ist-der-loeffel-start.webp",
+        "move": "",
+        "mistake": "img/thumbs/wo-ist-der-loeffel.webp"
+      },
+      "path": "sims/wo-ist-der-loeffel/index.html",
+      "uploaded": false
+    }
+  ]
+}
