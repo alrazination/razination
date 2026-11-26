@@ -27,8 +27,8 @@
   "hero": {
     "line1": "Fail here.",
     "line2": "Not on the job.",
-    "fit": 13.25,
-    "fitM": 22,
+    "fit": 9.28,
+    "fitM": 15.1,
     "lede": "Training simulations for safety, compliance and IT security. Your people make the mistake, see what happens, and learn why.",
     "button": "Play one now",
     "facts": [
@@ -318,8 +318,8 @@
   "simsPage": {
     "line1": "Get it wrong.",
     "line2": "On purpose.",
-    "fit": 12.15,
-    "fitM": 23,
+    "fit": 8.77,
+    "fitM": 17.3,
     "lede": "All playable. Pick one, press start, and make the mistake on purpose. That’s where the learning is.",
     "note": "Studio demos, built in-house to show how we work. Not client work.",
     "workHeading": "For the workplace",
