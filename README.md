@@ -18,6 +18,7 @@ from the site and is hidden from search engines.
   - Show or hide, reorder, and pick the one to three that appear on the home page.
   - Edit every line of text: card line, you do / what happens / what sticks, readout, descriptions.
   - Replace pictures. Uploads are cropped to 1280 × 720.
+  - Upload a short MP4 of the mistake. Simulations with a clip join the home page reel and play on hover.
   - Replace a simulation, or add a new one (one HTML file, or a folder with an `index.html`).
   - Delete.
 - **Home page:** headline (refitted to one line automatically), intro, facts, the facts strip, About
@@ -70,6 +71,7 @@ js/site.js          Stage player, replay, tabs, theater, slide 14, Gantt, contac
 css/site.css        All styles. Tokens and brand rules are at the top
 sims/<slug>/        The simulations, each a 1280 × 720 page
 img/thumbs/         1280 × 720 pictures per simulation: opening screen, your move, what happens
+media/              Footage of each simulation's key mistake (MP4), used by the hero reel and card hovers
 img/og/             Link-preview image (1200 × 630)
 fonts/              Archivo and Martian Mono, self-hosted (SIL OFL)
 vendor/             three.js and fonts used inside the simulations

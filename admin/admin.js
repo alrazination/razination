@@ -295,6 +295,11 @@
         imgSlot(i, 'move', 'Your move (optional)', 'The decision point just before the mistake. Without it, the opening screen is used') +
         imgSlot(i, 'mistake', 'What happens', 'The moment of the mistake') +
       '</div>' +
+      '<div class="acard acard--flat" style="margin-top:14px"><p class="pill" style="margin-bottom:8px">Footage clip (optional)</p>' +
+        '<p class="a-help" style="margin-bottom:10px">A short MP4 of the mistake happening (5–8 s, under 5 MB). Simulations with a clip play in the home page reel and on hover.</p>' +
+        '<div class="row"><span class="grow">' + (s.clip ? '<code>' + esc(s.clip) + '</code>' + (S.files[s.clip] ? ' (new)' : '') : 'No clip yet') + '</span>' +
+        '<label class="ib">Upload MP4<input type="file" accept="video/mp4" data-act="clip" data-i="' + i + '" hidden></label>' +
+        (s.clip ? '<button class="ib ib--danger" data-act="clip-clear" data-i="' + i + '">Remove clip</button>' : '') + '</div></div>' +
       '<div class="grid3" style="margin-top:12px">' + inp(b + 'alt', 'Describe the opening screen', { area: true, rows: 2 }) + inp(b + 'altMove', 'Describe your move', { area: true, rows: 2 }) + inp(b + 'altMistake', 'Describe what happens', { area: true, rows: 2 }) + '</div>' +
       '<details class="more"><summary>Replace the simulation itself</summary>' +
         '<p class="a-help">Upload a new version: one HTML file, or a folder with an index.html. It should be built for a 1280 × 720 screen.</p>' +
@@ -532,6 +537,7 @@
     else if (act === 'img') uploadImage(el);
     else if (act === 'photo') uploadPhoto(el);
     else if (act === 'replace-sim') replaceSim(el);
+    else if (act === 'clip') uploadClip(el);
   });
 
   app.addEventListener('click', function (e) {
@@ -564,6 +570,10 @@
       dropUpload(s0.img.move); s0.img.move = ''; s0.altMove = '';
       markDirty(); render();
     }
+    else if (act === 'clip-clear') {
+      var sc = d.sims[+el.getAttribute('data-i')];
+      dropUpload(sc.clip); sc.clip = ''; markDirty(); render();
+    }
     else if (act === 'del-sim') delSim(+el.getAttribute('data-i'));
     else if (act === 'publish') publish();
     else if (act === 'preview') openPreview();
@@ -594,6 +604,17 @@
       s.img[key] = p;
       markDirty(); render();
     }).catch(function (err) { alert(err.message); });
+  }
+  function uploadClip(el) {
+    var s = S.data.sims[+el.getAttribute('data-i')], f = el.files[0];
+    if (!f) return;
+    if (f.size > 8 * 1024 * 1024) { alert('That clip is over 8 MB. Please keep it short (5–8 s) and compressed.'); return; }
+    fileToB64(f).then(function (b) {
+      dropUpload(s.clip);
+      var p = 'media/' + s.slug + '-u' + stamp() + '.mp4';
+      S.files[p] = b; s.clip = p;
+      markDirty(); render();
+    });
   }
   function uploadPhoto(el) {
     var f = el.files[0];
@@ -776,7 +797,9 @@
     var old = [];
     S.original.sims.forEach(function (s) { ['start', 'move', 'mistake'].forEach(function (k) { if (s.img[k]) old.push(s.img[k]); }); });
     old.push(S.original.about.photo);
-    return old.filter(function (p) { return /-u[0-9a-z]+\.(webp|jpg)$/.test(p) && !used[p]; });
+    d.sims.forEach(function (s) { if (s.clip) used[s.clip] = 1; });
+    S.original.sims.forEach(function (s) { if (s.clip) old.push(s.clip); });
+    return old.filter(function (p) { return /-u[0-9a-z]+\.(webp|jpg|mp4)$/.test(p) && !used[p]; });
   }
 
   function publish() {

@@ -1,5 +1,24 @@
 # Razination: design decisions
 
+> **Update: version 2 ("Black box").** The owner found version 1 too quiet and asked for a "wow" site
+> without the 1280 px frame. Version 2 keeps the brand idea (*Fail here. Not on the job.*), the
+> flight-recorder orange and Archivo, but rebuilds everything else around **real footage**:
+>
+> - The **hero** is a tilted, glowing screen playing recordings of the actual mistakes, back to back: the
+>   fat-pan fireball, the phishing click spreading across the network, 1,800 customers leaving the
+>   building, the car rolling off the jack, and the contaminated cleanroom suit. Each is recorded from the
+>   simulations themselves. A live REC timecode, captions synced to each clip and an orange flash on every
+>   consequence sit on top, and the footage also lights the room behind it.
+> - A **pinned scroll story** tilts "slide 14 of 38" away and replaces it with the real flat-tire footage.
+> - **Cards** play their footage on hover and tilt toward the cursor. Every simulation opens in a full-screen
+>   **cinema player**, scaled to fit any screen.
+> - **Layout and type:** the page is dark, full-bleed, with film grain, glowing type, a 5-step timeline that
+>   draws in as you scroll, and a giant outlined wordmark in the footer.
+> - **Reduced motion:** with `prefers-reduced-motion`, nothing autoplays and the story becomes a static sequence.
+>
+> The reasoning below is the record of version 1. Its content decisions (honesty, no invented proof,
+> pricing, contact) still apply.
+
 How the redesign was decided. Four expert reviewers argued a first direction from their own point of
 view, disagreements were settled one by one, and a second round reviewed the built site.
 
