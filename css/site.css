@@ -110,7 +110,7 @@ html{transition:background-color .3s}
 .hero__media{position:absolute;inset:0;z-index:-2;background:#000;overflow:hidden}
 .hero__amb{position:absolute;inset:-10%;width:120%;height:120%;filter:blur(60px) saturate(1.8);opacity:.85;transform:scale(1.1)}
 .hero__shade{position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 75% 40%,rgba(var(--shade),.1),rgba(var(--shade),.86) 70%),linear-gradient(0deg,var(--bg),rgba(var(--shade),0) 40%)}
-.hero__screen{position:absolute;z-index:-1;right:var(--gut);top:clamp(110px,15vh,160px);width:min(50vw,860px);aspect-ratio:16/9;background:#000;
+.hero__screen{position:absolute;z-index:-1;right:var(--gut);top:clamp(100px,13vh,150px);width:min(60vw,98vh,1040px);aspect-ratio:16/9;background:#000;
   transform:perspective(1800px) rotateY(-16deg) rotateX(4deg) rotateZ(.5deg);transform-origin:100% 50%;
   box-shadow:0 0 0 1px var(--rule-2),0 40px 110px var(--card-shadow),0 0 140px rgba(255,79,0,.22);overflow:hidden}
 .hero__poster,.hero__v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s}
@@ -616,3 +616,5 @@ html[data-theme=light] .theme__sun{background:var(--hot);box-shadow:0 0 0 3px rg
 html[data-theme=light] .top.is-scrolled{background:rgba(255,255,255,.86)}
 html[data-theme=light] .player{background:#0B0B0C;color:#F4F1EA;--fg:#F4F1EA;--fg-2:#B9B5AC;--rule:rgba(244,241,234,.12);--rule-2:rgba(244,241,234,.22)}
 html[data-theme=light] .card__media::after{background:linear-gradient(0deg,rgba(0,0,0,.45),rgba(0,0,0,0) 45%)}
+/* laptops and tablets on their side: the footage gets more room */
+@media(min-width:901px) and (max-width:1199px){.hero__screen{width:min(66vw,100vh)}}
