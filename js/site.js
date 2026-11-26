@@ -19,9 +19,9 @@
   var W = 1280, H = 720;
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
   var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
-  function thumb(s, mistake) { return 'img/thumbs/' + s.slug + (mistake ? '' : '-start') + '.webp'; }
-  function simSrc(s) { return 'sims/' + s.slug + '/index.html'; }
-  function moveImg(s) { return s.move ? 'img/thumbs/' + s.slug + '-move.webp' : thumb(s, false); }
+  function thumb(s, mistake) { var i = s.img || {}; return (mistake ? i.mistake : i.start) || ''; }
+  function simSrc(s) { return s.path || 'sims/' + s.slug + '/index.html'; }
+  function moveImg(s) { var i = s.img || {}; return i.move || i.start || ''; }
   function phone() { return !!(window.matchMedia && !matchMedia('(min-width: 821px)').matches); }
 
   /* ---------------------------------------------------------------

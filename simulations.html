@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--@meta-->
 <title>Simulations · Razination</title>
 <meta name="description" content="Eight playable training simulations: fire safety, phishing, GDPR, procedures and classroom games. Pick one, press start, and make the mistake on purpose.">
 <meta property="og:title" content="Eight ways to get it wrong · Razination">
@@ -10,8 +11,12 @@
 <meta property="og:image" content="https://alrazination.github.io/razination/img/og/razination.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:url" content="https://alrazination.github.io/razination/simulations.html">
+<link rel="canonical" href="https://alrazination.github.io/razination/simulations.html">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="img/thumbs/fire-extinguisher.webp" as="image" fetchpriority="high">
+<!--/@meta-->
 <meta name="theme-color" content="#0E0E0F">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230E0E0F'/%3E%3Crect x='12' y='13' width='8' height='14' fill='%23F2EFE8'/%3E%3Crect x='11' y='4' width='10' height='6' fill='%23FF4F00'/%3E%3C/svg%3E">
 <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
@@ -45,17 +50,17 @@
 
 <main id="main">
   <section class="hero" aria-labelledby="h1">
-    <div class="frame">
+    <div class="frame"><!--@hero-->
       <h1 class="placard" id="h1" style="--fit:12.15;--fit-m:23"><span>Eight ways to</span> <span>get it wrong.</span></h1>
       <div class="hero__row">
         <p class="lede">All playable. Pick one, press start, and make the mistake on purpose. That’s where the learning is.</p>
         <p class="data mute" style="max-width:36ch">Studio demos, built in-house to show how we work. Not client work.</p>
       </div>
-    </div>
+    <!--/@hero--></div>
   </section>
 
   <section class="band band--top on-ink" aria-label="Simulation player">
-    <div class="frame">
+    <div class="frame"><!--@theater-->
       <div class="stage" id="theater" data-theater data-sim="fire-extinguisher">
         <div class="stage__bar">
           <div class="stage__title">
@@ -77,17 +82,17 @@
         <div class="screen">
           <div class="cover">
             <img class="before" src="img/thumbs/fire-extinguisher-move.webp" alt="Your move: Fire 3 of 4: a frying pan on fire in the staff kitchen. The pointer is on the water extinguisher." width="1280" height="720">
-            <img class="after" src="img/thumbs/fire-extinguisher.webp" alt="What happens: a kitchen engulfed by a fireball after water hit burning fat" width="1280" height="720" fetchpriority="high">
+            <img class="after" src="img/thumbs/fire-extinguisher.webp" alt="What happens: A kitchen engulfed by a fireball after water hit burning fat" width="1280" height="720" fetchpriority="high">
             <button class="btn start" type="button"><i class="tri" aria-hidden="true"></i><span class="lab">Play: Fire safety</span> <small>no sign-up</small></button>
           </div>
           <div class="screen__loading data" aria-hidden="true">Loading simulation</div>
         </div>
 
         <div class="replay">
-          <button class="replay__btn" type="button" aria-label="Play the replay"></button>
+          <button class="replay__btn" type="button" aria-label="Pause the replay"></button>
           <span class="replay__lab data" aria-hidden="true">Your move</span>
           <div class="track">
-            <input type="range" min="0" max="1000" value="0" aria-label="Replay of the mistake. Drag to go from your move to what happens.">
+            <input type="range" min="0" max="1000" value="1000" aria-label="Replay of the mistake. Drag to go from your move to what happens.">
             <span class="track__head"></span>
             <span class="track__fill"></span>
             <span class="track__cut"></span>
@@ -108,13 +113,13 @@
           <a class="arrow" href="./#contact">Want one like this? Get a fixed quote<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </div>
       </div>
-    </div>
+<!--/@theater--></div>
   </section>
 
   <section class="sec" id="all" aria-label="All simulations">
-    <div class="frame">
+    <div class="frame"><!--@cards-->
       <div class="group">
-        <div class="group__head"><h2>For the workplace</h2><span class="data">Safety · IT security · Data protection · Procedures</span></div>
+        <div class="group__head"><h2>For the workplace</h2><span class="data">Safety · IT security · Data protection · Procedure</span></div>
         <div class="cards cards--wide">
         <a class="card" href="#fire-extinguisher" data-card="fire-extinguisher" aria-current="false">
           <span class="card__pic"><img class="before" src="img/thumbs/fire-extinguisher-start.webp" alt="An office with a burning waste bin and extinguishers on the wall" width="1280" height="720" loading="lazy"><img class="after" src="img/thumbs/fire-extinguisher.webp" alt="" width="1280" height="720" loading="lazy"><span class="flag data"><i class="sq" aria-hidden="true"></i>The mistake</span><span class="play"><i class="tri" aria-hidden="true"></i>Play</span></span>
@@ -139,7 +144,7 @@
         </div>
       </div>
       <div class="group">
-        <div class="group__head"><h2>For the classroom</h2><span class="data">Sustainability · Languages</span></div>
+        <div class="group__head"><h2>For the classroom</h2><span class="data">Sustainability · Language</span></div>
         <div class="cards">
         <a class="card" href="#close-the-loop" data-card="close-the-loop" aria-current="false">
           <span class="card__pic"><img class="before" src="img/thumbs/close-the-loop-start.webp" alt="Waste on a conveyor belt heading for an incinerator" width="1280" height="720" loading="lazy"><img class="after" src="img/thumbs/close-the-loop.webp" alt="" width="1280" height="720" loading="lazy"><span class="flag data"><i class="sq" aria-hidden="true"></i>The mistake</span><span class="play"><i class="tri" aria-hidden="true"></i>Play</span></span>
@@ -155,7 +160,7 @@
         </a>
         </div>
       </div>
-    </div>
+    <!--/@cards--></div>
   </section>
 
   <section class="sec sec--ink" aria-labelledby="closer-h">
@@ -173,18 +178,18 @@
 </main>
 
 <footer class="foot">
-  <div class="frame">
+  <div class="frame"><!--@footer-->
     <div class="foot__grid">
       <div>
         <a class="logo" href="./" aria-label="Razination, home">raz<span class="i">ı</span>nation</a>
         <p class="foot__why"><i class="sq" aria-hidden="true"></i><span>Flight recorders are orange so they can be found after something goes wrong. Ours is for before.</span></p>
       </div>
       <div><h4 class="data">Site</h4><ul><li><a href="simulations.html">Simulations</a></li><li><a href="./#how">How it works</a></li><li><a href="./#pricing">Pricing</a></li><li><a href="./#about">About</a></li><li><a href="./#contact">Contact</a></li></ul></div>
-      <div><h4 class="data">Elsewhere</h4><ul><li><a href="https://www.linkedin.com/in/razin-abdullah/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+      <div><h4 class="data">Contact</h4><ul><li><a href="https://www.linkedin.com/in/razin-abdullah/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
       <div><h4 class="data">Legal</h4><ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li></ul></div>
     </div>
     <div class="foot__base"><span>© 2026 Razination · Munich</span><span>Every simulation here is hand-built and runs in your browser.</span></div>
-  </div>
+  <!--/@footer--></div>
 </footer>
 
 <script src="js/sims-data.js"></script>
