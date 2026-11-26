@@ -49,7 +49,7 @@
     var vids = $$('.hero__v', hero);
     if (!reel.length || reduce || !vids.length) return;
     var tc = $('[data-tc]', hero), cs = $('[data-case]', hero), tp = $('[data-topic]', hero);
-    var dO = $('[data-do]', hero), hp = $('[data-hap]', hero), cue = $('.cue', hero);
+    var dO = $('[data-do]', hero), hp = $('[data-hap]', hero), cue = $('.cue', hero), cs2 = $('[data-case2]', hero);
     // ambient light: paint a tiny copy of the footage, blurred, behind everything
     var amb = $('.hero__amb', hero), ctx = amb && amb.getContext('2d');
     (function paint() {
@@ -63,6 +63,8 @@
       tp.textContent = s.topic;
       dO.textContent = s.triad[0];
       hp.textContent = s.triad[1]; hp.style.opacity = 0; cutDone = false;
+      if (cs2) cs2.textContent = pad(cur + 1) + '/' + pad(reel.length);
+      cue.classList.remove('is-hap', 'is-new'); void cue.offsetWidth; cue.classList.add('is-new');
     }
     function start(p) { if (p && p.catch) p.catch(function () {}); }
     function play(i) {
@@ -84,7 +86,7 @@
         var t = Math.floor(elapsed + v.currentTime);
         tc.textContent = pad(Math.floor(t / 3600)) + ':' + pad(Math.floor(t / 60) % 60) + ':' + pad(t % 60);
         if (f > .4 && !cutDone) {
-          cutDone = true; hp.style.opacity = 1;
+          cutDone = true; hp.style.opacity = 1; cue.classList.add('is-hap');
           hero.classList.remove('is-cut'); void hero.offsetWidth; hero.classList.add('is-cut');
         }
       });
