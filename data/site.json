@@ -1,6 +1,7 @@
 {
   "settings": {
-    "siteUrl": "https://alrazination.github.io/razination/"
+    "siteUrl": "https://alrazination.github.io/razination/",
+    "brand": "Razination"
   },
   "meta": {
     "home": {
@@ -44,7 +45,8 @@
       "phishing-inbox",
       "gdpr-every-dot"
     ],
-    "demoNote": "Studio demos, built in-house to show how we work. Made for a laptop or tablet."
+    "demoNote": "Studio demos, built in-house to show how we work. Made for a laptop or tablet.",
+    "factsShow": true
   },
   "plate": [
     {
@@ -100,7 +102,7 @@
   },
   "process": {
     "heading": "Live in 3 to 5 weeks.",
-    "intro": "Each bar shows who does what. Your part is the thin line. Spoiler: it’s small.",
+    "intro": "Five steps, one after the other. Your part is marked in orange, and it’s small.",
     "steps": [
       {
         "title": "Find the moment",
@@ -157,7 +159,8 @@
         "youWidth": 28,
         "mistakes": false
       }
-    ]
+    ],
+    "show": true
   },
   "pricing": {
     "heading": "Three sizes. No “price on request”.",
@@ -209,7 +212,9 @@
       "Fixed quote first",
       "50% to start, 50% on delivery",
       "Extra languages or a retainer? Just ask"
-    ]
+    ],
+    "show": true,
+    "fromLabel": "from"
   },
   "faqHeading": "Before you ask.",
   "faq": [
@@ -347,17 +352,17 @@
       "topic": "Safety",
       "group": "work",
       "audience": "Every workplace",
-      "hook": "Water on burning fat: fireball.",
+      "hook": "Water on a pan fire: fireball.",
       "play": "Four fires. Grab something from the wall, or get out.",
       "triad": [
-        "Water on burning fat",
+        "Water on a pan fire",
         "Instant fireball",
-        "Fat fire? Use the fire blanket."
+        "Pan fire? Heat off, fire blanket."
       ],
       "readout": "Fire 3 of 4 · frying pan, staff kitchen",
       "alt": "An office with a burning waste bin and extinguishers on the wall",
       "altMove": "Fire 3 of 4: a frying pan on fire in the staff kitchen. The pointer is on the water extinguisher.",
-      "altMistake": "A kitchen engulfed by a fireball after water hit burning fat",
+      "altMistake": "A kitchen engulfed by a fireball after water hit a burning frying pan",
       "lang": "",
       "img": {
         "start": "img/thumbs/fire-extinguisher-start.webp",

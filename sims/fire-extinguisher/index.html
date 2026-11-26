@@ -124,7 +124,7 @@ canvas{display:block;width:900px;height:720px;touch-action:none}
       <ul class="rules">
         <li><b style="background:#D7263D">1</b>Paper, wood, fabric: water or foam.</li>
         <li><b style="background:#1D1B26">2</b>Anything electrical: CO₂. Never water.</li>
-        <li><b style="background:#E85D04">3</b>Burning fat: heat off, fire blanket. Never water.</li>
+        <li><b style="background:#E85D04">3</b>Pan fire: heat off, fire blanket. Never water.</li>
         <li><b style="background:#6E6556">4</b>Bigger than a bin, or spreading: raise the alarm and get out.</li>
       </ul>
       <button class="go" id="again" type="button">Play again</button>
@@ -180,11 +180,11 @@ var SCENES=[
   draw:drawKitchen,fire:{x:452,y:430,w:120,int:.85},
   res:{
    blanket:{t:'ok'},
-   water:{t:'bad',anim:'fireball',h:'Fireball.',p:'Water sank into 300°C oil, turned to steam in an instant and threw burning oil up to the ceiling.',rule:'Burning fat: heat off, fire blanket. Never water.'},
-   foam:{t:'bad',anim:'fireball',h:'Foam is mostly water.',p:'The water in the foam hit the hot oil, flashed to steam and blew a ball of fire across the kitchen.',rule:'Burning fat: heat off, fire blanket.'},
-   co2:{t:'bad',anim:'splash',h:'Burning oil everywhere.',p:'The force of the CO₂ jet blew burning oil out of the pan and across the counter.',rule:'Burning fat: heat off, fire blanket. (A wet chemical extinguisher, yellow band, also works.)'},
-   powder:{t:'bad',anim:'splash',h:'Burning oil everywhere.',p:'The powder jet hit the pan hard and scattered burning oil over the counter.',rule:'Burning fat: heat off, fire blanket.'},
-   out:{t:'safe',h:'Safe, but you could have stopped it.',p:'Leaving is never wrong. But a fire blanket was on the wall, and a pan fire this size is exactly what it’s for.',rule:'Burning fat: heat off, fire blanket.'}}},
+   water:{t:'bad',anim:'fireball',h:'Fireball.',p:'Water sank into 300°C oil, turned to steam in an instant and threw burning oil up to the ceiling.',rule:'Pan fire: heat off, fire blanket. Never water.'},
+   foam:{t:'bad',anim:'fireball',h:'Foam is mostly water.',p:'The water in the foam hit the hot oil, flashed to steam and blew a ball of fire across the kitchen.',rule:'Pan fire: heat off, fire blanket.'},
+   co2:{t:'bad',anim:'splash',h:'Burning oil everywhere.',p:'The force of the CO₂ jet blew burning oil out of the pan and across the counter.',rule:'Pan fire: heat off, fire blanket. (A wet chemical extinguisher, yellow band, also works.)'},
+   powder:{t:'bad',anim:'splash',h:'Burning oil everywhere.',p:'The powder jet hit the pan hard and scattered burning oil over the counter.',rule:'Pan fire: heat off, fire blanket.'},
+   out:{t:'safe',h:'Safe, but you could have stopped it.',p:'Leaving is never wrong. But a fire blanket was on the wall, and a pan fire this size is exactly what it’s for.',rule:'Pan fire: heat off, fire blanket.'}}},
  {id:'store',title:'Storeroom',desc:'You open the storeroom door. Boxes are burning up to the ceiling and smoke is rolling out at head height.',
   draw:drawStore,fire:{x:440,y:600,w:300,int:2.2},
   res:{
@@ -272,7 +272,7 @@ function blanketClick(p){
     tip('Find the hob knob, front right of the hob.');return;
   }
   if(Math.abs(p.x-F.x)<120&&Math.abs(p.y-F.y)<140){G.phase='anim';anim={type:'blanket',t:0};tip('');
-    setTimeout(function(){mark('ok');result({h:'Out.',p:'Heat off, blanket over the pan, and you kept your hands behind it. Leave it on for 30 minutes: the oil can reignite if air gets in while it’s hot.',rule:'Burning fat: heat off, fire blanket.'},'ok')},1700)}
+    setTimeout(function(){mark('ok');result({h:'Out.',p:'Heat off, blanket over the pan, and you kept your hands behind it. Leave it on for 30 minutes: the oil can reignite if air gets in while it’s hot.',rule:'Pan fire: heat off, fire blanket.'},'ok')},1700)}
 }
 
 /* ---------------- results ---------------- */

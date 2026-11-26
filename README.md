@@ -21,9 +21,13 @@ from the site and is hidden from search engines.
   - Upload a short MP4 of the mistake. Simulations with a clip join the home page reel and play on hover.
   - Replace a simulation, or add a new one (one HTML file, or a folder with an `index.html`).
   - Delete.
-- **Home page:** headline (refitted to one line automatically), intro, facts, the facts strip, About
-  (photo, quote, facts), the 5-week plan, the simulations-page header, footer line and page titles.
-- **Pricing & FAQ:** the three packages, terms, and questions (add, reorder, delete).
+- **Home page:**
+  - How the name is written: Razination (default) or razination.
+  - Switch sections on or off: How it works, Pricing, About, and the facts strip. Their menu links follow.
+  - Headline, intro, the facts strip, About (photo, quote, facts), the 5-week plan,
+    the simulations-page header, footer line and page titles.
+- **Pricing & FAQ:** one to four price boxes (add, reorder, delete, highlight one; every line editable),
+  the word before the price, terms, and questions (add, reorder, delete).
 - **Contact & legal:**
   - Email, phone, LinkedIn, booking link and the Web3Forms key.
   - Contact section text.

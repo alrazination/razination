@@ -220,7 +220,7 @@
     var top = document.getElementById('top');
     if (!top) return;
     var st = S.busy ? 'Publishing…' : S.dirty ? 'Unpublished changes' : 'All changes published';
-    top.innerHTML = '<span class="logo">raz<span class="i">ı</span>nation<small>admin</small></span>' +
+    top.innerHTML = '<span class="logo">' + RazRender.brand(S.data) + '<small>admin</small></span>' +
       '<span class="a-status' + (S.dirty && !S.busy ? ' is-dirty' : '') + '">' + st + '</span>' +
       '<button class="lnk" data-act="preview">Preview</button>' +
       '<a class="lnk" href="' + esc(siteUrl()) + '" target="_blank" rel="noopener">Open site</a>' +
@@ -347,7 +347,7 @@
         '<label class="af">Describe what happens<input name="altMistake"></label>' +
       '</div>' +
       '<div class="acard acard--flat">' +
-        '<p class="a-help" style="margin-bottom:10px"><b style="color:var(--ink)">The simulation itself *</b> One HTML file, or a whole folder with an index.html at its top. Build it for a 1280 × 720 screen.</p>' +
+        '<p class="a-help" style="margin-bottom:10px"><b style="color:var(--a-text)">The simulation itself *</b> One HTML file, or a whole folder with an index.html at its top. Build it for a 1280 × 720 screen.</p>' +
         '<div class="grid2">' +
           '<label class="af">Single HTML file<input type="file" name="simFile" accept=".html,.htm,text/html"></label>' +
           '<label class="af">…or a folder<input type="file" name="simFolder" webkitdirectory multiple></label>' +
@@ -363,6 +363,15 @@
     return '<h1 class="a-h">Home page</h1>' +
       '<p class="a-help">Changes appear on the site after you press <b>Publish changes</b>. Use <b>Preview</b> to check first.</p>' +
 
+      '<h2 class="a-h">Name</h2><div class="acard"><div class="grid2">' +
+        inp('settings.brand', 'How the name is written', { options: [['Razination', 'Razination (capital R)'], ['razination', 'razination (all small)']], hint: 'logo in the menu and the big name in the footer' }) +
+      '</div></div>' +
+
+      '<h2 class="a-h">Sections on the home page</h2><div class="acard">' +
+        '<p class="a-help">Switch a section off to remove it, and its menu links, from the site. Its text stays here for later.</p>' +
+        '<div class="row" style="gap:14px 28px">' + sw('process.show', 'How it works') + sw('pricing.show', 'Pricing') + sw('about.show', 'About') + sw('home.factsShow', 'Facts strip (Simulations · Playable in your browser …)') + '</div>' +
+      '</div>' +
+
       '<h2 class="a-h">Top of the page</h2><div class="acard">' +
         '<div class="grid2">' + inp('hero.line1', 'Headline, part 1') + inp('hero.line2', 'Headline, part 2', { hint: 'on phones the parts sit on two lines' }) + '</div>' +
         inp('hero.lede', 'Intro', { area: true, rows: 2 }) +
@@ -371,14 +380,23 @@
         inp('hero.reelFirst', 'First clip in the hero reel', { options: d.sims.filter(function (s) { return s.on && s.clip; }).map(function (s) { return [s.slug, s.title]; }), hint: 'only simulations with a footage clip play in the reel' }) +
       '</div>' +
 
-      '<h2 class="a-h">Facts strip</h2><div class="acard"><div class="grid2">' +
-        d.plate.map(function (p, i) { return '<div class="grid2">' + inp('plate.' + i + '.label', 'Label') + inp('plate.' + i + '.value', 'Value') + '</div>'; }).join('') +
-      '</div></div>' +
+      '<h2 class="a-h">Facts strip</h2><div class="acard">' +
+        '<p class="a-help">The row of short facts near the bottom of the page, above the footer.</p>' +
+        d.plate.map(function (p, i) {
+          return '<div class="row" style="align-items:flex-end">' +
+            '<div class="grow">' + inp('plate.' + i + '.label', 'Label') + '</div>' +
+            '<div class="grow" style="flex:2">' + inp('plate.' + i + '.value', 'Value') + '</div>' +
+            '<button class="ib" style="margin-bottom:14px" data-act="move-row" data-list="plate" data-i="' + i + '" data-d="-1"' + (i === 0 ? ' disabled' : '') + '>↑</button>' +
+            '<button class="ib" style="margin-bottom:14px" data-act="move-row" data-list="plate" data-i="' + i + '" data-d="1"' + (i === d.plate.length - 1 ? ' disabled' : '') + '>↓</button>' +
+            '<button class="ib ib--danger" style="margin-bottom:14px" data-act="del-row" data-list="plate" data-i="' + i + '">Remove</button></div>';
+        }).join('') +
+        (d.plate.length < 6 ? '<button class="ib" data-act="add-row" data-list="plate">+ Add a fact</button>' : '') +
+      '</div>' +
 
       '<h2 class="a-h">About</h2><div class="acard">' +
-        '<div class="row" style="margin-bottom:14px">' + sw('about.show', 'Show the About section') + '<span class="a-help" style="margin:0">Off: the section and its menu links are removed from the site.</span></div>' +
+
         '<div class="row" style="align-items:flex-start;margin-bottom:12px">' +
-          '<img src="' + esc(preview(d.about.photo)) + '" alt="" style="width:120px;height:120px;object-fit:cover;border:2px solid var(--ink)">' +
+          '<img src="' + esc(preview(d.about.photo)) + '" alt="" style="width:120px;height:120px;object-fit:cover;border:1px solid var(--a-line-2)">' +
           '<label class="af grow">Photo <small>cropped to a square</small><input type="file" accept="image/*" data-act="photo"></label>' +
         '</div>' +
         '<div class="grid2">' + inp('about.name', 'Name') + inp('about.heading', 'Heading') + '</div>' +
@@ -393,14 +411,14 @@
       '</div>' +
 
       '<h2 class="a-h">How it works</h2><div class="acard">' +
+        '<p class="a-help">Visitors scroll through the steps: the orange marker moves along the weeks and each drawing turns into the next. Weeks run from 0 (start of week 1) to 5 (end of week 5); the label shows e.g. "Week 1–2".</p>' +
         '<div class="grid2">' + inp('process.heading', 'Heading') + inp('process.intro', 'Intro') + '</div>' +
-        '<p class="a-help">Weeks run from 0 (start of week 1) to 5 (end of week 5). Halves are fine, e.g. 1.5.</p>' +
         d.process.steps.map(function (s, i) {
           var b = 'process.steps.' + i + '.';
           return '<div class="acard acard--flat"><p class="pill">Step ' + (i + 1) + '</p>' +
             '<div class="grid2">' + inp(b + 'title', 'Name') + inp(b + 'desc', 'One line') + '</div>' +
-            '<div class="grid4">' + inp(b + 'bar', 'Bar label') + inp(b + 'start', 'Starts at week', { type: 'number', num: true, attrs: ' min="0" max="5" step="0.5"' }) + inp(b + 'end', 'Ends at week', { type: 'number', num: true, attrs: ' min="0" max="5" step="0.5"' }) + inp(b + 'youAt', 'Your part at week', { type: 'number', num: true, attrs: ' min="0" max="5" step="0.05"' }) + '</div>' +
-            '<div class="row">' + '<div class="grow">' + inp(b + 'you', 'Your part', { hint: 'leave empty if there is none' }) + '</div>' + sw(b + 'mistakes', 'Orange bar (where the mistakes are designed)') + '</div>' +
+            '<div class="grid2">' + inp(b + 'start', 'Starts at week', { type: 'number', num: true, attrs: ' min="0" max="5" step="0.5"' }) + inp(b + 'end', 'Ends at week', { type: 'number', num: true, attrs: ' min="0" max="5" step="0.5"' }) + '</div>' +
+            '<div class="row">' + '<div class="grow">' + inp(b + 'you', 'Your part', { hint: 'leave empty if there is none' }) + '</div>' + sw(b + 'mistakes', 'Orange title (where the mistakes are designed)') + '</div>' +
           '</div>';
         }).join('') +
       '</div>' +
@@ -423,17 +441,25 @@
     var R = S.data.pricing;
     return '<h1 class="a-h">Pricing & FAQ</h1>' +
       '<div class="acard"><div class="grid2">' + inp('pricing.heading', 'Heading') + inp('pricing.intro', 'Intro') + '</div></div>' +
+      '<h2 class="a-h">Price boxes</h2>' +
+      '<p class="a-help">One to four boxes, side by side (also on phones, where a tap shows what a box includes). The highlighted box gets the orange frame and button.</p>' +
+      '<div class="acard"><div class="grid2">' + inp('pricing.fromLabel', 'Small word before the price', { hint: 'e.g. from; leave empty for none' }) + '</div></div>' +
       '<div class="grid3">' + R.packages.map(function (p, i) {
         var b = 'pricing.packages.' + i + '.';
         return '<div class="acard">' +
+          '<p class="pill">Box ' + (i + 1) + (p.core ? ' · highlighted' : '') + '</p>' +
           inp(b + 'name', 'Name') +
-          '<div class="grid2">' + inp(b + 'price', 'Price', { hint: 'shown after "from"' }) + inp(b + 'weeks', 'Weeks', { options: [[1, '1'], [2, '2'], [3, '3'], [4, '4'], [5, '5']], num: true }) + '</div>' +
+          '<div class="grid2">' + inp(b + 'price', 'Price') + inp(b + 'weeks', 'Weeks', { type: 'number', num: true, attrs: ' min="0" max="52" step="1"', hint: '0 hides it' }) + '</div>' +
           inp(b + 'for', 'Who it is for', { area: true, rows: 2 }) +
           inp(b + 'items', 'What you get', { lines: true, rows: 5, hint: 'one per line' }) +
           inp(b + 'button', 'Button') +
-          '<label class="sw"><input type="radio" name="core" data-act="core" data-i="' + i + '"' + (p.core ? ' checked' : '') + '>Highlight this one</label>' +
+          '<label class="sw" style="margin-bottom:12px"><input type="radio" name="core" data-act="core" data-i="' + i + '"' + (p.core ? ' checked' : '') + '>Highlight this one</label>' +
+          '<div class="row"><button class="ib" data-act="move-row" data-list="pricing.packages" data-i="' + i + '" data-d="-1"' + (i === 0 ? ' disabled' : '') + '>← Left</button>' +
+          '<button class="ib" data-act="move-row" data-list="pricing.packages" data-i="' + i + '" data-d="1"' + (i === R.packages.length - 1 ? ' disabled' : '') + '>Right →</button>' +
+          '<span class="grow"></span><button class="ib ib--danger" data-act="del-row" data-list="pricing.packages" data-i="' + i + '"' + (R.packages.length <= 1 ? ' disabled' : '') + '>Delete</button></div>' +
         '</div>';
       }).join('') + '</div>' +
+      (R.packages.length < 4 ? '<button class="ib" style="margin-bottom:18px" data-act="add-row" data-list="pricing.packages">+ Add a price box</button>' : '') +
       '<div class="acard">' + inp('pricing.terms', 'Terms under the prices', { lines: true, hint: 'one per line' }) + '</div>' +
 
       '<h2 class="a-h">FAQ</h2>' +
@@ -493,7 +519,7 @@
   /* ---- Sign in ---- */
   function renderLogin(err) {
     app.innerHTML = '<form class="login" id="login">' +
-      '<span class="logo" style="font-size:30px">raz<span class="i">ı</span>nation</span>' +
+      '<span class="logo" style="font-size:30px">Raz<span class="i">ı</span>nation</span>' +
       '<h1>Admin</h1>' +
       '<p class="a-help">Sign in with a GitHub access key that can edit only this site.</p>' +
       (err ? '<div class="msg msg--err" role="alert">' + esc(err) + '</div>' : '') +
@@ -578,7 +604,7 @@
     }
     else if (act === 'add-row') {
       var name = el.getAttribute('data-list');
-      getPath(d, name).push(name === 'faq' ? { q: '', a: '' } : name === 'contactSection.questions' ? { key: 'q' + (getPath(d, name).length + 1), q: '', multi: false, options: [] } : { label: '', value: '' });
+      getPath(d, name).push(name === 'faq' ? { q: '', a: '' } : name === 'contactSection.questions' ? { key: 'q' + (getPath(d, name).length + 1), q: '', multi: false, options: [] } : name === 'pricing.packages' ? { name: 'New box', weeks: 3, price: '€', for: '', items: [], button: 'Get in touch', core: false } : { label: '', value: '' });
       markDirty(); render();
     }
     else if (act === 'img-clear') {
