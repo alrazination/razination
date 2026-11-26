@@ -491,7 +491,7 @@
     },
     {
       "slug": "close-the-loop",
-      "on": true,
+      "on": false,
       "title": "Close the loop",
       "tab": "Upcycling",
       "topic": "Sustainability",
@@ -520,7 +520,7 @@
     },
     {
       "slug": "eco-party",
-      "on": true,
+      "on": false,
       "title": "Eco-Party Planner",
       "tab": "Eco-party",
       "topic": "Sustainability",

@@ -129,56 +129,6 @@ window.RAZ_SIMS = [
     "clip": "media/cleanroom-gowning.mp4"
   },
   {
-    "slug": "close-the-loop",
-    "tab": "Upcycling",
-    "readout": "Circularity score 33%",
-    "title": "Close the loop",
-    "topic": "Sustainability",
-    "group": "class",
-    "audience": "Schools, ages 10 to 14",
-    "hook": "Too slow and the material burns.",
-    "play": "Rescue waste from the belt before it reaches the fire.",
-    "triad": [
-      "Too slow, or the wrong machine",
-      "It burns in the incinerator",
-      "Right machine: jeans become a tote bag"
-    ],
-    "alt": "Waste on a conveyor belt heading for an incinerator",
-    "altMistake": "Torn jeans rescued and turned into a tote bag",
-    "path": "sims/close-the-loop/index.html",
-    "img": {
-      "start": "img/thumbs/close-the-loop-start.webp",
-      "move": "",
-      "mistake": "img/thumbs/close-the-loop.webp"
-    },
-    "clip": ""
-  },
-  {
-    "slug": "eco-party",
-    "tab": "Eco-party",
-    "readout": "Trap! The scale tips",
-    "title": "Eco-Party Planner",
-    "topic": "Sustainability",
-    "group": "class",
-    "audience": "Schools",
-    "hook": "The \"compostable\" cups are a trap.",
-    "play": "Plan the school party. Keep the scale balanced.",
-    "triad": [
-      "Pick the \"compostable\" cups",
-      "Trap. Compostable in factories only.",
-      "Check the claim before you buy"
-    ],
-    "alt": "An empty school gym ready to be decorated, next to a balance scale",
-    "altMistake": "A trap warning: the compostable cups only compost in industrial facilities",
-    "path": "sims/eco-party/index.html",
-    "img": {
-      "start": "img/thumbs/eco-party-start.webp",
-      "move": "",
-      "mistake": "img/thumbs/eco-party.webp"
-    },
-    "clip": ""
-  },
-  {
     "slug": "wo-ist-der-loeffel",
     "tab": "German A1",
     "readout": "Finde: die Blume",
