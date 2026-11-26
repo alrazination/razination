@@ -205,3 +205,4 @@ window.RAZ_SIMS = [
     "lang": "de"
   }
 ];
+window.RAZ_REEL = ["cleanroom-gowning","fire-extinguisher","phishing-inbox","gdpr-every-dot","flat-tire"];

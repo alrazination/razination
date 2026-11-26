@@ -44,7 +44,9 @@
   (function () {
     var hero = $('.hero:not(.hero--page)');
     if (!hero) return;
-    var vids = $$('.hero__v', hero), reel = SIMS.filter(function (s) { return s.clip; });
+    var order = window.RAZ_REEL || [];
+    var reel = order.length ? order.map(function (k) { return BY[k]; }).filter(Boolean) : SIMS.filter(function (s) { return s.clip; });
+    var vids = $$('.hero__v', hero);
     if (!reel.length || reduce || !vids.length) return;
     var tc = $('[data-tc]', hero), cs = $('[data-case]', hero), tp = $('[data-topic]', hero);
     var dO = $('[data-do]', hero), hp = $('[data-hap]', hero), cue = $('.cue', hero);
@@ -132,19 +134,13 @@
     window.addEventListener('resize', update); update();
   })();
 
-  /* ---------------- process line ---------------- */
+  /* ---------------- process: drawings run while in view ---------------- */
   (function () {
-    var steps = $('.steps');
-    if (!steps) return;
-    var items = $$('.step', steps);
-    function update() {
-      var r = steps.getBoundingClientRect(), H = window.innerHeight;
-      var p = reduce ? 1 : clamp((H * .8 - r.top) / (r.height + H * .25), 0, 1);
-      steps.style.setProperty('--p', p.toFixed(3));
-      items.forEach(function (it, i) { it.classList.toggle('is-lit', p >= i / items.length + .02); });
-    }
-    window.addEventListener('scroll', function () { requestAnimationFrame(update); }, { passive: true });
-    update();
+    var flow = $('[data-flow]');
+    if (!flow || reduce) return;
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { flow.classList.toggle('is-live', en[0].isIntersecting); }, { threshold: .2 }).observe(flow);
+    } else flow.classList.add('is-live');
   })();
 
   /* ---------------- cards: footage on hover, tilt ---------------- */
@@ -169,6 +165,71 @@
       card.style.setProperty('--ry', (x * 6).toFixed(2) + 'deg');
       card.style.setProperty('--rx', (-y * 5).toFixed(2) + 'deg');
     });
+  });
+
+  /* ---------------- carousel: the centred card faces you and plays ---------------- */
+  $$('[data-carousel]').forEach(function (car) {
+    var track = $('.carousel__track', car), cards = $$('.card', track), count = $('[data-count]', car), center = null;
+    function update() {
+      var r = track.getBoundingClientRect(), mid = r.left + r.width / 2, best = null, bestD = 1e9;
+      cards.forEach(function (c) {
+        var cr = c.getBoundingClientRect(), d = (cr.left + cr.width / 2 - mid) / (cr.width + 24);
+        var dd = clamp(d, -1.6, 1.6);
+        c.style.setProperty('--d', dd.toFixed(3));
+        c.style.setProperty('--ad', Math.min(1, Math.abs(dd)).toFixed(3));
+        if (Math.abs(d) < bestD) { bestD = Math.abs(d); best = c; }
+      });
+      var max = track.scrollWidth - track.clientWidth;
+      car.style.setProperty('--cp', max > 0 ? (track.scrollLeft / max).toFixed(3) : 0);
+      if (best !== center) {
+        if (center) { center.classList.remove('is-center'); var ov = $('video', center); if (ov) ov.pause(); }
+        center = best; center.classList.add('is-center');
+        count.textContent = pad(cards.indexOf(center) + 1);
+        var v = $('video', center);
+        if (v && !reduce && inView) {
+          if (!v.getAttribute('src')) { v.src = v.getAttribute('data-src'); v.addEventListener('playing', function () { v.classList.add('is-ready'); }, { once: true }); }
+          var pp = v.play(); if (pp && pp.catch) pp.catch(function () {});
+        }
+      }
+    }
+    var inView = false;
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) {
+      inView = en[0].isIntersecting;
+      if (!inView && center) { var v = $('video', center); if (v) v.pause(); }
+      else if (center) { var c0 = center; center = null; c0.classList.remove('is-center'); update(); }
+    }, { threshold: .3 }).observe(track);
+    var ticking = false;
+    track.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; update(); }); } }, { passive: true });
+    window.addEventListener('resize', update);
+    function go(dir) {
+      var i = clamp(cards.indexOf(center) + dir, 0, cards.length - 1), c = cards[i];
+      track.scrollTo({ left: c.offsetLeft - (track.clientWidth - c.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    $$('.carousel__btn', car).forEach(function (b) { b.addEventListener('click', function () { go(+b.getAttribute('data-dir')); }); });
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+    });
+    // drag with a mouse; a click without movement still opens the card
+    var down = null, moved = false;
+    track.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = { x: e.clientX, s: track.scrollLeft }; moved = false; });
+    window.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - down.x;
+      if (Math.abs(dx) > 6) { moved = true; track.classList.add('is-drag'); }
+      if (moved) track.scrollLeft = down.s - dx;
+    });
+    window.addEventListener('pointerup', function () {
+      if (!down) return;
+      down = null; track.classList.remove('is-drag');
+      if (moved) { go(0); setTimeout(function () { moved = false; }, 0); }
+    });
+    track.addEventListener('click', function (e) {
+      if (moved) { e.stopPropagation(); e.preventDefault(); return; }
+      var c = e.target.closest('.card');
+      if (c && c !== center) { e.stopPropagation(); e.preventDefault(); go(cards.indexOf(c) - cards.indexOf(center)); }
+    }, true);
+    update();
   });
 
   /* ---------------- player ---------------- */

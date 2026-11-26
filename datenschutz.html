@@ -8,12 +8,15 @@
 <meta name="theme-color" content="#070708">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070708'/%3E%3Crect x='12' y='13' width='8' height='14' fill='%23F4F1EA'/%3E%3Crect x='11' y='4' width='10' height='6' fill='%23FF4F00'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/site.css">
+<script>try{var t=localStorage.getItem("raz-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt</a>
 <header class="top">
   <a class="logo" href="./" aria-label="Razination, Startseite">raz<span class="i">ı</span>nation</a>
   <nav class="nav" aria-label="Hauptnavigation" lang="en"><a href="simulations.html">Simulations</a><a href="./#how">How it works</a><a href="./#pricing">Pricing</a></nav>
+  <button class="theme" type="button" data-theme-toggle aria-label="Switch to light theme"><span class="theme__sun" aria-hidden="true"></span></button>
   <a class="btn btn--sm btn--line" href="./">Zur Startseite</a>
 </header>
 <main id="main" class="legal"><div class="wrap"><!--@legal-->
@@ -44,5 +47,6 @@
 <p>Stand: <span class="todo">[Monat und Jahr]</span></p>
   <!--/@legal--></div></main>
 <footer class="foot foot--small"><div class="wrap"><div class="foot__base"><span>© 2026 Razination · München</span><span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span></div></div></footer>
+<script src="js/theme.js"></script>
 </body>
 </html>
