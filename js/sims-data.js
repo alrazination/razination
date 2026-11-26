@@ -9,15 +9,15 @@ window.RAZ_SIMS = [
     "topic": "Safety",
     "group": "work",
     "audience": "Every workplace",
-    "hook": "Water on burning fat: fireball.",
+    "hook": "Water on a pan fire: fireball.",
     "play": "Four fires. Grab something from the wall, or get out.",
     "triad": [
-      "Water on burning fat",
+      "Water on a pan fire",
       "Instant fireball",
-      "Fat fire? Use the fire blanket."
+      "Pan fire? Heat off, fire blanket."
     ],
     "alt": "An office with a burning waste bin and extinguishers on the wall",
-    "altMistake": "A kitchen engulfed by a fireball after water hit burning fat",
+    "altMistake": "A kitchen engulfed by a fireball after water hit a burning frying pan",
     "path": "sims/fire-extinguisher/index.html",
     "img": {
       "start": "img/thumbs/fire-extinguisher-start.webp",

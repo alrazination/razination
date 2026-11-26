@@ -42,6 +42,10 @@
     var a = Math.floor(+s.start || 0) + 1, b = Math.max(a, Math.ceil(+s.end || 0));
     return a === b ? 'Week ' + a : 'Week ' + a + '–' + b;
   }
+  function brand(d) {
+    var lower = d.settings && d.settings.brand === 'razination';
+    return (lower ? 'r' : 'R') + 'az<span class="i">ı</span>nation';
+  }
   var ARROW = '<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg>';
   var OUT = '<svg class="ic" aria-hidden="true"><use href="#i-out"/></svg>';
   var PLAY = '<svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>';
@@ -75,17 +79,18 @@
       '\n          <div class="card__body">' +
       '\n            <p class="card__topic">' + esc(s.topic) + ' <span>· ' + esc(s.audience) + '</span></p>' +
       '\n            <h3' + lang + '>' + esc(s.title) + '</h3>' +
-      '\n            <p class="card__chain"><span>' + esc(s.triad[0]) + '</span>' + ARROW + '<b>' + esc(s.triad[1]) + '</b></p>' +
+      '\n            <p class="card__chain"><span>' + esc(s.triad[0]) + '</span><b>' + ARROW + esc(s.triad[1]) + '</b></p>' +
       '\n          </div>' +
       '\n        </article>';
   }
 
+  function on(x) { return !x || x.show !== false; }
   function nav(d, home) {
-    var h = home ? '#' : './#', on = d.about.show !== false;
+    var h = home ? '#' : './#';
     return '\n    <a href="simulations.html"' + (home ? '' : ' aria-current="page"') + '>Simulations</a>' +
-      '\n    <a href="' + h + 'how">How it works</a>' +
-      '\n    <a href="' + h + 'pricing">Pricing</a>' +
-      (on ? '\n    <a href="' + h + 'about">About</a>' : '') + '\n  ';
+      (on(d.process) ? '\n    <a href="' + h + 'how">How it works</a>' : '') +
+      (on(d.pricing) ? '\n    <a href="' + h + 'pricing">Pricing</a>' : '') +
+      (on(d.about) ? '\n    <a href="' + h + 'about">About</a>' : '') + '\n  ';
   }
   function footer(d, home) {
     var c = d.contact, h = home ? '#' : './#', links = [];
@@ -94,10 +99,10 @@
     if (c.linkedin) links.push('<li><a href="' + esc(c.linkedin) + '" target="_blank" rel="noopener">LinkedIn</a></li>');
     return '\n    <div class="foot__top">' +
       '\n      <p class="foot__why"><i class="sq" aria-hidden="true"></i>' + esc(d.footer.why) + '</p>' +
-      '\n      <nav class="foot__nav" aria-label="Footer"><a href="simulations.html">Simulations</a><a href="' + h + 'how">How it works</a><a href="' + h + 'pricing">Pricing</a>' + (d.about.show !== false ? '<a href="' + h + 'about">About</a>' : '') + '<a href="' + h + 'contact">Contact</a></nav>' +
+      '\n      <nav class="foot__nav" aria-label="Footer"><a href="simulations.html">Simulations</a>' + (on(d.process) ? '<a href="' + h + 'how">How it works</a>' : '') + (on(d.pricing) ? '<a href="' + h + 'pricing">Pricing</a>' : '') + (on(d.about) ? '<a href="' + h + 'about">About</a>' : '') + '<a href="' + h + 'contact">Contact</a></nav>' +
       '\n      <ul class="foot__contact">' + links.join('') + '</ul>' +
       '\n    </div>' +
-      '\n    <p class="foot__mark" aria-hidden="true">raz<span class="i">ı</span>nation</p>' +
+      '\n    <p class="foot__mark" aria-hidden="true">' + brand(d) + '</p>' +
       '\n    <div class="foot__base"><span>© ' + esc(d.footer.year) + ' Razination</span><span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span></div>\n  ';
   }
 
@@ -120,9 +125,11 @@
     var reelFirst = reel(d)[0];
     r.reel = reelFirst ? '<img class="hero__poster" src="' + esc(reelFirst.img.mistake) + '" alt="" fetchpriority="high">' : '';
 
-    r.facts = '\n      <ul class="facts">' + (d.plate || []).map(function (p) {
+    var plate = (d.plate || []).filter(function (p) { return p.label || p.value; });
+    r.facts = d.home.factsShow === false || !plate.length ? '' : '\n  <section class="sec sec--facts" aria-label="Facts"><div class="wrap">' +
+      '\n      <ul class="facts" style="--n:' + plate.length + '">' + plate.map(function (p) {
       return '\n        <li><span>' + esc(fill(p.label, d)) + '</span><b>' + esc(fill(p.value, d)) + '</b></li>';
-    }).join('') + '\n      </ul>\n    ';
+    }).join('') + '\n      </ul>\n  </div></section>\n  ';
 
     var picks = homeSims(d), rest = shown(d).filter(function (s) { return picks.indexOf(s) < 0; }), all = picks.concat(rest);
     r.play = '\n      <div class="sec__head sec__head--row">' +
@@ -162,44 +169,63 @@
         '<rect x="20" y="58" width="120" height="8" rx="4" class="art__fill"/><path d="M0 0l0 18 5-5 4 9 4-2-4-9 7 0z" class="art__cursor"/>' +
         '<path d="M70 26l8 8 16-16" class="art__tick"/></svg>'
     ];
-    r.process = '\n      <div class="sec__head sec__head--row">' +
+    var steps = P.steps || [], n = steps.length;
+    r.process = !on(P) || !n ? '' : '\n  <section class="how" id="how" aria-label="How it works" data-how style="--n:' + n + '">' +
+      '\n    <div class="how__pin">' +
+      '\n      <div class="how__head wrap">' +
       '\n        <div><p class="eyebrow"><i class="sq" aria-hidden="true"></i>How it works</p>' +
-      '\n        <h2 class="big reveal-up"><span>' + esc(P.heading) + '</span></h2></div>' +
-      '\n        <p class="sec__lede">' + esc(P.intro) + '</p>' +
+      '\n        <h2 class="how__h">' + esc(P.heading) + '</h2></div>' +
+      '\n        <p class="how__lede">' + esc(P.intro) + '</p>' +
       '\n      </div>' +
-      '\n      <div class="flow" data-flow>' +
-      '\n        <div class="flow__line" aria-hidden="true"><i class="flow__run"></i></div>' +
-      '\n        <ol class="steps">' + P.steps.map(function (s, i) {
-        return '\n          <li class="step' + (s.mistakes ? ' step--hot' : '') + '" style="--i:' + i + '">' +
-          '<span class="step__wk">' + weeks(s) + '</span>' +
-          '<span class="step__dot" aria-hidden="true"></span>' +
-          '<div class="step__art" aria-hidden="true">' + (ART[i] || ART[ART.length - 1]) + '</div>' +
-          '<span class="step__n">' + pad(i + 1) + '</span>' +
-          '<h3>' + esc(s.title) + '</h3><p>' + esc(s.desc) + '</p>' +
-          (s.you ? '<p class="step__you"><b>You:</b> ' + esc(s.you) + '</p>' : '') + '</li>';
-      }).join('') + '\n        </ol>' +
-      '\n      </div>\n    ';
+      '\n      <ol class="how__steps wrap">' + steps.map(function (s, i) {
+        return '\n        <li class="hstep' + (s.mistakes ? ' hstep--hot' : '') + (i ? '' : ' is-on') + '" style="--e:' + (i ? 0 : 1) + ';--x:0">' +
+          '\n          <div class="hstep__art" aria-hidden="true"><span class="hstep__tag">' + weeks(s) + '</span>' + (ART[i] || ART[ART.length - 1]) + '</div>' +
+          '\n          <div class="hstep__txt"><p class="hstep__n"><b>' + pad(i + 1) + '</b> / ' + pad(n) + ' · ' + weeks(s) + '</p><h3>' + esc(s.title) + '</h3><p>' + esc(s.desc) + '</p>' +
+          (s.you ? '<p class="hstep__you"><b>Your part:</b> ' + esc(s.you) + '</p>' : '') + '</div>' +
+          '\n        </li>';
+      }).join('') + '\n      </ol>' +
+      '\n      <div class="how__track wrap" aria-hidden="true">' +
+      '\n        <div class="how__line"><i></i><b class="how__dot"></b></div>' +
+      '\n        <ol class="how__marks">' + steps.map(function (s, i) {
+        return '<li style="--at:' + (n > 1 ? i / (n - 1) : 0) + '"' + (i ? '' : ' class="is-on"') + '><i></i><span>' + esc(weeks(s)) + '</span><b>' + esc(s.title) + '</b></li>';
+      }).join('') + '</ol>' +
+      '\n      </div>' +
+      '\n    </div>' +
+      '\n  </section>\n  ';
 
-    r.pricing = '\n      <div class="sec__head">' +
+    var pk = (R.packages || []).filter(function (p) { return p.name || p.price; });
+    var sel = Math.max(0, pk.map(function (p) { return !!p.core; }).indexOf(true));
+    var from = R.fromLabel == null ? 'from' : R.fromLabel;
+    function wk(p) { return p.weeks ? 'About ' + esc(p.weeks) + ' week' + (+p.weeks === 1 ? '' : 's') : ''; }
+    function details(p) {
+      return '<p class="price__for">' + esc(p.for) + '</p>' +
+        '<ul>' + (p.items || []).filter(Boolean).map(function (it) { return '<li>' + esc(it) + '</li>'; }).join('') + '</ul>' +
+        '<a class="btn ' + (p.core ? 'btn--hot' : 'btn--line') + '" href="#contact">' + esc(p.button || 'Get in touch') + '</a>';
+    }
+    r.pricing = !on(R) || !pk.length ? '' : '\n  <section class="sec" id="pricing" aria-label="Pricing"><div class="wrap">' +
+      '\n      <div class="sec__head">' +
       '\n        <p class="eyebrow"><i class="sq" aria-hidden="true"></i>Pricing</p>' +
       '\n        <h2 class="big reveal-up"><span>' + esc(R.heading) + '</span></h2>' +
       '\n        <p class="sec__lede">' + esc(R.intro) + '</p>' +
       '\n      </div>' +
-      '\n      <div class="prices">' + R.packages.map(function (p) {
-        return '\n        <article class="price' + (p.core ? ' price--core' : '') + '">' +
-          '\n          <p class="price__wk">About ' + esc(p.weeks) + ' week' + (+p.weeks === 1 ? '' : 's') + '</p>' +
+      '\n      <div class="prices" data-prices style="--n:' + pk.length + '">' + pk.map(function (p, i) {
+        return '\n        <article class="price' + (p.core ? ' price--core' : '') + (i === sel ? ' is-sel' : '') + '" data-pk="' + i + '">' +
+          '\n          <button class="price__pick" type="button" aria-label="' + esc('Show what ' + p.name + ' includes') + '" aria-pressed="' + (i === sel) + '"></button>' +
+          '\n          <p class="price__wk">' + wk(p) + '</p>' +
           '\n          <h3>' + esc(p.name) + '</h3>' +
-          '\n          <p class="price__amt"><span>from</span>' + esc(p.price) + '</p>' +
-          '\n          <p class="price__for">' + esc(p.for) + '</p>' +
-          '\n          <ul>' + (p.items || []).filter(Boolean).map(function (it) { return '<li>' + esc(it) + '</li>'; }).join('') + '</ul>' +
-          '\n          <a class="btn ' + (p.core ? 'btn--hot' : 'btn--line') + '" href="#contact">' + esc(p.button) + '</a>' +
+          '\n          <p class="price__amt">' + (from ? '<span>' + esc(from) + '</span>' : '') + esc(p.price) + '</p>' +
+          '\n          <div class="price__more">' + details(p) + '</div>' +
           '\n        </article>';
       }).join('') + '\n      </div>' +
-      '\n      <p class="terms">' + (R.terms || []).filter(Boolean).map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') + '</p>\n    ';
+      '\n      <div class="prices__detail" aria-live="polite">' + pk.map(function (p, i) {
+        return '\n        <div class="price__panel' + (p.core ? ' price--core' : '') + (i === sel ? ' is-sel' : '') + '" data-pk="' + i + '"><p class="price__wk">' + esc(p.name) + (wk(p) ? ' · ' + wk(p) : '') + '</p>' + details(p) + '</div>';
+      }).join('') + '\n      </div>' +
+      '\n      <p class="terms">' + (R.terms || []).filter(Boolean).map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') + '</p>' +
+      '\n  </div></section>\n  ';
 
     var aboutOn = A.show !== false;
     r.nav = nav(d, true);
-    r.about = !aboutOn ? '' : '\n  <section class="sec sec--about" id="about" aria-label="About"><div class="wrap who">' +
+    r.about = !aboutOn ? '' : '\n  <section class="sec sec--about" id="about" aria-label="About"><div class="wrap"><div class="who">' +
       '\n      <figure class="who__pic reveal">' +
       '\n        <img src="' + esc(A.photo) + '" alt="' + esc(A.name) + '" width="480" height="480" loading="lazy">' +
       '\n        <figcaption>' + esc(A.name) + '</figcaption>' +
@@ -211,7 +237,7 @@
         return '<div><dt>' + esc(f.label) + '</dt><dd>' + esc(f.value) + '</dd></div>';
       }).join('') + '</dl>' +
       (C.linkedin ? '\n        <a class="more" href="' + esc(C.linkedin) + '" target="_blank" rel="noopener">' + esc(first(A.name)) + ' on LinkedIn' + OUT + '</a>' : '') +
-      '\n      </div>\n  </div></section>\n  ';
+      '\n      </div>\n  </div></div></section>\n  ';
 
     r.faq = '\n      <div class="sec__head sec__head--side">' +
       '\n        <p class="eyebrow"><i class="sq" aria-hidden="true"></i>FAQ</p>' +
@@ -276,6 +302,7 @@
       '\n      </div>\n    ';
 
     r.footer = footer(d, true);
+    r.logo = brand(d);
     return r;
   }
 
@@ -299,6 +326,7 @@
     }).join('') + '\n    ';
     r.nav = nav(d, false);
     r.footer = footer(d, false);
+    r.logo = brand(d);
     return r;
   }
 
@@ -384,13 +412,13 @@
     return {
       'index.html': apply(pages['index.html'], homeRegions(d), 'index.html'),
       'simulations.html': apply(pages['simulations.html'], simsRegions(d), 'simulations.html'),
-      'impressum.html': apply(pages['impressum.html'], { legal: impressum(d) }, 'impressum.html'),
-      'datenschutz.html': apply(pages['datenschutz.html'], { legal: datenschutz(d) }, 'datenschutz.html'),
+      'impressum.html': apply(pages['impressum.html'], { legal: impressum(d), logo: brand(d) }, 'impressum.html'),
+      'datenschutz.html': apply(pages['datenschutz.html'], { legal: datenschutz(d), logo: brand(d) }, 'datenschutz.html'),
       'js/sims-data.js': simsData(d)
     };
   }
 
-  var API = { build: build, apply: apply, homeRegions: homeRegions, simsRegions: simsRegions, simsData: simsData, fill: fill, shown: shown, esc: esc };
+  var API = { build: build, apply: apply, homeRegions: homeRegions, simsRegions: simsRegions, simsData: simsData, fill: fill, shown: shown, esc: esc, brand: brand };
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
   else root.RazRender = API;
 })(this);

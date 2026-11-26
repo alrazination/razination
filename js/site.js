@@ -134,46 +134,59 @@
     window.addEventListener('resize', update); update();
   })();
 
-  /* ---------------- process: the signal walks the weeks, each drawing appears as it arrives ---------------- */
+  /* ---------------- process: scroll moves the signal; each drawing swaps in as it reaches its week ---------------- */
   (function () {
-    var flow = $('[data-flow]');
-    if (!flow) return;
-    var steps = $$('.step', flow), line = $('.flow__line', flow);
-    if (reduce) { steps.forEach(function (st) { st.classList.add('is-on'); }); return; }
-    flow.classList.add('is-js');
-    var k = -1, timer = null, live = false;
-    function pos(i) {
-      var dot = $('.step__dot', steps[i]), lr = line.getBoundingClientRect(), dr = dot.getBoundingClientRect();
-      return { x: dr.left + dr.width / 2 - lr.left, y: dr.top + dr.height / 2 - lr.top };
+    var how = $('[data-how]');
+    if (!how || reduce) return;
+    var steps = $$('.hstep', how), marks = $$('.how__marks li', how), n = steps.length;
+    if (n < 2) return;
+    how.classList.add('is-pin');
+    var HOLD = .55, last = -1;
+    function update() {
+      var r = how.getBoundingClientRect(), H = window.innerHeight;
+      var p = clamp(-r.top / Math.max(1, r.height - H), 0, 1);
+      // n stops; the dot rests at each week, then travels to the next one
+      var seg = Math.min(n - 1, p * (n - 1) / (1 - HOLD / n)), i = Math.floor(seg), f = seg - i;
+      var move = clamp((f - HOLD) / (1 - HOLD), 0, 1);
+      if (i >= n - 1) { i = n - 1; move = 0; }
+      var q = (i + move) / (n - 1);
+      how.style.setProperty('--q', q.toFixed(4));
+      steps.forEach(function (st, k) {
+        var e = k === 0 ? 1 : k <= i ? 1 : k === i + 1 ? move : 0;
+        var x = k < i ? 1 : k === i ? move : 0;
+        st.style.setProperty('--e', e.toFixed(3));
+        st.style.setProperty('--x', x.toFixed(3));
+      });
+      var cur = move > .5 ? i + 1 : i;
+      if (cur !== last) {
+        last = cur;
+        steps.forEach(function (st, k) { st.classList.toggle('is-on', k === cur); });
+        marks.forEach(function (m, k) { m.classList.toggle('is-on', k <= cur); m.classList.toggle('is-cur', k === cur); });
+      }
     }
-    function go(i) {
-      k = i;
-      var p = pos(i);
-      flow.style.setProperty('--fx', Math.max(0, p.x) + 'px');
-      flow.style.setProperty('--fy', Math.max(0, p.y) + 'px');
-      steps.forEach(function (st, j) { st.classList.toggle('is-on', j <= i); });
-    }
-    function reset() {
-      flow.classList.add('is-reset');
-      steps.forEach(function (st) { st.classList.remove('is-on'); });
-      flow.style.setProperty('--fx', '0px'); flow.style.setProperty('--fy', '0px');
-      void flow.offsetWidth; flow.classList.remove('is-reset'); k = -1;
-    }
-    function tick() {
-      if (!live) return;
-      if (k >= steps.length - 1) { timer = setTimeout(function () { reset(); timer = setTimeout(tick, 700); }, 3200); return; }
-      go(k + 1);
-      timer = setTimeout(tick, 2100);
-    }
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (en) {
-        var was = live; live = en[0].isIntersecting;
-        if (live && !was) { clearTimeout(timer); timer = setTimeout(tick, 400); }
-        if (!live) clearTimeout(timer);
-      }, { threshold: .35 }).observe(flow);
-    } else steps.forEach(function (st) { st.classList.add('is-on'); });
-    window.addEventListener('resize', function () { if (k >= 0) go(k); });
+    var ticking = false;
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; update(); }); } }, { passive: true });
+    window.addEventListener('resize', update); update();
+    // a click on a week jumps to it
+    marks.forEach(function (m, k) {
+      m.addEventListener('click', function () {
+        var H = window.innerHeight, total = how.offsetHeight - H, p = k / (n - 1) * (1 - HOLD / n);
+        window.scrollTo({ top: how.getBoundingClientRect().top + window.scrollY + total * p + 2, behavior: 'smooth' });
+      });
+    });
   })();
+
+  /* ---------------- pricing: on phones, tap a card to see what it includes ---------------- */
+  $$('[data-prices]').forEach(function (box) {
+    var cards = $$('.price', box), panels = $$('.price__panel', box.parentNode);
+    cards.forEach(function (c) {
+      $('.price__pick', c).addEventListener('click', function () {
+        var k = c.getAttribute('data-pk');
+        cards.forEach(function (x) { var on = x === c; x.classList.toggle('is-sel', on); $('.price__pick', x).setAttribute('aria-pressed', on); });
+        panels.forEach(function (x) { x.classList.toggle('is-sel', x.getAttribute('data-pk') === k); });
+      });
+    });
+  });
 
   /* ---------------- carousel: the centred card faces you and plays ---------------- */
   $$('[data-carousel]').forEach(function (car) {
@@ -257,21 +270,51 @@
     fit();
     frame.addEventListener('load', function () {
       try {
+        zoomLock(true, frame.contentWindow);
+        var st = frame.contentDocument.createElement('style');
+        st.textContent = 'html{touch-action:manipulation;-webkit-text-size-adjust:100%}';
+        frame.contentDocument.head.appendChild(st);
         frame.focus();
         // Escape inside the simulation closes the player too (same origin)
         frame.contentWindow.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
       } catch (e) {}
     });
   }
-  function fullscreen(sideways) {
-    var req = screenEl.requestFullscreen || screenEl.webkitRequestFullscreen;
-    if (!req) return;
+  var fsBtn = dlg && $('[data-p-full]', dlg);
+  function fsEl() { return document.fullscreenElement || document.webkitFullscreenElement; }
+  function setMax(on) {
+    dlg.classList.toggle('is-max', on);
+    if (fsBtn) fsBtn.lastChild.textContent = on ? 'Exit full screen' : 'Full screen';
+    setTimeout(fit, 60);
+  }
+  function lockSideways() {
+    try { if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(function () {}); } catch (e) {}
+  }
+  /* real full screen where the browser allows it; a full-window mode where it doesn't (iPhone) */
+  function fullscreen(on) {
+    if (on === undefined) on = !dlg.classList.contains('is-max');
+    setMax(on);
+    var req = dlg.requestFullscreen || dlg.webkitRequestFullscreen;
+    var exit = document.exitFullscreen || document.webkitExitFullscreen;
     try {
-      var p = req.call(screenEl);
-      if (p && p.then) p.then(function () {
-        if (sideways && screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(function () {});
-      }).catch(function () {});
+      if (on && req && !fsEl()) {
+        var pr = req.call(dlg);
+        if (pr && pr.then) pr.then(lockSideways).catch(function () {}); else lockSideways();
+      } else if (!on && fsEl() && exit) {
+        var px = exit.call(document); if (px && px.catch) px.catch(function () {});
+      }
     } catch (e) {}
+  }
+  function onFs() { if (!fsEl() && dlg.classList.contains('is-max')) setMax(false); fit(); }
+  /* no pinch zoom while a simulation is open: the player already fills the screen */
+  var vp = $('meta[name=viewport]'), vpWas = vp && vp.getAttribute('content');
+  function noZoom(e) { e.preventDefault(); }
+  function noPinch(e) { if (e.touches && e.touches.length > 1) e.preventDefault(); }
+  function zoomLock(on, win) {
+    var d = (win || window).document, m = on ? 'addEventListener' : 'removeEventListener';
+    d[m]('gesturestart', noZoom, { passive: false });
+    d[m]('gesturechange', noZoom, { passive: false });
+    d[m]('touchmove', noPinch, { passive: false });
   }
   function open(slug) {
     var sim = BY[slug];
@@ -285,14 +328,21 @@
     $('[data-p-stick]', dlg).textContent = sim.triad[2];
     if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
     document.body.style.overflow = 'hidden';
+    if (vp) vp.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no');
+    zoomLock(true);
     load(sim);
-    if (!matchMedia('(min-width: 821px)').matches) fullscreen(true);
+    // phones: full screen and sideways straight away where the browser allows it
+    if (matchMedia('(hover: none) and (max-width: 940px), (hover: none) and (max-height: 500px)').matches) fullscreen(true);
   }
   function close() {
     if (dlg.open && dlg.close) dlg.close(); else { dlg.removeAttribute('open'); cleanup(); }
   }
   function cleanup() {
     if (frame) { frame.remove(); frame = null; }
+    if (fsEl()) fullscreen(false); else setMax(false);
+    try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch (e) {}
+    if (vp) vp.setAttribute('content', vpWas);
+    zoomLock(false);
     document.body.style.overflow = '';
     if (opener && opener.focus) opener.focus();
   }
@@ -300,9 +350,11 @@
     dlg.addEventListener('close', cleanup);
     $('[data-p-close]', dlg).addEventListener('click', close);
     $('[data-p-restart]', dlg).addEventListener('click', function () { if (curSim) load(curSim); });
-    $('[data-p-full]', dlg).addEventListener('click', function () { fullscreen(false); });
+    fsBtn.addEventListener('click', function () { fullscreen(); });
     window.addEventListener('resize', fit);
-    document.addEventListener('fullscreenchange', fit);
+    window.addEventListener('orientationchange', function () { setTimeout(fit, 250); });
+    document.addEventListener('fullscreenchange', onFs);
+    document.addEventListener('webkitfullscreenchange', onFs);
     if ('ResizeObserver' in window) new ResizeObserver(fit).observe(screenEl);
   }
   document.addEventListener('click', function (e) {
